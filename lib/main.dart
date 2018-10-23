@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart'; 
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'AddHikePage.dart';
 const Color dark_green = Color(0xff027206);
 const Color jade_blue = Color(0xff339192);
 
@@ -137,6 +138,7 @@ class NewPageDone extends StatelessWidget{
   }
 }
 
+/*
 class AddHikePage extends MaterialPageRoute<Null>{
   AddHikePage(): super( builder: (BuildContext context){
     return new Scaffold(
@@ -188,7 +190,7 @@ class AddHikePage extends MaterialPageRoute<Null>{
   } 
   );
 }
-
+*/
 
 class HikeCard extends StatelessWidget{
   @override
