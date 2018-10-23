@@ -1,5 +1,8 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'; 
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'NewPageDone.dart';
+import 'NewPageToDo.dart';
+import 'HikeCard.dart';
 const Color dark_green = Color(0xff027206);
 const Color jade_blue = Color(0xff339192);
 
@@ -64,6 +67,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
     );
   }
 }
+<<<<<<< HEAD
 
 class NewPageToDo extends StatelessWidget{
   
@@ -259,3 +263,5 @@ class CustomCard extends StatelessWidget {
   }
 }
 */
+=======
+>>>>>>> fe01dc01e4da9a7e2df546f1719ffaeb364dba01
