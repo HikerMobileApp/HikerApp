@@ -4,7 +4,7 @@ const Color dark_green = Color(0xff027206);
 const Color jade_blue = Color(0xff339192);
 
 //List<Widget> cards = new List.generate(20, (i)=>new HikeCard());
-String hikeName;
+//String hikeName;
 String typeOfHike;
 
 void main() => runApp( new MaterialApp(
