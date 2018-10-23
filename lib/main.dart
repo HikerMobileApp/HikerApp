@@ -145,7 +145,6 @@ class AddHikePage extends MaterialPageRoute<Null>{
     title: new Text("Add a hike"),
     actions: <Widget>[
       new IconButton(icon: const Icon(Icons.check), onPressed: () {
-        
 
       })
     ],
@@ -171,7 +170,7 @@ class AddHikePage extends MaterialPageRoute<Null>{
         ),
       ),
       new ListTile(
-        leading: const Icon(MdiIcons.airplane),
+        leading: const Icon(MdiIcons.pen),
         title: new TextFormField(
           decoration: new InputDecoration(
             hintText: "Type of Hike",
