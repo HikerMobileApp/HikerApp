@@ -157,7 +157,7 @@ class AddHikePage extends MaterialPageRoute<Null>{
         leading: const Icon(MdiIcons.walk),
         title: new TextFormField(
           decoration: new InputDecoration(
-            hintText: "Name of Hike",
+            hintText: "Name of hike",
           ),
           onSaved: (String value){
             hikeName = value;
