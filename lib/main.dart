@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'; 
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 const Color dark_green = Color(0xff027206);
 const Color jade_blue = Color(0xff339192);
 
-List<Widget> cards = new List.generate(20, (i)=>new HikeCard());
+//List<Widget> cards = new List.generate(20, (i)=>new HikeCard());
 String hikeName;
 String typeOfHike;
 
