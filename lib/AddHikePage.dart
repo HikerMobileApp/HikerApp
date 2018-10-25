@@ -12,7 +12,7 @@ class AddHikePage extends MaterialPageRoute<Null>{
     actions: <Widget>[
       new IconButton(icon: const Icon(Icons.check), onPressed: () {
 
-        Firestore.instance.collection('Hikes').document().setData({ 'title': 'Robins New Hike', 'Type': 'Your awesome' });
+        //Firestore.instance.collection('Hikes').document().setData({ 'Title': 'Robicdcdsns New Hike', 'Type': 'Your awesome' });
 
       })
     ],
@@ -38,7 +38,7 @@ class AddHikePage extends MaterialPageRoute<Null>{
         ),
       ),
       new ListTile(
-        leading: const Icon(MdiIcons.pen),
+        leading: const Icon(MdiIcons.accountBox),
         title: new TextFormField(
           decoration: new InputDecoration(
             hintText: "Type of Hike",
