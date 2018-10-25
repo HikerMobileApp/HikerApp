@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart'; 
 import 'main.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AddHikePage extends MaterialPageRoute<Null>{
   AddHikePage(): super( builder: (BuildContext context){
@@ -10,6 +11,8 @@ class AddHikePage extends MaterialPageRoute<Null>{
     title: new Text("Add a hike"),
     actions: <Widget>[
       new IconButton(icon: const Icon(Icons.check), onPressed: () {
+
+        Firestore.instance.collection('Hikes').document().setData({ 'title': 'Robins New Hike', 'Type': 'Your awesome' });
 
       })
     ],
