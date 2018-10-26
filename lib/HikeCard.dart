@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 class HikeCard extends StatelessWidget{
   @override
   Widget build(BuildContext context){
+
     return new Card(
         child: new Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             const ListTile(
             leading: const Icon(Icons.directions_walk),
-            title: const Text('jade lake'),
+            title: const Text('Jade Lake'),
             subtitle: const Text('20 mile Backpacking'),
             ),
             new ButtonTheme.bar(
@@ -29,5 +30,7 @@ class HikeCard extends StatelessWidget{
           ]
         )
       );
+ 
   }
+    
 }

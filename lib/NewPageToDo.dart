@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart'; 
 import 'main.dart';
 import 'AddHikePage.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 class NewPageToDo extends StatelessWidget{
   
