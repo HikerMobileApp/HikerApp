@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart'; 
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+//import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'NewPageDone.dart';
 import 'NewPageToDo.dart';
 import 'HikeCard.dart';
 import 'AddHikePage.dart';
-import 'package:splashscreen/splashscreen.dart';
 const Color dark_green = Color(0xff027206);
 const Color jade_blue = Color(0xff339192);
 List<Widget> cards = new List.generate(20, (i)=>new HikeCard());
 String hikeName;
 String typeOfHike;
+final GlobalKey<ScaffoldState> globalKey = new GlobalKey<ScaffoldState>();
 
 void main() => runApp( new MaterialApp(
   theme: new ThemeData(
@@ -25,35 +27,13 @@ class HomePage extends StatefulWidget{
   _HomePageState createState() => new _HomePageState();
 }
 
-/*
-class splashStuff extends State<HomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return new SplashScreen(
-      seconds: 14,
-      navigateAfterSeconds: new AfterSplash(),
-      title: new Text('Welcome In SplashScreen',
-      style: new TextStyle(
-        fontWeight: FontWeight.bold,
-        fontSize: 20.0
-      ),),
-      image: new Image.network('https://i.imgur.com/TyCSG9A.png'),
-      backgroundColor: Colors.white,
-      styleTextUnderTheLoader: new TextStyle(),
-      photoSize: 100.0,
-      onClick: ()=>print("Flutter Egypt"),
-      loaderColor: Colors.red
-    );
-  }
-}
-*/
-
-
 class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin{
   TabController tabController;
   @override
   void initState(){
     super.initState();
+    Firestore.instance.collection('Hiking').document()
+    .setData({'Title': 'Jade Lake', 'Type': 'Backpacking'});
     tabController = new TabController(length: 2, vsync: this);
   }
   @override
@@ -63,15 +43,25 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
   }
   @override
   Widget build(BuildContext context){
+    Drawer drawer = new Drawer();
     return new Scaffold(
-      appBar: new AppBar(title: new Text("Hiker"), elevation: 0.0, backgroundColor: dark_green,
+      key: globalKey,
+      drawer: drawer,
+      appBar: new AppBar(title: new Text("Home"), elevation: 5.0, backgroundColor: dark_green,
+      leading: new IconButton(
+          icon: new Icon(Icons.account_circle),
+          onPressed: () {
+            //Navigator.push(context, AddHikePage());
+            globalKey.currentState.openDrawer();
+          }
+        ),
       actions: <Widget>[
         new IconButton(
           icon: new Icon(Icons.add),
           onPressed: () {
             Navigator.push(context, AddHikePage());
           }
-        )
+        ),
       ]), 
       body: new TabBarView(
         physics: NeverScrollableScrollPhysics(),
