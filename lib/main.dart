@@ -15,8 +15,8 @@ String typeOfHike;
 
 void main() => runApp( new MaterialApp(
   theme: new ThemeData(
-    accentColor: Colors.teal,
-    hintColor: Colors.teal,
+    accentColor: Colors.green,
+    hintColor: Colors.green
   ),
   home: new HomePage(),
   
@@ -31,7 +31,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
   TabController tabController;
   @override
   void initState(){
-    Firestore.instance.collection('Hikes').document().setData({ 'Title': 'Jade Hike', 'Type': '20 Miles' });
+    //Firestore.instance.collection('Hikes').document().setData({ 'Title': 'Jade Hike', 'Type': '20 Miles' });
 
     super.initState();
     tabController = new TabController(length: 2, vsync: this);
@@ -53,7 +53,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
         //color: jade_blue,
         color: dark_green,
         child: new TabBar(
-          indicatorColor: Colors.white,
+          indicatorColor: Colors.green,
           controller: tabController,
           tabs: <Widget>[
             new Tab(
