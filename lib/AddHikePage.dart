@@ -14,6 +14,7 @@ class AddHikePage extends MaterialPageRoute<Null>{
     actions: <Widget>[
       new IconButton(icon: const Icon(Icons.check), onPressed: () {
         
+        
         Navigator.pop(context);
 
       })
