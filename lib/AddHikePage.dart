@@ -12,7 +12,7 @@ class AddHikePage extends MaterialPageRoute<Null>{
     actions: <Widget>[
       new IconButton(icon: const Icon(Icons.check), onPressed: () {
 
-        Firestore.instance.collection('Hikes').document().setData({ 'Title': 'Robicdcdsns New Hike', 'Type': 'Your awesome' });
+        //Firestore.instance.collection('Hikes').document().setData({ 'Title': 'Robicdcdsns New Hike', 'Type': 'Your awesome' });
 
       })
     ],
