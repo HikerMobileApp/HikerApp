@@ -3,9 +3,6 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'NewPageDone.dart';
 import 'NewPageToDo.dart';
 import 'HikeCard.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-
-
 const Color dark_green = Color(0xff027206);
 const Color jade_blue = Color(0xff339192);
 
@@ -15,8 +12,8 @@ String typeOfHike;
 
 void main() => runApp( new MaterialApp(
   theme: new ThemeData(
-    accentColor: Colors.green,
-    hintColor: Colors.green
+    accentColor: Colors.teal,
+    hintColor: Colors.teal,
   ),
   home: new HomePage(),
   
@@ -31,8 +28,6 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
   TabController tabController;
   @override
   void initState(){
-    //Firestore.instance.collection('Hikes').document().setData({ 'Title': 'Jade Hike', 'Type': '20 Miles' });
-
     super.initState();
     tabController = new TabController(length: 2, vsync: this);
   }
@@ -53,7 +48,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
         //color: jade_blue,
         color: dark_green,
         child: new TabBar(
-          indicatorColor: Colors.green,
+          indicatorColor: Colors.white,
           controller: tabController,
           tabs: <Widget>[
             new Tab(
