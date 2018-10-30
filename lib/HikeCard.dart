@@ -9,7 +9,7 @@ class HikeCard extends StatelessWidget{
           children: <Widget>[
             const ListTile(
             leading: const Icon(Icons.directions_walk),
-            title: const Text('jade lake'),
+            title: const Text('Jade Lake'),
             subtitle: const Text('20 mile Backpacking'),
             ),
             new ButtonTheme.bar(
@@ -29,5 +29,7 @@ class HikeCard extends StatelessWidget{
           ]
         )
       );
+ 
   }
+    
 }

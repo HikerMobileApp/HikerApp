@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'main.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-String name;
-String typeHike;
-
 class AddHikePage extends MaterialPageRoute<Null>{
+  TextFormField name = new TextFormField(decoration: new InputDecoration(
+            hintText: "Name of hike",
+          ),);
   AddHikePage(): super( builder: (BuildContext context){
     return new Scaffold(
   appBar: new AppBar(
@@ -13,8 +13,8 @@ class AddHikePage extends MaterialPageRoute<Null>{
     title: new Text("Add a hike"),
     actions: <Widget>[
       new IconButton(icon: const Icon(Icons.check), onPressed: () {
-
         
+        Navigator.pop(context);
 
       })
     ],
@@ -30,7 +30,7 @@ class AddHikePage extends MaterialPageRoute<Null>{
             hintText: "Name of hike",
           ),
           onSaved: (String value){
-            name = value;
+            hikeName = value;
           },
             validator: (value) {
     if (value.isEmpty) {
@@ -46,7 +46,7 @@ class AddHikePage extends MaterialPageRoute<Null>{
             hintText: "Type of Hike",
           ),
           onSaved: (String value){
-            typeHike = value;
+            typeOfHike = value;
           },
         ),
       ),
