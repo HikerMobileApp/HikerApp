@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "842460879065",
+    "firebase_url": "https://summit-log-4800c.firebaseio.com",
+    "project_id": "summit-log-4800c",
+    "storage_bucket": "summit-log-4800c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:842460879065:android:dcd735ade7564820",
+        "android_client_info": {
+          "package_name": "com.example.mobilehikingapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "842460879065-tcmmmrbmk2869bvqjtgcochddbh9iglm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.mobilehikingapp",
+            "certificate_hash": "4ae882c95d458d974989bff9d0041d57e49f27d9"
+          }
+        },
+        {
+          "client_id": "842460879065-7li5jtajbihrr27cuhr9tbvha0qkoum1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2H9WCz4xJrSFBWC_6dmFghMgphm-KSQY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "842460879065-7li5jtajbihrr27cuhr9tbvha0qkoum1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
