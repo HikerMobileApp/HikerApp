@@ -3,9 +3,10 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'NewPageDone.dart';
 import 'NewPageToDo.dart';
 import 'HikeCard.dart';
+import 'AddHikePage.dart';
+import 'package:splashscreen/splashscreen.dart';
 const Color dark_green = Color(0xff027206);
 const Color jade_blue = Color(0xff339192);
-
 List<Widget> cards = new List.generate(20, (i)=>new HikeCard());
 String hikeName;
 String typeOfHike;
@@ -24,6 +25,30 @@ class HomePage extends StatefulWidget{
   _HomePageState createState() => new _HomePageState();
 }
 
+/*
+class splashStuff extends State<HomePage> {
+  @override
+  Widget build(BuildContext context) {
+    return new SplashScreen(
+      seconds: 14,
+      navigateAfterSeconds: new AfterSplash(),
+      title: new Text('Welcome In SplashScreen',
+      style: new TextStyle(
+        fontWeight: FontWeight.bold,
+        fontSize: 20.0
+      ),),
+      image: new Image.network('https://i.imgur.com/TyCSG9A.png'),
+      backgroundColor: Colors.white,
+      styleTextUnderTheLoader: new TextStyle(),
+      photoSize: 100.0,
+      onClick: ()=>print("Flutter Egypt"),
+      loaderColor: Colors.red
+    );
+  }
+}
+*/
+
+
 class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin{
   TabController tabController;
   @override
@@ -39,8 +64,17 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
   @override
   Widget build(BuildContext context){
     return new Scaffold(
-      appBar: new AppBar(title: new Text("Hiker"), elevation: 0.0, backgroundColor: dark_green,), 
+      appBar: new AppBar(title: new Text("Hiker"), elevation: 0.0, backgroundColor: dark_green,
+      actions: <Widget>[
+        new IconButton(
+          icon: new Icon(Icons.add),
+          onPressed: () {
+            Navigator.push(context, AddHikePage());
+          }
+        )
+      ]), 
       body: new TabBarView(
+        physics: NeverScrollableScrollPhysics(),
         children: <Widget>[new NewPageToDo("todo"), new NewPageDone("done")],
         controller: tabController,
       ),

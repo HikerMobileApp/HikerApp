@@ -3,6 +3,9 @@ import 'main.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class AddHikePage extends MaterialPageRoute<Null>{
+  TextFormField name = new TextFormField(decoration: new InputDecoration(
+            hintText: "Name of hike",
+          ),);
   AddHikePage(): super( builder: (BuildContext context){
     return new Scaffold(
   appBar: new AppBar(
