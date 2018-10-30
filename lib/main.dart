@@ -7,7 +7,6 @@ const Color dark_green = Color(0xff027206);
 const Color jade_blue = Color(0xff339192);
 
 List<Widget> cards = new List.generate(20, (i)=>new HikeCard());
-//Test
 String hikeName;
 String typeOfHike;
 
