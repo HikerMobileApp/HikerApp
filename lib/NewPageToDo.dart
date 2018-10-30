@@ -11,12 +11,12 @@ class NewPageToDo extends StatelessWidget{
   Widget build(BuildContext context){
     return new Scaffold(
       backgroundColor: dark_green,
-      floatingActionButton: FloatingActionButton(
-      backgroundColor: jade_blue, onPressed: (){
-        Navigator.push(context, AddHikePage());
-      }
-        , child: Icon(Icons.add),
-    ),
+      //floatingActionButton: FloatingActionButton(
+     // backgroundColor: jade_blue, onPressed: (){
+     //   Navigator.push(context, AddHikePage());
+     // }
+     //   , child: Icon(Icons.add),
+    //),
        body: new Container(
               child: new ListView(
                 children: cards,

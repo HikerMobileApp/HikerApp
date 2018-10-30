@@ -3,6 +3,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'NewPageDone.dart';
 import 'NewPageToDo.dart';
 import 'HikeCard.dart';
+import 'AddHikePage.dart';
 import 'package:splashscreen/splashscreen.dart';
 const Color dark_green = Color(0xff027206);
 const Color jade_blue = Color(0xff339192);
@@ -63,7 +64,15 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
   @override
   Widget build(BuildContext context){
     return new Scaffold(
-      appBar: new AppBar(title: new Text("Hiker"), elevation: 0.0, backgroundColor: dark_green,), 
+      appBar: new AppBar(title: new Text("Hiker"), elevation: 0.0, backgroundColor: dark_green,
+      actions: <Widget>[
+        new IconButton(
+          icon: new Icon(Icons.plus_one),
+          onPressed: () {
+            Navigator.push(context, AddHikePage());
+          }
+        )
+      ]), 
       body: new TabBarView(
         physics: NeverScrollableScrollPhysics(),
         children: <Widget>[new NewPageToDo("todo"), new NewPageDone("done")],
