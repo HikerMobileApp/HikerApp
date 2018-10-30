@@ -67,7 +67,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
       appBar: new AppBar(title: new Text("Hiker"), elevation: 0.0, backgroundColor: dark_green,
       actions: <Widget>[
         new IconButton(
-          icon: new Icon(Icons.plus_one),
+          icon: new Icon(Icons.add),
           onPressed: () {
             Navigator.push(context, AddHikePage());
           }
