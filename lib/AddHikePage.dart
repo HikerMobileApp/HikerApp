@@ -22,48 +22,42 @@ class AddHikePage extends MaterialPageRoute<Null>{
               //print(myController.text);
               Navigator.pop(context);
             }
+            else if(hikeName.text == "")
+            {
+              hikeName.text = 'ERROR';
+            }
+            else if(hikeType.text == "")
+            {
+              hikeType.text = 'ERROR';
+            }
+
           })
         ],
       ),
-    body: new Column(
-    children: <Widget>[
-      new ListTile(
-        leading: const Icon(Icons.directions_walk),
-        title: new TextField(
-          decoration: new InputDecoration(
-            labelText: 'Hike Name',
-            hintText: "Name your hike",
+      body: new Column(
+        children: <Widget>[
+          new ListTile(
+            leading: const Icon(Icons.directions_walk),
+            title: new TextField(
+              decoration: new InputDecoration(
+                labelText: 'Hike Name',
+                hintText: "Name your hike",
+              ),
+              controller: hikeName,
+            ),
           ),
-          controller: hikeName,
-        ),
-      ),
-      new ListTile(
-        leading: const Icon(Icons.comment),
-        title: new TextField(
-          decoration: new InputDecoration(
-            labelText: 'Hike Type',
-            hintText: "Describe the hike",
+          new ListTile(
+            leading: const Icon(Icons.comment),
+            title: new TextField(
+              decoration: new InputDecoration(
+                labelText: 'Hike Type',
+                hintText: "Describe the hike",
+              ),
+              controller: hikeType,
+            ),
           ),
-          controller: hikeType,
-        ),
+        ],
       ),
-    ],
-  ),
     );
   });
 }
-
-
-
-
-/*new Container(
-    padding: new EdgeInsets.all(10.0),
-      child: TextField(
-        decoration: InputDecoration( 
-          icon: Icon(Icons.directions_walk),
-          labelText: 'Hike Name',
-          hintText: 'Please enter a search term',
-        ),
-          controller: hikeName,
-      ),
-  ),*/
