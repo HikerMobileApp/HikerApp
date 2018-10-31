@@ -21,9 +21,6 @@ class AddHikePage extends MaterialPageRoute<Null>{
           //print(myController.text);
           Navigator.pop(context);
         }
-        
-
-
       })
     ],
   ),
