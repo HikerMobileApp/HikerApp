@@ -15,25 +15,31 @@ class AddHikePage extends MaterialPageRoute<Null>{
     actions: <Widget>[
       new IconButton(icon: const Icon(Icons.check), onPressed: () {
         
-        Firestore.instance.collection("Hiking").document().setData({'Title': myController.text, 'Type': 'Being HELLA Coool!!!!!!!'});
-        print(myController.text);
-        Navigator.pop(context);
+        if(myController.text != "")
+        {
+          Firestore.instance.collection("Hiking").document().setData({'Title': myController.text, 'Type': 'Being HELLA Coool!!!!!!!'});
+          //print(myController.text);
+          Navigator.pop(context);
+        }
+        
+
 
       })
     ],
   ),
-  body: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: TextField(
-          decoration: InputDecoration(
-          border: InputBorder.none,
-          hintText: 'Please enter a search term'
-          ),
-          controller: myController,
+  body: new Container(
+    padding: new EdgeInsets.all(10.0),
+      child: TextField(
+        decoration: InputDecoration( 
+          icon: Icon(Icons.directions_walk),
+          labelText: 'Hike Name',
+          hintText: 'Please enter a search term',
+          
         ),
+          controller: myController,
       ),
-
-    );
+  ),
+);
   } 
   );
 }
