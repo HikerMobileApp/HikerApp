@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart'; 
 import 'main.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+//import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class AddHikePage extends MaterialPageRoute<Null>{
   
   AddHikePage(): super( builder: (BuildContext context){
+    final myController = TextEditingController();
+
     return new Scaffold(
   appBar: new AppBar(
     backgroundColor: dark_green,
@@ -12,48 +15,24 @@ class AddHikePage extends MaterialPageRoute<Null>{
     actions: <Widget>[
       new IconButton(icon: const Icon(Icons.check), onPressed: () {
         
-        
-
+        Firestore.instance.collection("Hiking").document().setData({'Title': myController.text, 'Type': 'Being HELLA Coool!!!!!!!'});
+        print(myController.text);
         Navigator.pop(context);
 
       })
     ],
   ),
-  body: 
-  new Form(
-    child: new Column(
-    children: <Widget>[
-      new ListTile(
-        leading: const Icon(MdiIcons.walk),
-        title: new TextFormField(
-          decoration: new InputDecoration(
-            hintText: "Name of hike",
+  body: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: TextField(
+          decoration: InputDecoration(
+          border: InputBorder.none,
+          hintText: 'Please enter a search term'
           ),
-          onSaved: (String value){
-            hikeName = value;
-          },
-            validator: (value) {
-    if (value.isEmpty) {
-      return 'Please enter some text';
-    }
-  },
-        ),
-      ),
-      new ListTile(
-        leading: const Icon(MdiIcons.pen),
-        title: new TextFormField(
-          decoration: new InputDecoration(
-            hintText: "Type of Hike",
-          ),
-          onSaved: (String value){
-            typeOfHike = value;
-          },
+          controller: myController,
         ),
       ),
 
-    ],
-  ),
-  ),
     );
   } 
   );
