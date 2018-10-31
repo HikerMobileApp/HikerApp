@@ -38,7 +38,7 @@ class AddHikePage extends MaterialPageRoute<Null>{
         ),
       ),
       new ListTile(
-        leading: const Icon(Icons.directions_walk),
+        leading: const Icon(Icons.comment),
         title: new TextField(
           decoration: new InputDecoration(
             labelText: 'Hike Type',

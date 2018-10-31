@@ -35,8 +35,6 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
   @override
   void initState(){
     super.initState();
-    //Firestore.instance.collection('Hiking').document().setData({'Title': 'Jade Lake', 'Type': 'Backpacking'});
-
 
     tabController = new TabController(length: 2, vsync: this);
   }
@@ -90,7 +88,6 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
             )
           ],
         ),
-
       ),
     );
   }
