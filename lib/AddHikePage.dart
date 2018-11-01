@@ -16,20 +16,20 @@ class AddHikePage extends MaterialPageRoute<Null>{
         actions: <Widget>[
           new IconButton(icon: const Icon(Icons.check), onPressed: () {
         
-            if(hikeName.text != '' && hikeType.text != '')
+            if(hikeName.text != "" && hikeType.text != "")
             {   
               Firestore.instance.collection("Hiking").document().setData({'Title': hikeName.text, 'Type': hikeType.text});
               //print(myController.text);
               Navigator.pop(context);
             }
-            else if(hikeName.text == "")
+            /*else if(hikeName.text == "")
             {
               hikeName.text = 'ERROR';
             }
             else if(hikeType.text == "")
             {
               hikeType.text = 'ERROR';
-            }
+            }*/
 
           })
         ],
