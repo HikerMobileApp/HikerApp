@@ -4,10 +4,18 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 //import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class AddHikePage extends MaterialPageRoute<Null>{
+<<<<<<< HEAD
   
   AddHikePage(): super( builder: (BuildContext context){
     final hikeName = TextEditingController();  // hike name
     final hikeType = TextEditingController();  // hike type 
+=======
+
+  AddHikePage(): super( builder: (BuildContext context){
+    
+    final hikeName = TextEditingController();
+    final hikeType = TextEditingController();
+>>>>>>> 448ee1413fbeb3a5a10a965c2aa02d209c6f8f71
 
     return new Scaffold(
       appBar: new AppBar(
@@ -16,6 +24,7 @@ class AddHikePage extends MaterialPageRoute<Null>{
         actions: <Widget>[
           new IconButton(icon: const Icon(Icons.check), onPressed: () {
         
+<<<<<<< HEAD
             if(hikeName.text != "" && hikeType.text != "")
             {   
               Firestore.instance.collection("Hiking").document().setData({'Title': hikeName.text, 'Type': hikeType.text});
@@ -57,6 +66,41 @@ class AddHikePage extends MaterialPageRoute<Null>{
             ),
           ),
         ],
+=======
+        /*if(hikeName.text != "" && hikeType.text != "")
+        {
+          Firestore.instance.collection("Hiking").document().setData({'Title': hikeName.text, 'Type': hikeType.text});
+        }*/
+
+        Navigator.pop(context);
+
+      })
+    ],
+  ),
+  body: 
+  new Form(
+    child: new Column(
+    children: <Widget>[
+      new ListTile(
+        leading: const Icon(MdiIcons.walk),
+        title: new TextFormField(
+          decoration: new InputDecoration(
+            labelText: 'Hike Name',
+            hintText: "Name your hike",
+          ),
+          controller: hikeName,
+        ),
+      ),
+      new ListTile(
+        leading: const Icon(MdiIcons.pen),
+        title: new TextFormField(
+          decoration: new InputDecoration(
+            labelText: 'Hike Type',
+            hintText: "Describle your hike",
+          ),
+          controller: hikeType,
+        ),
+>>>>>>> 448ee1413fbeb3a5a10a965c2aa02d209c6f8f71
       ),
     );
   });

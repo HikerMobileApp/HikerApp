@@ -1,4 +1,5 @@
 PODS:
+<<<<<<< HEAD
   - BoringSSL (10.0.6):
     - BoringSSL/Implementation (= 10.0.6)
     - BoringSSL/Interface (= 10.0.6)
@@ -172,10 +173,19 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/firebase_auth/ios"
   firebase_core:
     :path: ".symlinks/plugins/firebase_core/ios"
+=======
+  - Flutter (1.0.0)
+
+DEPENDENCIES:
+  - Flutter (from `.symlinks/flutter/ios`)
+
+EXTERNAL SOURCES:
+>>>>>>> 448ee1413fbeb3a5a10a965c2aa02d209c6f8f71
   Flutter:
     :path: ".symlinks/flutter/ios"
 
 SPEC CHECKSUMS:
+<<<<<<< HEAD
   BoringSSL: e10f92a27043805c01071fe815a5cd98ae8212e7
   cloud_firestore: a2d49d9c7219fce31033eb1a2ee953d7733c91d6
   Firebase: 383fa29aca93e371cab776b48a5c66544d3c2003
@@ -200,6 +210,9 @@ SPEC CHECKSUMS:
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
+=======
+  Flutter: 9d0fac939486c9aba2809b7982dfdbb47a7b0296
+>>>>>>> 448ee1413fbeb3a5a10a965c2aa02d209c6f8f71
 
 PODFILE CHECKSUM: 1e5af4103afd21ca5ead147d7b81d06f494f51a2
 
