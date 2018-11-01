@@ -22,14 +22,14 @@ class AddHikePage extends MaterialPageRoute<Null>{
               //print(myController.text);
               Navigator.pop(context);
             }
-            /*else if(hikeName.text == "")
+            else if(hikeName.text == "")
             {
               hikeName.text = 'ERROR';
             }
             else if(hikeType.text == "")
             {
               hikeType.text = 'ERROR';
-            }*/
+            }
 
           })
         ],
