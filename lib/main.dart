@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart'; 
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 //import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+//import 'package:cloud_firestore/cloud_firestore.dart';
 import 'NewPageDone.dart';
 import 'NewPageToDo.dart';
 import 'HikeCard.dart';
 import 'AddHikePage.dart';
 
-//import 'package:splashscreen/splashscreen.dart';
+const Color dark_green = Color(0xff141d26);
+const Color light_dark = Color(0xff243447);
 
-const Color dark_green = Color(0xff027206);
-const Color jade_blue = Color(0xff339192);
 List<Widget> cards = new List.generate(20, (i)=>new HikeCard());
 String hikeName;
 String typeOfHike;
@@ -20,6 +19,7 @@ void main() => runApp( new MaterialApp(
   theme: new ThemeData(
     accentColor: Colors.teal,
     hintColor: Colors.teal,
+    canvasColor: light_dark,
   ),
   home: new HomePage(),
   
@@ -35,8 +35,8 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
   @override
   void initState(){
     super.initState();
-    Firestore.instance.collection('Hiking').document()
-    .setData({'Title': 'Jade Lake', 'Type': 'Backpacking'});
+    //Firestore.instance.collection('Hiking').document()
+    //.setData({'Title': 'Jade Lake', 'Type': 'Backpacking'});
     tabController = new TabController(length: 2, vsync: this);
   }
   @override
@@ -46,11 +46,22 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
   }
   @override
   Widget build(BuildContext context){
-    Drawer drawer = new Drawer();
+    Drawer drawer = new Drawer(
+      child: new ListView(
+        children: <Widget>[
+          new DrawerHeader(
+            //accountName: new Text("Isaiah Scheel"),
+            //accountEmail: new Text("isaiahscheel@gmail.com"),
+            //currentAccountPicture: new Icon(Icons.account_circle),
+            child: new CircleAvatar(),
+          )
+        ],
+      ),
+    );
     return new Scaffold(
       key: globalKey,
       drawer: drawer,
-      appBar: new AppBar(title: new Text("Home"), elevation: 5.0, backgroundColor: dark_green,
+      appBar: new AppBar(title: new Text("Home"), elevation: 5.0, backgroundColor: light_dark,
       leading: new IconButton(
           icon: new Icon(Icons.account_circle),
           onPressed: () {
@@ -73,7 +84,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
       ),
       bottomNavigationBar: new Material(
         //color: jade_blue,
-        color: dark_green,
+        color: light_dark,
         child: new TabBar(
           indicatorColor: Colors.white,
           controller: tabController,
