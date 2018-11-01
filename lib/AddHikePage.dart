@@ -13,7 +13,9 @@ class AddHikePage extends MaterialPageRoute<Null>{
     title: new Text("Add a hike"),
     actions: <Widget>[
       new IconButton(icon: const Icon(Icons.check), onPressed: () {
-          Navigator.pop(context);
+        
+        Navigator.pop(context);
+
       })
     ],
   ),
