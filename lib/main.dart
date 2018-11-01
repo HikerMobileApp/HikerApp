@@ -35,12 +35,8 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
   @override
   void initState(){
     super.initState();
-<<<<<<< HEAD
-
-=======
     //Firestore.instance.collection('Hiking').document()
     //.setData({'Title': 'Jade Lake', 'Type': 'Backpacking'});
->>>>>>> 448ee1413fbeb3a5a10a965c2aa02d209c6f8f71
     tabController = new TabController(length: 2, vsync: this);
   }
   @override
