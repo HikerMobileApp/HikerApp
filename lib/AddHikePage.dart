@@ -3,10 +3,12 @@ import 'main.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class AddHikePage extends MaterialPageRoute<Null>{
-  TextFormField name = new TextFormField(decoration: new InputDecoration(
-            hintText: "Name of hike",
-          ),);
+
   AddHikePage(): super( builder: (BuildContext context){
+    
+    final hikeName = TextEditingController();
+    final hikeType = TextEditingController();
+
     return new Scaffold(
   appBar: new AppBar(
     backgroundColor: dark_green,
@@ -14,6 +16,11 @@ class AddHikePage extends MaterialPageRoute<Null>{
     actions: <Widget>[
       new IconButton(icon: const Icon(Icons.check), onPressed: () {
         
+        /*if(hikeName.text != "" && hikeType.text != "")
+        {
+          Firestore.instance.collection("Hiking").document().setData({'Title': hikeName.text, 'Type': hikeType.text});
+        }*/
+
         Navigator.pop(context);
 
       })
@@ -27,27 +34,20 @@ class AddHikePage extends MaterialPageRoute<Null>{
         leading: const Icon(MdiIcons.walk),
         title: new TextFormField(
           decoration: new InputDecoration(
-            hintText: "Name of hike",
+            labelText: 'Hike Name',
+            hintText: "Name your hike",
           ),
-          onSaved: (String value){
-            hikeName = value;
-          },
-            validator: (value) {
-    if (value.isEmpty) {
-      return 'Please enter some text';
-    }
-  },
+          controller: hikeName,
         ),
       ),
       new ListTile(
         leading: const Icon(MdiIcons.pen),
         title: new TextFormField(
           decoration: new InputDecoration(
-            hintText: "Type of Hike",
+            labelText: 'Hike Type',
+            hintText: "Describle your hike",
           ),
-          onSaved: (String value){
-            typeOfHike = value;
-          },
+          controller: hikeType,
         ),
       ),
 
