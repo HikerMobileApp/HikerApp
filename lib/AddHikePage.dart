@@ -8,6 +8,10 @@ class AddHikePage extends MaterialPageRoute<Null> {
       : super(builder: (BuildContext context) {
           final hikeName = TextEditingController();
           final hikeType = TextEditingController();
+<<<<<<< HEAD
+=======
+
+>>>>>>> b6608636e03f464238dd6e6ba2c73cd7795d1ac9
           return new Scaffold(
             appBar: new AppBar(
               backgroundColor: dark_green,
@@ -25,6 +29,10 @@ class AddHikePage extends MaterialPageRoute<Null> {
                           'Type': hikeType.text
                         });
                       }*/
+<<<<<<< HEAD
+=======
+
+>>>>>>> b6608636e03f464238dd6e6ba2c73cd7795d1ac9
                       Navigator.pop(context);
                     })
               ],
@@ -33,7 +41,11 @@ class AddHikePage extends MaterialPageRoute<Null> {
               child: new Column(
                 children: <Widget>[
                   new ListTile(
+<<<<<<< HEAD
                     leading: const Icon(Icons.directions_walk),
+=======
+                    leading: const Icon(MdiIcons.walk),
+>>>>>>> b6608636e03f464238dd6e6ba2c73cd7795d1ac9
                     title: new TextFormField(
                       decoration: new InputDecoration(
                         labelText: 'Hike Name',
