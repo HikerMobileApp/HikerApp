@@ -1,36 +1,22 @@
-import 'package:flutter/material.dart'; 
+import 'package:flutter/material.dart';
 
-class HikeCard extends StatelessWidget{
+class HikeCard extends StatelessWidget {
   @override
-  Widget build(BuildContext context){
-
+  Widget build(BuildContext context) {
     return new Card(
-        child: new Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            const ListTile(
-            leading: const Icon(Icons.directions_walk),
-            title: const Text('Jade Lake'),
-            subtitle: const Text('20 mile Backpacking'),
-            ),
-            new ButtonTheme.bar(
-              child: new ButtonBar(
-                children: <Widget>[
-                  new FlatButton(
-                    child: const Text('DONE'),
-                    onPressed: () {}
-                  ),
-                  new FlatButton(
-                    child: const Text('DELETE'),
-                    onPressed: () {}
-                  ),
-                ],
-              )
-            )
-          ]
-        )
-      );
- 
+        child: new Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
+      const ListTile(
+        leading: const Icon(Icons.directions_walk),
+        title: const Text('Jade Lake'),
+        subtitle: const Text('20 mile Backpacking'),
+      ),
+      new ButtonTheme.bar(
+          child: new ButtonBar(
+        children: <Widget>[
+          new FlatButton(child: const Text('DONE'), onPressed: () {}),
+          new FlatButton(child: const Text('DELETE'), onPressed: () {}),
+        ],
+      ))
+    ]));
   }
-    
 }
