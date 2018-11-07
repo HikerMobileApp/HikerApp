@@ -8,20 +8,6 @@ class NewPageToDo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-<<<<<<< HEAD
-        backgroundColor: dark_green,
-        //floatingActionButton: FloatingActionButton(
-        // backgroundColor: jade_blue, onPressed: (){
-        //   Navigator.push(context, AddHikePage());
-        // }
-        //   , child: Icon(Icons.add),
-        //),
-        body: new Container(
-            child: new ListView(
-          children: cards,
-        )));
-  }
-=======
      // backgroundColor: dark_green,
       //floatingActionButton: FloatingActionButton(
      // backgroundColor: jade_blue, onPressed: (){
@@ -35,5 +21,5 @@ class NewPageToDo extends StatelessWidget {
               )
             ) 
     );
->>>>>>> 135a7a309329d715cedb90a611820fbdadd8a618
+}
 }
