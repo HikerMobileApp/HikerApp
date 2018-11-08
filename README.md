@@ -1,8 +1,11 @@
-# mobile_hiking_app
+# Summit Log Hiking App
 
-A new Flutter project.
+A mobile app that allows users to keep track of outdoor activities they wish to do, have done, and view others.
 
 ## Getting Started
 
-For help getting started with Flutter, view our online
-[documentation](https://flutter.io/).
+To run this code as is, you must have flutter installed and working, follow the steps [Here](https://flutter.io/)
+
+## Demos
+
+
