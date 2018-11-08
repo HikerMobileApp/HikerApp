@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'RegisterPage.dart';
-import 'Home.dart';
-class LoginPage extends StatefulWidget {
+
+class RegisterPage extends StatefulWidget {
   @override
-  _LoginPageState createState() => new _LoginPageState();
+  _RegisterPage createState() => new _RegisterPage();
 }
 
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPage extends State<RegisterPage> {
   final formKey = new GlobalKey<FormState>();
   String _email;
   String _password;
@@ -29,14 +28,10 @@ class _LoginPageState extends State<LoginPage> {
   void validateAndSubmit() async{
     if(validateAndSave()){
       try{
-        FirebaseUser user = await FirebaseAuth.instance.signInWithEmailAndPassword(email: _email, password: _password);
-        print('Verified? : ${user.isEmailVerified}');
-        if(user.isEmailVerified){
-          Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => HomePage()),
-            );
-        }
+        FirebaseUser user = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: _email, password: _password);
+        user.sendEmailVerification();
+        print('Registered user: ${user.uid}');
+        Navigator.pop(context);
       }
       catch(e){
         print(e);
@@ -44,11 +39,8 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-  void moveToRegister(){
-                Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => RegisterPage()),
-            );
+  void moveToLogin(){
+    Navigator.pop(context);
   }
 
   @override
@@ -93,16 +85,16 @@ class _LoginPageState extends State<LoginPage> {
           height: 42.0,
           onPressed: validateAndSubmit,
           color: Colors.lightBlueAccent,
-          child: Text('Log In', style: TextStyle(color: Colors.white)),
+          child: Text('Register', style: TextStyle(color: Colors.white)),
         ),
     );
 
-    final registerLabel = FlatButton(
+    final alreadyHaveAccountLabel = FlatButton(
       child: Text(
-        'Register New User?',
+        'Already Have an Account?',
         style: TextStyle(color: Colors.black54),
       ),
-      onPressed: moveToRegister,
+      onPressed: moveToLogin,
     );
 
     return Scaffold(
@@ -121,7 +113,7 @@ class _LoginPageState extends State<LoginPage> {
             password,
             SizedBox(height: 24.0),
             loginButton,
-            registerLabel
+            alreadyHaveAccountLabel
           ],
         ),
         ),
