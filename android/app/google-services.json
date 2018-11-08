@@ -42,6 +42,13 @@
             {
               "client_id": "842460879065-7li5jtajbihrr27cuhr9tbvha0qkoum1.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "842460879065-fmq628rghp9nsnlpmuct14e302blpqhd.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.mobileHikingApp"
+              }
             }
           ]
         },
