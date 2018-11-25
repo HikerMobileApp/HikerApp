@@ -10,7 +10,7 @@ import 'AddHikePage.dart';
 const Color dark_green = Color(0xff141d26);
 const Color light_dark = Color(0xff243447);
 
-List<Widget> cards = new List.generate(20, (i)=>new HikeCard());
+//List<Widget> cards = new List.generate(5, (i)=>new HikeCard());
 String hikeName;
 String typeOfHike;
 final GlobalKey<ScaffoldState> globalKey = new GlobalKey<ScaffoldState>();
@@ -69,7 +69,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
       ]), 
       body: new TabBarView(
         physics: NeverScrollableScrollPhysics(),
-        children: <Widget>[new NewPageToDo("todo"), new NewPageDone("done")],
+        children: <Widget>[new NewPageToDo(), new NewPageDone("done")],
         controller: tabController,
       ),
       bottomNavigationBar: new Material(
