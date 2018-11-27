@@ -1,5 +1,5 @@
 # Summit Log Hiking App
-Welcome to the next gen hike tracking application. 
+Welcome to the next gen hike tracking application.\n 
 A mobile app that allows users to keep track of outdoor activities they wish to do, have done, and view others.
 
 ## Getting Started
