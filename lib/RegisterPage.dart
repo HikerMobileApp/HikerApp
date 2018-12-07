@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+const Color light_dark = Color(0xff243447);
 class RegisterPage extends StatefulWidget {
   @override
   _RegisterPage createState() => new _RegisterPage();
@@ -53,7 +54,17 @@ class _RegisterPage extends State<RegisterPage> {
         child: Image.asset('assets/logo.png'),
       ),
     );
+
+    final title = 
+    Text(
+    'Summit Log',
+    textAlign: TextAlign.center,
+    overflow: TextOverflow.ellipsis,
+    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 50.0, color: Colors.white),
+);
+
     final email = TextFormField(
+      style: TextStyle(fontSize: 20.0, color: Colors.white),
       keyboardType: TextInputType.emailAddress,
       autofocus: false,
       decoration: InputDecoration(
@@ -66,6 +77,7 @@ class _RegisterPage extends State<RegisterPage> {
     );
 
     final password = TextFormField(
+      style: TextStyle(fontSize: 20.0, color: Colors.white),
       autofocus: false,
       obscureText: true,
       decoration: InputDecoration(
@@ -79,12 +91,10 @@ class _RegisterPage extends State<RegisterPage> {
 
     final loginButton = Padding(
       padding: EdgeInsets.symmetric(vertical: 2.0),
-        child: MaterialButton(
-          elevation: 20.0,
-          minWidth: 200.0,
-          height: 42.0,
+        child: FlatButton(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32.0)),
           onPressed: validateAndSubmit,
-          color: Colors.lightBlueAccent,
+          color: Colors.green,
           child: Text('Register', style: TextStyle(color: Colors.white)),
         ),
     );
@@ -92,13 +102,13 @@ class _RegisterPage extends State<RegisterPage> {
     final alreadyHaveAccountLabel = FlatButton(
       child: Text(
         'Already Have an Account?',
-        style: TextStyle(color: Colors.black54),
+        style: TextStyle(color: Colors.white),
       ),
       onPressed: moveToLogin,
     );
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: light_dark,
       body: Center(
         child: Form(
           key: formKey,
@@ -106,6 +116,7 @@ class _RegisterPage extends State<RegisterPage> {
           shrinkWrap: true,
           padding: EdgeInsets.only(left: 24.0, right: 24.0),
           children: <Widget>[
+            title,
             logo,
             SizedBox(height: 48.0),
             email,

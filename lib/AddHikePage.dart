@@ -7,10 +7,11 @@ class AddHikePage extends MaterialPageRoute<Null> {
       : super(builder: (BuildContext context) {
           final hikeName = TextEditingController();
           final hikeType = TextEditingController();
+          final miles = TextEditingController();
 
           return new Scaffold(
             appBar: new AppBar(
-              backgroundColor: dark_green,
+              backgroundColor: light_dark,
               title: new Text("Add a hike"),
               actions: <Widget>[
                 new IconButton(
@@ -34,8 +35,9 @@ class AddHikePage extends MaterialPageRoute<Null> {
               child: new Column(
                 children: <Widget>[
                   new ListTile(
-                    leading: const Icon(MdiIcons.walk),
+                    leading: const Icon(MdiIcons.walk, color: Colors.white),
                     title: new TextFormField(
+                      style: TextStyle(fontSize: 15.0, color: Colors.white),
                       decoration: new InputDecoration(
                         labelText: 'Hike Name',
                         hintText: "Name your hike",
@@ -44,13 +46,25 @@ class AddHikePage extends MaterialPageRoute<Null> {
                     ),
                   ),
                   new ListTile(
-                    leading: const Icon(MdiIcons.pen),
+                    leading: const Icon(MdiIcons.pen, color: Colors.white),
                     title: new TextFormField(
+                      style: TextStyle(fontSize: 15.0, color: Colors.white),
                       decoration: new InputDecoration(
                         labelText: 'Hike Type',
                         hintText: "Describle your hike",
                       ),
                       controller: hikeType,
+                    ),
+                  ),
+                  new ListTile(
+                    leading: const Icon(MdiIcons.note, color: Colors.white,),
+                    title: new TextFormField(
+                      style: TextStyle(fontSize: 15.0, color: Colors.white),
+                      decoration: new InputDecoration(
+                        labelText: 'Miles',
+                        hintText: "How Many Miles?",
+                      ),
+                      controller: miles,
                     ),
                   ),
                 ],

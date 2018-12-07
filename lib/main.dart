@@ -6,8 +6,8 @@ const Color light_dark = Color(0xff243447);
 
 void main() => runApp( new MaterialApp(
   theme: new ThemeData(
-    accentColor: Colors.teal,
-    hintColor: Colors.teal,
+    accentColor: Colors.greenAccent,
+    hintColor: Colors.greenAccent,
     canvasColor: light_dark,
   ),
   home: new LoginPage(),
