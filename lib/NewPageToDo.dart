@@ -14,9 +14,10 @@ class NewPageToDoState extends State<NewPageToDo>{
   static Card card4 = hikeCardMaker('Poo Poo Point', 'Day Hike', '6');
   static Card card5 = hikeCardMaker('Matterhorn', 'Backpacking', '16');
   List<Widget> cards = [card1, card2, card3, card4, card5];
+  
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return new Scaffold(
        body: new Container(
               child: new ListView.builder(
@@ -44,7 +45,7 @@ class NewPageToDoState extends State<NewPageToDo>{
                   );
                 }
               )
-            ) 
+       )
     );
 }
 }
