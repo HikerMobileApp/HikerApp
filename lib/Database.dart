@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Database{
 
+  //I need to rethink this to a bool
   void pushAddHike(String user, String hikeName, String hikeType)
   {
     Firestore.instance
@@ -12,5 +13,7 @@ class Database{
     .document(hikeName)
     .setData({'Title': hikeName,'Type': hikeType});
   }
+
+  void
 
 }
