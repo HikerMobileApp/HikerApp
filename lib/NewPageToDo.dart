@@ -1,12 +1,4 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
-import 'main.dart';
-import 'Home.dart';
-
-class NewPageToDo extends StatelessWidget {
-  final String title;
-  NewPageToDo(this.title);
-=======
 import 'HikeCard.dart'; 
 
 class NewPageToDo extends StatefulWidget{
@@ -23,7 +15,6 @@ class NewPageToDoState extends State<NewPageToDo>{
   static Card card5 = hikeCardMaker('Matterhorn', 'Backpacking', '16');
   List<Widget> cards = [card1, card2, card3, card4, card5];
 
->>>>>>> b8cf8eb8615d8b1215dc2bd6d5f02f13dfe9d53c
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
