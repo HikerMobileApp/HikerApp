@@ -22,11 +22,9 @@ class AddHikePage extends MaterialPageRoute<Null> {
                     onPressed: () {
                       if (hikeName.text != "" && hikeType.text != "") {
                         String user = FirebaseAuth.instance.currentUser().toString();
-                        print(user);
                         Database temp = new Database();
                         temp.pushAddHike(user, hikeName.text, hikeType.text);
                       }
-
                       Navigator.pop(context);
                     })
               ],

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 
 class Database{
@@ -14,6 +15,15 @@ class Database{
     .setData({'Title': hikeName,'Type': hikeType});
   }
 
-  void
+  void pullHikes()
+  {
+    String user = FirebaseAuth.instance.currentUser().toString();
+    Firestore.instance
+    .collection(user)
+    .document("Hikes To Do")
+    .collection("Hike List")
+    .getDocuments();
 
+
+  }
 }
