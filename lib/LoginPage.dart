@@ -1,22 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'RegisterPage.dart';
+import 'Home.dart';
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
+const Color light_dark = Color(0xff243447);
+const Color dark_green = Color(0xff141d26);
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => new _LoginPageState();
 }
 
-enum FormType{
-  login,
-  register
+bool isLoggedIn = false;
+var profile;
+
+String returnProfilePic(){
+  if(profile != null){
+  print(profile['picture']['data']['url']);
+  return profile['picture']['data']['url'];
+  }
+  else {
+    return "";
+  }
 }
-
-
 class _LoginPageState extends State<LoginPage> {
   final formKey = new GlobalKey<FormState>();
   String _email;
   String _password;
-  FormType _formType = FormType.login;
 
   bool validateAndSave(){
     final form = formKey.currentState;
@@ -30,12 +42,58 @@ class _LoginPageState extends State<LoginPage> {
       return false;
     }
   }
+void onLoginStatusChanged(bool LoggedIn, {profileData}) {
+    setState(() {
+      isLoggedIn = LoggedIn;
+      profile = profileData;
+    });
+  }
+
+  void initiateFacebookLogin() async {
+    var facebookLogin = FacebookLogin();
+    facebookLogin.loginBehavior = FacebookLoginBehavior.nativeOnly;
+    var facebookLoginResult =
+        await facebookLogin.logInWithReadPermissions(['email', 'public_profile']);
+     switch (facebookLoginResult.status) {
+      case FacebookLoginStatus.error:
+        print("Error");
+        onLoginStatusChanged(false);
+        break;
+      case FacebookLoginStatus.cancelledByUser:
+        print("CancelledByUser");
+        onLoginStatusChanged(false);
+        break;
+      case FacebookLoginStatus.loggedIn:
+        print("LoggedIn");
+        FirebaseAuth.instance.signInWithFacebook(accessToken: facebookLoginResult.accessToken.token);
+        onLoginStatusChanged(true);
+        break;
+    }
+    if(isLoggedIn){
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => HomePage()),
+            );
+            var graphResponse = await http.get(
+            'https://graph.facebook.com/v2.12/me?fields=name,first_name,last_name,email,picture.height(200)&access_token=${facebookLoginResult
+                .accessToken.token}');
+
+        profile = json.decode(graphResponse.body);
+        print(profile.toString());
+    }
+  }
 
   void validateAndSubmit() async{
     if(validateAndSave()){
       try{
         FirebaseUser user = await FirebaseAuth.instance.signInWithEmailAndPassword(email: _email, password: _password);
-        print('Signed in: ${user.uid}');
+        print('Verified? : ${user.isEmailVerified}');
+        if(user.isEmailVerified){
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => HomePage()),
+            );
+        }
       }
       catch(e){
         print(e);
@@ -44,13 +102,23 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void moveToRegister(){
-    setState(() {
-      _formType = FormType.register;
-        });
+                Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => RegisterPage()),
+            );
   }
 
   @override
   Widget build(BuildContext context) {
+
+    final title = 
+    Text(
+    'Summit Log',
+    textAlign: TextAlign.center,
+    overflow: TextOverflow.ellipsis,
+    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 50.0, color: Colors.white),
+);
+
     final logo = Hero(
       tag: 'hero',
       child: CircleAvatar(
@@ -59,7 +127,9 @@ class _LoginPageState extends State<LoginPage> {
         child: Image.asset('assets/logo.png'),
       ),
     );
+    
     final email = TextFormField(
+      style: TextStyle(fontSize: 20.0, color: Colors.white),
       keyboardType: TextInputType.emailAddress,
       autofocus: false,
       decoration: InputDecoration(
@@ -72,6 +142,7 @@ class _LoginPageState extends State<LoginPage> {
     );
 
     final password = TextFormField(
+      style: TextStyle(fontSize: 20.0, color: Colors.white),
       autofocus: false,
       obscureText: true,
       decoration: InputDecoration(
@@ -85,33 +156,43 @@ class _LoginPageState extends State<LoginPage> {
 
     final loginButton = Padding(
       padding: EdgeInsets.symmetric(vertical: 2.0),
-        child: MaterialButton(
-          elevation: 20.0,
-          minWidth: 200.0,
-          height: 42.0,
+        child: FlatButton(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32.0)),
           onPressed: validateAndSubmit,
-          color: Colors.lightBlueAccent,
+          color: Colors.green,
           child: Text('Log In', style: TextStyle(color: Colors.white)),
+        ),
+    );
+
+    final loginFacebookButton = Padding(
+      padding: EdgeInsets.symmetric(vertical: 2.0),
+        child: FlatButton(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(32.0)),
+          onPressed: initiateFacebookLogin,
+          color: Colors.blue,
+          child: Text('Facebook', style: TextStyle(color: Colors.white)),
         ),
     );
 
     final registerLabel = FlatButton(
       child: Text(
         'Register New User?',
-        style: TextStyle(color: Colors.black54),
+        style: TextStyle(color: Colors.white),
       ),
       onPressed: moveToRegister,
     );
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: light_dark,
       body: Center(
         child: Form(
           key: formKey,
           child: ListView(
+          physics: NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           padding: EdgeInsets.only(left: 24.0, right: 24.0),
           children: <Widget>[
+            title,
             logo,
             SizedBox(height: 48.0),
             email,
@@ -119,6 +200,7 @@ class _LoginPageState extends State<LoginPage> {
             password,
             SizedBox(height: 24.0),
             loginButton,
+            loginFacebookButton,
             registerLabel
           ],
         ),
