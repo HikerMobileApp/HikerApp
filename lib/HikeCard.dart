@@ -1,5 +1,39 @@
 import 'package:flutter/material.dart'; 
 
+
+//class HikeCard(String hikeName, string hikeType, int elevation, String location){
+//
+//}
+
+Card hikeCardMaker(String hikeName, String hikeType, String miles){
+  return new Card(
+        child: new Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+             ListTile(
+            leading:  Icon(Icons.directions_walk),
+            title:  Text(hikeName),
+            subtitle:  Text(miles + ' mile ' + hikeType),
+            ),
+            new ButtonTheme.bar(
+              child: new ButtonBar(
+                children: <Widget>[
+                  new FlatButton(
+                    child: const Text('DONE', style: TextStyle(color: Colors.blueGrey)),
+                    onPressed: () {}
+                  ),
+                  new FlatButton(
+                    child: const Text('DELETE', style: TextStyle(color: Colors.blueGrey)),
+                    onPressed: () {}
+                  ),
+                ],
+              )
+            )
+          ]
+        )
+      );
+
+}
 class HikeCard extends StatelessWidget{
   @override
   Widget build(BuildContext context){
@@ -17,7 +51,7 @@ class HikeCard extends StatelessWidget{
               child: new ButtonBar(
                 children: <Widget>[
                   new FlatButton(
-                    child: const Text('DONE'),
+                    child: const Text('DONE', style: TextStyle(color: Colors.blueGrey),),
                     onPressed: () {}
                   ),
                   new FlatButton(
