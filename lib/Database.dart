@@ -18,12 +18,30 @@ class Database{
   void pullHikes()
   {
     String user = FirebaseAuth.instance.currentUser().toString();
-    Firestore.instance
+    CollectionReference collectionRef = Firestore.instance
     .collection(user)
     .document("Hikes To Do")
-    .collection("Hike List")
-    .getDocuments();
+    .collection("Hike List");
 
+    collectionRef.getDocuments();
+
+
+  Future <List<Map<dynamic, dynamic>>> getCollection() async{
+  List<DocumentSnapshot> templist;
+  List<Map<dynamic, dynamic>> list = new List();
+  CollectionReference collectionRef = Firestore.instance.collection(user)
+                                                        .document("Hikes To Do")
+                                                        .collection("Hike List");
+  QuerySnapshot collectionSnapshot = await collectionRef.getDocuments();
+
+  templist = collectionSnapshot.documents; // <--- ERROR
+
+  list = templist.map((DocumentSnapshot docSnapshot){
+    return docSnapshot.data;
+  }).toList();
+
+  return list;
+}  
 
   }
 }
