@@ -10,8 +10,9 @@ FirebaseAuth _auth = FirebaseAuth.instance;
   void pushAddHike(String user, String hikeName, String hikeType)
   {
     _getCurrentUser();
+    print('Hello ' + mCurrentUser.displayName.toString());
     Firestore.instance
-    .collection(mCurrentUser.displayName)
+    .collection(mCurrentUser.displayName.toString())
     .document("Hikes To Do")
     .collection("Hike List")
     .document(hikeName)
