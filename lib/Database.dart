@@ -4,15 +4,24 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 class Database{
 
+FirebaseUser mCurrentUser;
+FirebaseAuth _auth = FirebaseAuth.instance;
   //I need to rethink this to a bool
   void pushAddHike(String user, String hikeName, String hikeType)
   {
+    _getCurrentUser();
     Firestore.instance
-    .collection(user)
+    .collection(mCurrentUser.displayName)
     .document("Hikes To Do")
     .collection("Hike List")
     .document(hikeName)
     .setData({'Title': hikeName,'Type': hikeType});
+  }
+
+  
+  _getCurrentUser () async {
+  mCurrentUser = await _auth.currentUser();
+  print('Hello ' + mCurrentUser.displayName.toString());
   }
 
   void pullHikes()
