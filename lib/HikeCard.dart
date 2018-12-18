@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart'; 
+import 'package:flutter/material.dart';
 
 
 //class HikeCard(String hikeName, string hikeType, int elevation, String location){
@@ -36,8 +36,7 @@ Card hikeCardMaker(String hikeName, String hikeType, String miles){
 }
 class HikeCard extends StatelessWidget{
   @override
-  Widget build(BuildContext context){
-
+  Widget build(BuildContext context) {
     return new Card(
         child: new Column(
           mainAxisSize: MainAxisSize.min,
@@ -66,5 +65,4 @@ class HikeCard extends StatelessWidget{
       );
  
   }
-    
 }

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'main.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+//import 'package:cloud_firestore/cloud_firestore.dart';
+//import 'package:firebase_auth/firebase_auth.dart';
+import 'Database.dart';
 
 class AddHikePage extends MaterialPageRoute<Null> {
   AddHikePage()
@@ -17,16 +20,10 @@ class AddHikePage extends MaterialPageRoute<Null> {
                 new IconButton(
                     icon: const Icon(Icons.check),
                     onPressed: () {
-                      /*if (hikeName.text != "" && hikeType.text != "") {
-                        Firestore.instance
-                            .collection("Hiking")
-                            .document()
-                            .setData({
-                          'Title': hikeName.text,
-                          'Type': hikeType.text
-                        });
-                      }*/
-
+                      if (hikeName.text != "" && hikeType.text != "") {
+                        Database temp = new Database();
+                        temp.pushAddHike(hikeName.text, hikeType.text);
+                      }
                       Navigator.pop(context);
                     })
               ],
