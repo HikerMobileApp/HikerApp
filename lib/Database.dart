@@ -9,6 +9,7 @@ FirebaseAuth _auth = FirebaseAuth.instance;
 
   Future<void> pushAddHike(String hikeName, String hikeType) async {
     mCurrentUser = await _auth.currentUser();
+    print("User" + mCurrentUser.toString());
     if(mCurrentUser.displayName.toString() == null)
     {
       Firestore.instance
