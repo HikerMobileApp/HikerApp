@@ -17,11 +17,33 @@ class NewPageToDoState extends State<NewPageToDo> {
   static Card card5 = hikeCardMaker('Matterhorn', 'Backpacking', '16');
   List<Widget> cards = [card1, card2, card3, card4, card5];
 
-  @override
+ @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<QuerySnapshot>(
+      stream: Firestore.instance.collection('robinkumar123').document("Hikes To Do").collection("Hike List").snapshots(),
+      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+        if (snapshot.hasError)
+          return new Text('Error: ${snapshot.error}');
+        switch (snapshot.connectionState) {
+          case ConnectionState.waiting: return new Text('Loading...');
+          default:
+            return new ListView(
+              children: snapshot.data.documents.map((DocumentSnapshot document) {
+                return new ListTile(
+                  title: new Text(document['Title']),
+                  subtitle: new Text(document['Type']),
+                );
+              }).toList(),
+            );
+        }
+      },
+    );
+  }
+  /*@override
   Widget build(BuildContext context) {
     return new Scaffold(
         body:
-            /*StreamBuilder(
+            StreamBuilder(
       stream: Firestore.instance
           .collection('robinkumar123')
           .document("Hikes To Do")
@@ -36,7 +58,7 @@ class NewPageToDoState extends State<NewPageToDo> {
           ],
         );
       },
-    )*/
+    )
             new Container(
                 child: new ListView.builder(
                     itemCount: cards.length,
@@ -60,6 +82,7 @@ class NewPageToDoState extends State<NewPageToDo> {
                         background: Container(color: Colors.red),
                         child: ListTile(title: card),
                       );
-                    })));
-  }
+                    }))
+                    );
+  }*/
 }
