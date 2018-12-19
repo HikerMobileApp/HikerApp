@@ -33,6 +33,7 @@ class NewPageToDoState extends State<NewPageToDo> {
                   title: new Text(document['Title']),
                   subtitle: new Text(document['Type']),
                 );
+                
               }).toList(),
             );
         }
