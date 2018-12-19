@@ -21,6 +21,7 @@ class AddHikePage extends MaterialPageRoute<Null> {
                     icon: const Icon(Icons.check),
                     onPressed: () {
                       if (hikeName.text != "" && hikeType.text != "") {
+                        print("Checkmark clicked");
                         Database temp = new Database();
                         temp.pushAddHike(hikeName.text, hikeType.text);
                       }
