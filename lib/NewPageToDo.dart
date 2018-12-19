@@ -17,23 +17,27 @@ class NewPageToDoState extends State<NewPageToDo> {
   static Card card5 = hikeCardMaker('Matterhorn', 'Backpacking', '16');
   List<Widget> cards = [card1, card2, card3, card4, card5];
 
- @override
+  @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      stream: Firestore.instance.collection('robinkumar123').document("Hikes To Do").collection("Hike List").snapshots(),
+      stream: Firestore.instance
+          .collection('robinkumar123')
+          .document("Hikes To Do")
+          .collection("Hike List")
+          .snapshots(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-        if (snapshot.hasError)
-          return new Text('Error: ${snapshot.error}');
+        if (snapshot.hasError) return new Text('Error: ${snapshot.error}');
         switch (snapshot.connectionState) {
-          case ConnectionState.waiting: return new Text('Loading...');
+          case ConnectionState.waiting:
+            return new Text('Loading...');
           default:
             return new ListView(
-              children: snapshot.data.documents.map((DocumentSnapshot document) {
+              children:
+                  snapshot.data.documents.map((DocumentSnapshot document) {
                 return new ListTile(
                   title: new Text(document['Title']),
                   subtitle: new Text(document['Type']),
                 );
-                
               }).toList(),
             );
         }
@@ -43,24 +47,7 @@ class NewPageToDoState extends State<NewPageToDo> {
   /*@override
   Widget build(BuildContext context) {
     return new Scaffold(
-        body:
-            StreamBuilder(
-      stream: Firestore.instance
-          .collection('robinkumar123')
-          .document("Hikes To Do")
-          //.collection("Hike List")
-          .snapshots(),
-      builder: (context, snapshot) {
-        if (!snapshot.hasData) return Text('No hikes added yet');
-        return Column(
-          children: <Widget>[
-            Text(snapshot.data.documents[0]['Title'],style: new TextStyle(fontSize: 45.0),),
-            Text(snapshot.data.documents[0]['Type'],style: new TextStyle(fontSize: 40.0),)
-          ],
-        );
-      },
-    )
-            new Container(
+        body: new Container(
                 child: new ListView.builder(
                     itemCount: cards.length,
                     itemBuilder: (context, index) {
