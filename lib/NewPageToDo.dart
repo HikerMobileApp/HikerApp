@@ -19,25 +19,35 @@ class NewPageToDoState extends State<NewPageToDo> {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-        body:
-            /*StreamBuilder(
+    return StreamBuilder<QuerySnapshot>(
       stream: Firestore.instance
           .collection('robinkumar123')
           .document("Hikes To Do")
-          //.collection("Hike List")
+          .collection("Hike List")
           .snapshots(),
-      builder: (context, snapshot) {
-        if (!snapshot.hasData) return Text('No hikes added yet');
-        return Column(
-          children: <Widget>[
-            Text(snapshot.data.documents[0]['Title'],style: new TextStyle(fontSize: 45.0),),
-            Text(snapshot.data.documents[0]['Type'],style: new TextStyle(fontSize: 40.0),)
-          ],
-        );
+      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+        if (snapshot.hasError) return new Text('Error: ${snapshot.error}');
+        switch (snapshot.connectionState) {
+          case ConnectionState.waiting:
+            return new Text('Loading...');
+          default:
+            return new ListView(
+              children:
+                  snapshot.data.documents.map((DocumentSnapshot document) {
+                return new ListTile(
+                  title: new Text(document['Title']),
+                  subtitle: new Text(document['Type']),
+                );
+              }).toList(),
+            );
+        }
       },
-    )*/
-            new Container(
+    );
+  }
+  /*@override
+  Widget build(BuildContext context) {
+    return new Scaffold(
+        body: new Container(
                 child: new ListView.builder(
                     itemCount: cards.length,
                     itemBuilder: (context, index) {
@@ -60,6 +70,7 @@ class NewPageToDoState extends State<NewPageToDo> {
                         background: Container(color: Colors.red),
                         child: ListTile(title: card),
                       );
-                    })));
-  }
+                    }))
+                    );
+  }*/
 }
