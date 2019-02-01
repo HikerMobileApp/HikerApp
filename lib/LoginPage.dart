@@ -8,6 +8,7 @@ import 'dart:convert';
 
 const Color light_dark = Color(0xff243447);
 const Color dark_green = Color(0xff141d26);
+final FirebaseAuth _auth = FirebaseAuth.instance;
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => new _LoginPageState();
