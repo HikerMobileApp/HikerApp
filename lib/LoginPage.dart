@@ -17,6 +17,7 @@ class LoginPage extends StatefulWidget {
 bool isLoggedIn = false;
 var profile;
 
+/*
 String returnProfilePic(){
   if(profile != null){
   print(profile['picture']['data']['url']);
@@ -26,6 +27,8 @@ String returnProfilePic(){
     return "";
   }
 }
+*/
+
 class _LoginPageState extends State<LoginPage> {
   final formKey = new GlobalKey<FormState>();
   String _email;
@@ -67,7 +70,11 @@ void onLoginStatusChanged(bool LoggedIn, {profileData}) {
       case FacebookLoginStatus.loggedIn:
         print("LoggedIn");
         FirebaseAuth.instance.signInWithFacebook(accessToken: facebookLoginResult.accessToken.token);
+        final FirebaseUser user = await _auth.signInWithFacebook(accessToken: facebookLoginResult.accessToken.token);
         onLoginStatusChanged(true);
+        final FirebaseUser currentUser = await _auth.currentUser();
+        assert(user.uid == currentUser.uid);
+
         break;
     }
     if(isLoggedIn){
@@ -83,7 +90,7 @@ void onLoginStatusChanged(bool LoggedIn, {profileData}) {
         print(profile.toString());
     }
   }
-
+/*
   void validateAndSubmit() async{
     if(validateAndSave()){
       try{
@@ -101,6 +108,7 @@ void onLoginStatusChanged(bool LoggedIn, {profileData}) {
       }
     }
   }
+  */
 
   void moveToRegister(){
                 Navigator.push(
@@ -128,7 +136,7 @@ void onLoginStatusChanged(bool LoggedIn, {profileData}) {
         child: Image.asset('assets/logo.png'),
       ),
     );
-    
+    /*
     final email = TextFormField(
       style: TextStyle(fontSize: 20.0, color: Colors.white),
       keyboardType: TextInputType.emailAddress,
@@ -164,7 +172,7 @@ void onLoginStatusChanged(bool LoggedIn, {profileData}) {
           child: Text('Log In', style: TextStyle(color: Colors.white)),
         ),
     );
-
+*/
     final loginFacebookButton = Padding(
       padding: EdgeInsets.symmetric(vertical: 2.0),
         child: FlatButton(
@@ -175,6 +183,7 @@ void onLoginStatusChanged(bool LoggedIn, {profileData}) {
         ),
     );
 
+/*
     final registerLabel = FlatButton(
       child: Text(
         'Register New User?',
@@ -182,6 +191,7 @@ void onLoginStatusChanged(bool LoggedIn, {profileData}) {
       ),
       onPressed: moveToRegister,
     );
+    */
 
     return Scaffold(
       backgroundColor: light_dark,
@@ -195,14 +205,16 @@ void onLoginStatusChanged(bool LoggedIn, {profileData}) {
           children: <Widget>[
             title,
             logo,
+            /*
             SizedBox(height: 48.0),
             email,
             SizedBox(height: 8.0),
             password,
             SizedBox(height: 24.0),
             loginButton,
+            */
             loginFacebookButton,
-            registerLabel
+            //registerLabel
           ],
         ),
         ),
