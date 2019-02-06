@@ -110,7 +110,9 @@ class _HomePageState extends State<HomePage>
                     fontWeight: FontWeight.normal,
                     fontSize: 16.0,
                     color: Colors.white)),
-            onTap: () {},
+            onTap: () {
+              print(auth.currentUser().toString());
+            },
           ),
           ListTile(
             leading: Icon(

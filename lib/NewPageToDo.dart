@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'HikeCard.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'Constants.dart';
 //import 'package:firebase_auth/firebase_auth.dart';
 
 class NewPageToDo extends StatefulWidget {
@@ -21,7 +22,7 @@ class NewPageToDoState extends State<NewPageToDo> {
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
       stream: Firestore.instance
-          .collection('robinkumar123')
+          .collection(auth.currentUser().toString())
           .document("Hikes To Do")
           .collection("Hike List")
           .snapshots(),
