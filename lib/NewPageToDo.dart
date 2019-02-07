@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'HikeCard.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'Constants.dart';
 //import 'package:firebase_auth/firebase_auth.dart';
 
 class NewPageToDo extends StatefulWidget {
@@ -21,7 +22,9 @@ class NewPageToDoState extends State<NewPageToDo> {
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
       stream: Firestore.instance
-          .collection('robinkumar123')
+          //.collection(auth.currentUser().toString())
+          .collection("robinkumar123")
+          //.collection("Isaiah Scheel")
           .document("Hikes To Do")
           .collection("Hike List")
           .snapshots(),
@@ -29,14 +32,21 @@ class NewPageToDoState extends State<NewPageToDo> {
         if (snapshot.hasError) return new Text('Error: ${snapshot.error}');
         switch (snapshot.connectionState) {
           case ConnectionState.waiting:
-            return new Text('Loading...');
+            return new Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          new CircularProgressIndicator(),
+          new Text("Loading"),
+        ],
+      );
           default:
             return new ListView(
               children:
                   snapshot.data.documents.map((DocumentSnapshot document) {
                 return new ListTile(
-                  title: new Text(document['Title']),
-                  subtitle: new Text(document['Type']),
+                  title: hikeCardMaker(document['Title'], document['Type'], '1')
+                  //title: new Text(document['Title']),
+                  //subtitle: new Text(document['Type']),
                 );
               }).toList(),
             );

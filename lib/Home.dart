@@ -3,7 +3,9 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'NewPageDone.dart';
 import 'NewPageToDo.dart';
 import 'AddHikePage.dart';
-import 'LoginPage.dart';
+import 'auth.dart';
+import 'Constants.dart';
+import 'Root.dart';
 
 const Color dark_green = Color(0xff141d26);
 const Color light_dark = Color(0xff243447);
@@ -108,7 +110,25 @@ class _HomePageState extends State<HomePage>
                     fontWeight: FontWeight.normal,
                     fontSize: 16.0,
                     color: Colors.white)),
-            onTap: () {},
+            onTap: () {
+              print("");
+            },
+          ),
+          ListTile(
+            leading: Icon(
+              Icons.exit_to_app,
+              color: Colors.white,
+              size: 20,
+            ),
+              title: Text('Sign Out',
+                style: TextStyle(
+                    fontWeight: FontWeight.normal,
+                    fontSize: 16.0,
+                    color: Colors.white)),
+            onTap: () {
+              auth.signOut();
+              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext) => RootPage(auth: Auth())));
+            },
           ),
         ],
       ),
@@ -123,7 +143,7 @@ class _HomePageState extends State<HomePage>
           leading: new IconButton(
               icon: new Icon(Icons.account_circle),
               onPressed: () {
-                img = returnProfilePic();
+                //img = returnProfilePic();
                 print(img);
                 if (img == ' ') {
                   img = 'http://logo.pizza/img/dog-profile/dog-profile.png';
