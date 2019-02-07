@@ -44,10 +44,24 @@ class _RootPageState extends State<RootPage> {
     switch (authStatus) {
       case AuthStatus.notSignedIn:
         auth =  widget.auth;
+        /*
+        auth.displayName().then((result) {
+          setState(() {
+            globalUserName = result;
+        });
+      });
+      */
         return LoginPage();
         break;
       case AuthStatus.signedIn:
         auth =  widget.auth;
+        /*
+        auth.displayName().then((result) {
+          setState(() {
+            globalUserName = result;
+        });
+      });
+      */
         //onSignOut = () => _updateAuthStatus(AuthStatus.notSignedIn);
         onSignOut = () => null;
         return HomePage();

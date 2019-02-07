@@ -7,9 +7,11 @@ class Database {
     FirebaseUser mCurrentUser = await FirebaseAuth.instance.currentUser();
     int index = mCurrentUser.email.indexOf('@');
     String username = mCurrentUser.email.substring(0, index);
+    //username = mCurrentUser.displayName;
     print("Username " + username);
     Firestore.instance
-        .collection(username)
+        //.collection(username)
+        .collection("robinkumar123")
         .document('Hikes To Do')
         .collection('Hike List')
         .document(hikeName)

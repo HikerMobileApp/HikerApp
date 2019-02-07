@@ -22,7 +22,9 @@ class NewPageToDoState extends State<NewPageToDo> {
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
       stream: Firestore.instance
-          .collection(auth.currentUser().toString())
+          //.collection(auth.currentUser().toString())
+          .collection("robinkumar123")
+          //.collection("Isaiah Scheel")
           .document("Hikes To Do")
           .collection("Hike List")
           .snapshots(),
@@ -30,7 +32,13 @@ class NewPageToDoState extends State<NewPageToDo> {
         if (snapshot.hasError) return new Text('Error: ${snapshot.error}');
         switch (snapshot.connectionState) {
           case ConnectionState.waiting:
-            return new Text('Loading...');
+            return new Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          new CircularProgressIndicator(),
+          new Text("Loading"),
+        ],
+      );
           default:
             return new ListView(
               children:

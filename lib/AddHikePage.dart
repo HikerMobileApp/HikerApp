@@ -25,6 +25,14 @@ class AddHikePage extends MaterialPageRoute<Null> {
                         Database temp = new Database();
                         temp.pushAddHike(hikeName.text, hikeType.text);
                       }
+                      else if(hikeName.text == "" && hikeType.text == ""){
+                        print("Fields Left Empty");
+                        Database temp = new Database();
+                        temp.pushAddHike("test", "test");
+                      }
+                      else{
+                        print("idk what is happening");
+                      }
                       Navigator.pop(context);
                     })
               ],

@@ -9,6 +9,7 @@ abstract class BaseAuth {
   Future<String> signIn(String _email, String _password);
   Future<String> createUser(String _email, String _password, String _firstName, String _lastName);
   Future<void> signOut();
+  //Future<String> displayName();
 }
 
 class Auth implements BaseAuth {
@@ -27,16 +28,23 @@ class Auth implements BaseAuth {
 
   Future<String> currentUser() async {
     FirebaseUser user = await _firebaseAuth.currentUser();
-    print("Username --> " + user.uid);
-    print("Firebase user --> " + user.toString());
-    print("Display Nmae --> " + user.displayName);
+    //print("Username --> " + user.uid);
+    //print("Firebase user --> " + user.toString());
+    //print("Display Nmae --> " + user.displayName);
     return user != null ? user.uid : null;
   }
 
     Future<FirebaseUser> firebaseCurrentUser() async {
+    FirebaseUser mCurrentUser = await FirebaseAuth.instance.currentUser();
     FirebaseUser user = await _firebaseAuth.currentUser();
     return user;
   }
+/*
+    Future<String> displayName() async {
+      FirebaseUser mCurrentUser = await FirebaseAuth.instance.currentUser();
+      return mCurrentUser.displayName;
+  }
+  */
 
   Future<void> signOut() async {
     return _firebaseAuth.signOut();
