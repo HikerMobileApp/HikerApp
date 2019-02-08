@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'HikeCard.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'Constants.dart';
+//import 'Constants.dart';
 //import 'package:firebase_auth/firebase_auth.dart';
+import 'Database.dart';
+import 'dart:async';
 
 class NewPageToDo extends StatefulWidget {
   NewPageToDoState createState() {
@@ -20,10 +22,15 @@ class NewPageToDoState extends State<NewPageToDo> {
 
   @override
   Widget build(BuildContext context) {
+    Database temp = new Database();
+    var name = temp.getUserName();
+    print("IN NEW PAGE");
+    print(name.toString());
     return StreamBuilder<QuerySnapshot>(
       stream: Firestore.instance
           //.collection(auth.currentUser().toString())
-          .collection("robinkumar123")
+          //.collection("robinkumar123")
+          .collection(name.toString())
           //.collection("Isaiah Scheel")
           .document("Hikes To Do")
           .collection("Hike List")
@@ -33,10 +40,11 @@ class NewPageToDoState extends State<NewPageToDo> {
         switch (snapshot.connectionState) {
           case ConnectionState.waiting:
             return new Row(
-        mainAxisSize: MainAxisSize.min,
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           new CircularProgressIndicator(),
-          new Text("Loading"),
+          //new Text("Loading"),
         ],
       );
           default:

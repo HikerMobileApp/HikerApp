@@ -17,7 +17,11 @@ class Database {
         .document(hikeName)
         .setData({'Title': hikeName, 'Type': hikeType});
   }
-
+  
+  Future<String> getUserName() async { 
+    FirebaseUser mCurrentUser = await FirebaseAuth.instance.currentUser();
+    return mCurrentUser.displayName;
+  }
   getProfileImage() async {
     FirebaseUser mCurrentUser = await FirebaseAuth.instance.currentUser();
     mCurrentUser.photoUrl;
