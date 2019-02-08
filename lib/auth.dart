@@ -9,7 +9,7 @@ abstract class BaseAuth {
   Future<String> signIn(String _email, String _password);
   Future<String> createUser(String _email, String _password, String _firstName, String _lastName);
   Future<void> signOut();
-  //Future<String> displayName();
+  Future<String> displayName();
 }
 
 class Auth implements BaseAuth {
@@ -39,12 +39,12 @@ class Auth implements BaseAuth {
     FirebaseUser user = await _firebaseAuth.currentUser();
     return user;
   }
-/*
+
     Future<String> displayName() async {
       FirebaseUser mCurrentUser = await FirebaseAuth.instance.currentUser();
       return mCurrentUser.displayName;
   }
-  */
+  
 
   Future<void> signOut() async {
     return _firebaseAuth.signOut();

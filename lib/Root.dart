@@ -51,10 +51,18 @@ class _RootPageState extends State<RootPage> {
         });
       });
       */
+
+      auth.firebaseCurrentUser().then((result) {
+          setState(() {
+            globalUser = result;
+        });
+      });
+      
         return LoginPage();
         break;
       case AuthStatus.signedIn:
         auth =  widget.auth;
+        
         /*
         auth.displayName().then((result) {
           setState(() {
@@ -62,6 +70,12 @@ class _RootPageState extends State<RootPage> {
         });
       });
       */
+
+      auth.firebaseCurrentUser().then((result) {
+          setState(() {
+            globalUser = result;
+        });
+      });
         //onSignOut = () => _updateAuthStatus(AuthStatus.notSignedIn);
         onSignOut = () => null;
         return HomePage();
