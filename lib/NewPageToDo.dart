@@ -23,8 +23,7 @@ class NewPageToDoState extends State<NewPageToDo> {
     return StreamBuilder<QuerySnapshot>(
       stream: Firestore.instance
           //.collection(auth.currentUser().toString())
-          .collection("robinkumar123")
-          //.collection("Isaiah Scheel")
+          .collection(globalUser.displayName)
           .document("Hikes To Do")
           .collection("Hike List")
           .snapshots(),
@@ -32,6 +31,8 @@ class NewPageToDoState extends State<NewPageToDo> {
         if (snapshot.hasError) return new Text('Error: ${snapshot.error}');
         switch (snapshot.connectionState) {
           case ConnectionState.waiting:
+            return new Text("Loading");
+          /*
             return new Row(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -39,6 +40,7 @@ class NewPageToDoState extends State<NewPageToDo> {
           new Text("Loading"),
         ],
       );
+      */
           default:
             return new ListView(
               children:
@@ -54,33 +56,4 @@ class NewPageToDoState extends State<NewPageToDo> {
       },
     );
   }
-  /*@override
-  Widget build(BuildContext context) {
-    return new Scaffold(
-        body: new Container(
-                child: new ListView.builder(
-                    itemCount: cards.length,
-                    itemBuilder: (context, index) {
-                      final card = cards[index];
-
-                      return Dismissible(
-                        key: ObjectKey(card),
-                        // We also need to provide a function that tells our app
-                        // what to do after an item has been swiped away.
-                        onDismissed: (DismissDirection direction) {
-                          // Remove the item from our data source.
-                          if (direction == DismissDirection.endToStart) {
-                            setState(() {
-                              cards.removeAt(index);
-                            });
-                            Scaffold.of(context).showSnackBar(
-                                SnackBar(content: Text("$card dismissed")));
-                          }
-                        },
-                        background: Container(color: Colors.red),
-                        child: ListTile(title: card),
-                      );
-                    }))
-                    );
-  }*/
 }

@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'Constants.dart';
 //import 'package:firebase_core/firebase_core.dart';
 
 class Database {
@@ -11,7 +12,8 @@ class Database {
     print("Username " + username);
     Firestore.instance
         //.collection(username)
-        .collection("robinkumar123")
+        //.collection("robinkumar123")
+        .collection(globalUser.displayName)
         .document('Hikes To Do')
         .collection('Hike List')
         .document(hikeName)
