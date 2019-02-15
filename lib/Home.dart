@@ -6,6 +6,7 @@ import 'AddHikePage.dart';
 import 'auth.dart';
 import 'Constants.dart';
 import 'Root.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 const Color dark_green = Color(0xff141d26);
 const Color light_dark = Color(0xff243447);
@@ -22,11 +23,34 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
+
+
+_setUsername(String username) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      prefs.setString('username', username);
+    });
+  }
+_loadUsername() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      globalUserName = (prefs.getString('username') ?? "username");
+    });
+  }
+  _loadProfPic() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      img = (prefs.getString('profPic') ?? "image");
+    });
+  }
+
   TabController tabController;
   String img = "";
   @override
   void initState() {
     super.initState();
+    _loadUsername();
+    _loadProfPic();
     //Firestore.instance.collection('Hiking').document()
     //.setData({'Title': 'Jade Lake', 'Type': 'Backpacking'});
     tabController = new TabController(length: 2, vsync: this);
@@ -40,26 +64,31 @@ class _HomePageState extends State<HomePage>
 
   @override
   Widget build(BuildContext context) {
+    //_loadUsername();
     Drawer drawer = new Drawer(
       child: new ListView(
         children: <Widget>[
-          new DrawerHeader(
-            //accountName: new Text("Isaiah Scheel"),
-            //accountEmail: new Text("isaiahscheel@gmail.com"),
-            //currentAccountPicture: new Icon(Icons.account_circle),
-            child: Container(
-              height: 350.0,
-              width: 350.0,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                image: DecorationImage(
-                  //fit: BoxFit.fill,
-                  image: NetworkImage(
-                      'http://logo.pizza/img/dog-profile/dog-profile.png'),
-                ),
-              ),
+          new UserAccountsDrawerHeader(
+            decoration: BoxDecoration(
+              color: light_dark
+              
             ),
-          ),
+            accountName: new Text(
+              globalUserName, 
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
+              currentAccountPicture: new Container(
+                width: 250.0,
+                height: 250.0,
+                decoration: new BoxDecoration(
+                  shape: BoxShape.circle,
+                  image: new DecorationImage(
+                  fit: BoxFit.fill,
+                  image: new NetworkImage(img)
+                 )
+                  )),
+      
+            ),
           ListTile(
             leading: Icon(
               Icons.person,
@@ -126,6 +155,7 @@ class _HomePageState extends State<HomePage>
                     fontSize: 16.0,
                     color: Colors.white)),
             onTap: () {
+              _setUsername("Signed Out");
               auth.signOut();
               Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext) => RootPage(auth: Auth())));
             },
@@ -141,7 +171,10 @@ class _HomePageState extends State<HomePage>
           elevation: 5.0,
           backgroundColor: light_dark,
           leading: new IconButton(
-              icon: new Icon(Icons.account_circle),
+              icon: new CircleAvatar(
+               backgroundImage: NetworkImage(img),
+              ),
+              
               onPressed: () {
                 //img = returnProfilePic();
                 print(img);

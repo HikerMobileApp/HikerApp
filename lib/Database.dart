@@ -9,12 +9,12 @@ class Database {
     int index = mCurrentUser.email.indexOf('@');
     String username = mCurrentUser.email.substring(0, index);
     //username = mCurrentUser.displayName;
-    print("Username " + username);
+    print("GlobalUsername " + globalUserName);
     Firestore.instance
-        //.collection(username)
+        .collection(globalUserName)
         //.collection("robinkumar123")
         //.collection(globalUser.displayName)
-        .collection("Isaiah Scheel")
+        //.collection("Isaiah Scheel")
         .document('Hikes To Do')
         .collection('Hike List')
         .document(hikeName)

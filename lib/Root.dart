@@ -3,7 +3,8 @@ import 'auth.dart';
 import 'LoginPage.dart';
 import 'Home.dart';
 import 'Constants.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'SharedPreferences.dart';
 
 class RootPage extends StatefulWidget {
   RootPage({Key key, this.auth, this.themeData}) : super(key: key);
@@ -26,6 +27,7 @@ class _RootPageState extends State<RootPage> {
 
   initState() {
     super.initState();
+    _loadUsername();
     widget.auth.currentUser().then((userId) {
       setState(() {
         authStatus = userId != null ? AuthStatus.signedIn : AuthStatus.notSignedIn;
@@ -39,29 +41,51 @@ class _RootPageState extends State<RootPage> {
     });
   }
 
+      _loadUsername() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      globalUserName = (prefs.getString('username') ?? "username");
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+
     switch (authStatus) {
       case AuthStatus.notSignedIn:
         auth =  widget.auth;
+
+
+        
         /*
         auth.displayName().then((result) {
           setState(() {
-            globalUserName = result;
+           sp.setUsername(result);
         });
       });
       */
-
+      
+/*
       auth.firebaseCurrentUser().then((result) {
           setState(() {
             globalUser = result;
         });
       });
+      */
       
         return LoginPage();
         break;
       case AuthStatus.signedIn:
         auth =  widget.auth;
+        //_loadUsername();
+
+        /*
+       sp.getUsername().then((name){
+         setState(() {
+           globalUserName = name;
+         });
+       });
+       */
         
         /*
         auth.displayName().then((result) {
@@ -71,11 +95,13 @@ class _RootPageState extends State<RootPage> {
       });
       */
 
+/*
       auth.firebaseCurrentUser().then((result) {
           setState(() {
             globalUser = result;
         });
       });
+      */
         //onSignOut = () => _updateAuthStatus(AuthStatus.notSignedIn);
         onSignOut = () => null;
         return HomePage();
