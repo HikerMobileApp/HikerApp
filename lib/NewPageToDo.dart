@@ -30,12 +30,17 @@ class NewPageToDoState extends State<NewPageToDo> {
       stream: Firestore.instance
           //.collection(auth.currentUser().toString())
 <<<<<<< HEAD
+<<<<<<< HEAD
           //.collection("robinkumar123")
           .collection(name.toString())
           //.collection("Isaiah Scheel")
 =======
           .collection(globalUser.displayName)
 >>>>>>> bdf3359f31ffe48efd2592573439ceddfada376a
+=======
+          .collection(globalUserName)
+          //.collection("Isaiah Scheel")
+>>>>>>> 04fb79e62a62855bc68b230bdbe998c51ebd3dde
           .document("Hikes To Do")
           .collection("Hike List")
           .snapshots(),

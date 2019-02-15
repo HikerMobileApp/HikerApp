@@ -5,10 +5,15 @@ import 'Home.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'Constants.dart';
+import 'Root.dart';
+import 'auth.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 const Color light_dark = Color(0xff243447);
 const Color dark_green = Color(0xff141d26);
 final FirebaseAuth _auth = FirebaseAuth.instance;
+
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => new _LoginPageState();
@@ -30,6 +35,41 @@ String returnProfilePic(){
 */
 
 class _LoginPageState extends State<LoginPage> {
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUsername();
+    _loadProfPic();
+  }
+
+_setUsername(String username) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      prefs.setString('username', username);
+    });
+  }
+_loadUsername() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      globalUserName = (prefs.getString('username') ?? "username");
+    });
+  }
+  _setProfPic(String image) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      prefs.setString('profPic', image);
+    });
+  }
+  _loadProfPic() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      img = (prefs.getString('profPic') ?? "image");
+    });
+  }
+
+
+
   final formKey = new GlobalKey<FormState>();
   String _email;
   String _password;
@@ -73,21 +113,32 @@ void onLoginStatusChanged(bool LoggedIn, {profileData}) {
         final FirebaseUser user = await _auth.signInWithFacebook(accessToken: facebookLoginResult.accessToken.token);
         onLoginStatusChanged(true);
         final FirebaseUser currentUser = await _auth.currentUser();
+        print("Login Page Username " + currentUser.displayName);
+        print("Global Username Before " + globalUserName);
+        _setUsername(currentUser.displayName);
+        _loadUsername();
+        print("Global Username After " + globalUserName);
         assert(user.uid == currentUser.uid);
 
         break;
     }
     if(isLoggedIn){
-          Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => HomePage()),
-            );
-            var graphResponse = await http.get(
-            'https://graph.facebook.com/v2.12/me?fields=name,first_name,last_name,email,picture.height(200)&access_token=${facebookLoginResult
+        var graphResponse = await http.get(
+            'https://graph.facebook.com/v2.12/me?fields=name,first_name,last_name,email,picture.height(500)&access_token=${facebookLoginResult
                 .accessToken.token}');
 
         profile = json.decode(graphResponse.body);
+        print(profile['picture']['data']['url']);
+        _setProfPic(profile['picture']['data']['url']);
+        _loadProfPic();
+        print("Profile img --> " + img);
         print(profile.toString());
+
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => RootPage(auth: Auth())),
+            );
+
     }
   }
 /*
