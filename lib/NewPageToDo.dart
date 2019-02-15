@@ -23,7 +23,8 @@ class NewPageToDoState extends State<NewPageToDo> {
     return StreamBuilder<QuerySnapshot>(
       stream: Firestore.instance
           //.collection(auth.currentUser().toString())
-          .collection(globalUser.displayName)
+          //.collection(globalUser.displayName)
+          .collection("Isaiah Scheel")
           .document("Hikes To Do")
           .collection("Hike List")
           .snapshots(),

@@ -13,7 +13,8 @@ class Database {
     Firestore.instance
         //.collection(username)
         //.collection("robinkumar123")
-        .collection(globalUser.displayName)
+        //.collection(globalUser.displayName)
+        .collection("Isaiah Scheel")
         .document('Hikes To Do')
         .collection('Hike List')
         .document(hikeName)
