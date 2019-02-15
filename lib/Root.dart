@@ -3,7 +3,6 @@ import 'auth.dart';
 import 'LoginPage.dart';
 import 'Home.dart';
 import 'Constants.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class RootPage extends StatefulWidget {
   RootPage({Key key, this.auth, this.themeData}) : super(key: key);
