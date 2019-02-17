@@ -31,7 +31,9 @@ class NewPageToDoState extends State<NewPageToDo> {
         if (snapshot.hasError) return new Text('Error: ${snapshot.error}');
         switch (snapshot.connectionState) {
           case ConnectionState.waiting:
-            return new Text("Loading");
+            return CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+            );
           default:
             return new ListView(
               children:
