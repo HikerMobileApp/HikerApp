@@ -22,7 +22,7 @@ class Database {
         .setData({'Title': hikeName, 'Type': hikeType});
   }
   
-  Future<void> deleteHikeFromDonePage(String hikeName, String hikeType) async {
+  Future<void> deleteHikeFromDonePage(String hikeName) async {
     Firestore.instance
     .collection(globalUserName)
     .document('Done Hikes')
@@ -31,7 +31,7 @@ class Database {
     .catchError( (e) {  print(e);} );
   }
 
-  Future<void> deleteHikeFromToDoPage(String hikeName, String hikeType) async {
+  Future<void> deleteHikeFromToDoPage(String hikeName) async {
     Firestore.instance
     .collection(globalUserName)
     .document('Hikes To Do')
