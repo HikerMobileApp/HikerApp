@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'Database.dart';
 
 
 //class HikeCard(String hikeName, string hikeType, int elevation, String location){
@@ -20,11 +21,18 @@ Card hikeCardMaker(String hikeName, String hikeType, String miles){
                 children: <Widget>[
                   new FlatButton(
                     child: const Text('DONE', style: TextStyle(color: Colors.blueGrey)),
-                    onPressed: () {}
+                    onPressed: () {
+                      Database temp = new Database();
+                      temp.pushAddDoneHike(hikeName, hikeType);
+                      temp.deleteHikeFromToDoPage(hikeName);
+                      }
                   ),
                   new FlatButton(
                     child: const Text('DELETE', style: TextStyle(color: Colors.blueGrey)),
-                    onPressed: () {}
+                    onPressed: () {
+                      Database temp = new Database();
+                      temp.deleteHikeFromToDoPage(hikeName);
+                    }
                   ),
                 ],
               )
