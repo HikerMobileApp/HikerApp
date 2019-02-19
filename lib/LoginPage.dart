@@ -128,13 +128,16 @@ void onLoginStatusChanged(bool LoggedIn, {profileData}) {
                 .accessToken.token}');
 
         profile = json.decode(graphResponse.body);
+
         print(profile['picture']['data']['url']);
         _setProfPic(profile['picture']['data']['url']);
         _loadProfPic();
         print("Profile img --> " + img);
         print(profile.toString());
+        
 
           Navigator.pushReplacement(
+            
               context,
               MaterialPageRoute(builder: (context) => RootPage(auth: Auth())),
             );
