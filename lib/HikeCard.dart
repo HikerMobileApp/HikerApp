@@ -56,7 +56,7 @@ Card doneHikeCardMaker(String hikeName, String hikeType, String miles){
               child: new ButtonBar(
                 children: <Widget>[
                   new FlatButton(
-                    child: const Text('DONE', style: TextStyle(color: Colors.blueGrey)),
+                    child: const Text('EDIT', style: TextStyle(color: Colors.blueGrey)),
                     onPressed: () {
                       Database temp = new Database();
                       //temp.pushAddDoneHike(hikeName, hikeType);
