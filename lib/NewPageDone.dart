@@ -15,12 +15,6 @@ class NewPageDone extends StatefulWidget {
 }
  
   class NewPageDoneState extends State<NewPageDone> {
-    static Card card1 = toDoHikeCardMaker('Jade Lake', 'Backpacking', '20');
-    static Card card2 = toDoHikeCardMaker('Panarama Point', 'Day Hike', '5');
-    static Card card3 = toDoHikeCardMaker('Tuck and Robin Lake', 'Backpacking', '12');
-    static Card card4 = toDoHikeCardMaker('Poo Poo Point', 'Day Hike', '6');
-    static Card card5 = toDoHikeCardMaker('Matterhorn', 'Backpacking', '16');
-    List<Widget> cards = [card1, card2, card3, card4, card5];
 
   @override
   Widget build(BuildContext context) {
