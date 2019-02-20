@@ -6,7 +6,7 @@ import 'Database.dart';
 //
 //}
 
-Card hikeCardMaker(String hikeName, String hikeType, String miles){
+Card toDoHikeCardMaker(String hikeName, String hikeType, String miles){
   return new Card(
         child: new Column(
           mainAxisSize: MainAxisSize.min,
@@ -40,8 +40,44 @@ Card hikeCardMaker(String hikeName, String hikeType, String miles){
           ]
         )
       );
-
 }
+
+Card doneHikeCardMaker(String hikeName, String hikeType, String miles){
+  return new Card(
+        child: new Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+             ListTile(
+            leading:  Icon(Icons.directions_walk),
+            title:  Text(hikeName),
+            subtitle:  Text(miles + ' mile ' + hikeType),
+            ),
+            new ButtonTheme.bar(
+              child: new ButtonBar(
+                children: <Widget>[
+                  new FlatButton(
+                    child: const Text('DONE', style: TextStyle(color: Colors.blueGrey)),
+                    onPressed: () {
+                      Database temp = new Database();
+                      //temp.pushAddDoneHike(hikeName, hikeType);
+                      temp.deleteHikeFromDonePage(hikeName);
+                      }
+                  ),
+                  new FlatButton(
+                    child: const Text('DELETE', style: TextStyle(color: Colors.blueGrey)),
+                    onPressed: () {
+                      Database temp = new Database();
+                      temp.deleteHikeFromDonePage(hikeName);
+                    }
+                  ),
+                ],
+              )
+            )
+          ]
+        )
+      );
+}
+
 class HikeCard extends StatelessWidget{
   @override
   Widget build(BuildContext context) {

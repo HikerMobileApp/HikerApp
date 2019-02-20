@@ -39,7 +39,7 @@ class NewPageToDoState extends State<NewPageToDo> {
               children:
                   snapshot.data.documents.map((DocumentSnapshot document) {
                 return new ListTile(
-                  title: hikeCardMaker(document['Title'], document['Type'], '1')
+                  title: toDoHikeCardMaker(document['Title'], document['Type'], '1')
                   //title: new Text(document['Title']),
                   //subtitle: new Text(document['Type']),
                 );

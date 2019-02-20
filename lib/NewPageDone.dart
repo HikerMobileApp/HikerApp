@@ -42,7 +42,7 @@ class NewPageDone extends StatefulWidget {
               children:
                   snapshot.data.documents.map((DocumentSnapshot document) {
                 return new ListTile(
-                  title: hikeCardMaker(document['Title'], document['Type'], '1')
+                  title: doneHikeCardMaker(document['Title'], document['Type'], '1')
                   //title: new Text(document['Title']),
                   //subtitle: new Text(document['Type']),
                 );
