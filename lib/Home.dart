@@ -192,7 +192,7 @@ _loadUsername() async {
           ]),
       body: new TabBarView(
         physics: NeverScrollableScrollPhysics(),
-        children: <Widget>[new NewPageToDo(), new NewPageDone("done")],
+        children: <Widget>[new NewPageToDo(), new NewPageDone()],
         controller: tabController,
       ),
       bottomNavigationBar: new Material(

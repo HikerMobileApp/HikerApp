@@ -4,7 +4,7 @@ import 'LoginPage.dart';
 import 'Home.dart';
 import 'Constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'SharedPreferences.dart';
+//import 'SharedPreferences.dart';
 
 class RootPage extends StatefulWidget {
   RootPage({Key key, this.auth, this.themeData}) : super(key: key);

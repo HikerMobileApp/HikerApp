@@ -5,22 +5,45 @@ import 'Constants.dart';
 
 class Database {
   Future<void> pushAddHike(String hikeName, String hikeType) async {
-    FirebaseUser mCurrentUser = await FirebaseAuth.instance.currentUser();
-    int index = mCurrentUser.email.indexOf('@');
-    String username = mCurrentUser.email.substring(0, index);
-    //username = mCurrentUser.displayName;
-    print("GlobalUsername " + globalUserName);
     Firestore.instance
         .collection(globalUserName)
-        //.collection("robinkumar123")
-        //.collection(globalUser.displayName)
-        //.collection("Isaiah Scheel")
         .document('Hikes To Do')
         .collection('Hike List')
         .document(hikeName)
         .setData({'Title': hikeName, 'Type': hikeType});
   }
 
+  Future<void> pushAddDoneHike(String hikeName, String hikeType) async {
+    Firestore.instance
+        .collection(globalUserName)
+        .document('Done Hikes')
+        .collection('Hike List')
+        .document(hikeName)
+        .setData({'Title': hikeName, 'Type': hikeType});
+  }
+  
+  Future<void> deleteHikeFromDonePage(String hikeName) async {
+    Firestore.instance
+    .collection(globalUserName)
+    .document('Done Hikes')
+    .collection('Hike List')
+    .document(hikeName).delete()
+    .catchError( (e) {  print(e);} );
+  }
+
+  Future<void> deleteHikeFromToDoPage(String hikeName) async {
+    Firestore.instance
+    .collection(globalUserName)
+    .document('Hikes To Do')
+    .collection('Hike List')
+    .document(hikeName).delete()
+    .catchError( (e) {  print(e);} );
+  }
+
+  Future<String> getUserName() async { 
+    FirebaseUser mCurrentUser = await FirebaseAuth.instance.currentUser();
+    return mCurrentUser.displayName;
+  }
   getProfileImage() async {
     FirebaseUser mCurrentUser = await FirebaseAuth.instance.currentUser();
     mCurrentUser.photoUrl;
