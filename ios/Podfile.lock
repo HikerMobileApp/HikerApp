@@ -185,11 +185,11 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
   BoringSSL-GRPC: 2a230d9cd93e7ce39916044f645cebb31f37dde6
-  cloud_firestore: c575f263eb7033afb7d407e6264b21d6e622a061
+  cloud_firestore: cd6e849ecb8ab43e5a7a5f1f169304ca65436c03
   FBSDKCoreKit: ae214474b25033399c131dc81d258e412582a2ba
   FBSDKLoginKit: c3079d9a4db27c492287b1eed7a4272b28cf8a59
   Firebase: 59d557e064217fab6a03ff00baa73c06e73832e6
-  firebase_auth: 6023fc2e28feabd6571d9a105b678cce7978be90
+  firebase_auth: 02ced56521bc9f220d40edda27b1ec5a2fcdf01e
   firebase_core: ce5006bb48508ee4e71e0f429a3f519bb8ee2961
   FirebaseAnalytics: 75e4bbc6417d190cc98ec1f17c41a4fad4c2c976
   FirebaseAuth: 0f61e1329237da5682c49c9abd135e8f9d07a151
