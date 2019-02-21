@@ -50,6 +50,7 @@ class NewPageToDoState extends State<NewPageToDo> {
                         Database temp = new Database();
                         temp.pushAddDoneHike(document['Title'], document['Type']);
                         temp.deleteHikeFromToDoPage(document['Title']);
+                        Scaffold.of(context).showSnackBar(SnackBar( content: Text('Hike was moved to the done page')));
                         },
                     ),
                     new IconSlideAction(
