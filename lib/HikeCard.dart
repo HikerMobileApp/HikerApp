@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'Database.dart';
 
 
 //class HikeCard(String hikeName, string hikeType, int elevation, String location){
