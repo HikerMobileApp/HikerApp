@@ -57,7 +57,7 @@ class NewPageToDoState extends State<NewPageToDo> {
                       caption: 'Share',
                       color: Colors.indigo,
                       icon: Icons.share,
-                      onTap: () => {} ,
+                      onTap: () {} ,
                     ),
                   ],
                   secondaryActions: <Widget>[
@@ -65,7 +65,7 @@ class NewPageToDoState extends State<NewPageToDo> {
                       caption: 'More',
                       color: Colors.black45,
                       icon: Icons.more_horiz,
-                      onTap: () => {},
+                      onTap: () {},
                     ),
                     new IconSlideAction(
                       caption: 'Delete',
@@ -74,6 +74,7 @@ class NewPageToDoState extends State<NewPageToDo> {
                       onTap: () {
                           Database temp = new Database();
                           temp.deleteHikeFromToDoPage(document['Title']);
+                           Scaffold.of(context).showSnackBar(SnackBar( content: Text('Deleted')));
                         },
                     ),
                   ],

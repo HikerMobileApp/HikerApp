@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'HikeCard.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'Database.dart';
 
 import 'Constants.dart';
 
@@ -42,16 +43,16 @@ class NewPageDoneState extends State<NewPageDone> {
                   ),
                   actions: <Widget>[
                     new IconSlideAction(
-                      caption: 'Archive',
+                      caption: 'Edit',
                       color: Colors.blue,
-                      icon: Icons.archive,
-                      onTap: () => {} /*_showSnackBar('Archive')*/,
+                      icon: Icons.edit,
+                      onTap: () {},
                     ),
                     new IconSlideAction(
                       caption: 'Share',
                       color: Colors.indigo,
                       icon: Icons.share,
-                      onTap: () => {} /*_showSnackBar('Share')*/,
+                      onTap: () {},
                     ),
                   ],
                   secondaryActions: <Widget>[
@@ -59,13 +60,18 @@ class NewPageDoneState extends State<NewPageDone> {
                       caption: 'More',
                       color: Colors.black45,
                       icon: Icons.more_horiz,
-                      onTap: () => {} /*_showSnackBar('More')*/,
+                      onTap: () {},
                     ),
                     new IconSlideAction(
                       caption: 'Delete',
                       color: Colors.red,
                       icon: Icons.delete,
-                      onTap: () => {} /*_showSnackBar('Delete')*/,
+                      onTap: () {
+                        Database temp = new Database();
+                        temp.deleteHikeFromDonePage(document['Title']);
+                        Scaffold.of(context)
+                            .showSnackBar(SnackBar(content: Text('Deleted')));
+                      },
                     ),
                   ],
                 );

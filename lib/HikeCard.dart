@@ -16,7 +16,7 @@ Card toDoHikeCardMaker(String hikeName, String hikeType, String miles){
             title:  Text(hikeName),
             subtitle:  Text(miles + ' mile ' + hikeType),
             ),
-            new ButtonTheme.bar(
+            /*new ButtonTheme.bar(
               child: new ButtonBar(
                 children: <Widget>[
                   new FlatButton(
@@ -36,7 +36,7 @@ Card toDoHikeCardMaker(String hikeName, String hikeType, String miles){
                   ),
                 ],
               )
-            )
+            )*/
           ]
         )
       );
@@ -52,7 +52,7 @@ Card doneHikeCardMaker(String hikeName, String hikeType, String miles){
             title:  Text(hikeName),
             subtitle:  Text(miles + ' mile ' + hikeType),
             ),
-            new ButtonTheme.bar(
+            /*new ButtonTheme.bar(
               child: new ButtonBar(
                 children: <Widget>[
                   new FlatButton(
@@ -72,7 +72,7 @@ Card doneHikeCardMaker(String hikeName, String hikeType, String miles){
                   ),
                 ],
               )
-            )
+            )*/
           ]
         )
       );
