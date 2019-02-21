@@ -50,13 +50,13 @@ class NewPageToDoState extends State<NewPageToDo> {
                         Database temp = new Database();
                         temp.pushAddDoneHike(document['Title'], document['Type']);
                         temp.deleteHikeFromToDoPage(document['Title']);
-                        } /*_showSnackBar('Archive')*/,
+                        },
                     ),
                     new IconSlideAction(
                       caption: 'Share',
                       color: Colors.indigo,
                       icon: Icons.share,
-                      onTap: () => {} /*_showSnackBar('Share')*/,
+                      onTap: () => {} ,
                     ),
                   ],
                   secondaryActions: <Widget>[
@@ -64,7 +64,7 @@ class NewPageToDoState extends State<NewPageToDo> {
                       caption: 'More',
                       color: Colors.black45,
                       icon: Icons.more_horiz,
-                      onTap: () => {} /*_showSnackBar('More')*/,
+                      onTap: () => {},
                     ),
                     new IconSlideAction(
                       caption: 'Delete',
@@ -73,7 +73,7 @@ class NewPageToDoState extends State<NewPageToDo> {
                       onTap: () {
                           Database temp = new Database();
                           temp.deleteHikeFromToDoPage(document['Title']);
-                        } /*_showSnackBar('Delete')*/,
+                        },
                     ),
                   ],
                 );
