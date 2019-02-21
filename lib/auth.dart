@@ -35,7 +35,7 @@ class Auth implements BaseAuth {
   }
 
     Future<FirebaseUser> firebaseCurrentUser() async {
-    FirebaseUser mCurrentUser = await FirebaseAuth.instance.currentUser();
+    //FirebaseUser mCurrentUser = await FirebaseAuth.instance.currentUser();
     FirebaseUser user = await _firebaseAuth.currentUser();
     return user;
   }
