@@ -6,6 +6,7 @@ import 'AddHikePage.dart';
 import 'auth.dart';
 import 'Constants.dart';
 import 'Root.dart';
+import 'ProfilePage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 const Color dark_green = Color(0xff141d26);
@@ -100,7 +101,9 @@ _loadUsername() async {
                     fontWeight: FontWeight.normal,
                     fontSize: 16.0,
                     color: Colors.white)),
-            onTap: () {},
+            onTap: () {
+              Navigator.push(context, ProfilePage());
+            },
           ),
           ListTile(
             leading: Icon(

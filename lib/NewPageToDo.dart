@@ -15,9 +15,13 @@ class NewPageToDo extends StatefulWidget {
 
 class NewPageToDoState extends State<NewPageToDo> {
   //alert box
-  openAlertBox(String  title, String description) {
+  final hikeName = TextEditingController();
+  final hikeType = TextEditingController();
+  final miles = TextEditingController();
+  openAlertBox(String  title, String description, DocumentSnapshot doc) {
     return showDialog(
         context: context,
+        
         builder: (BuildContext context) {
           return AlertDialog(
             shape: RoundedRectangleBorder(
@@ -25,7 +29,7 @@ class NewPageToDoState extends State<NewPageToDo> {
             contentPadding: EdgeInsets.only(top: 10.0),
             content: Container(
               width: 300.0,
-              height: 514.0,
+              height: 519.0,
               //height: 500.0,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -37,13 +41,24 @@ class NewPageToDoState extends State<NewPageToDo> {
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
                       Text(
-                        title,
+                        "Edit Hike",
                         style: TextStyle(fontSize: 24.0),
                       ),
                     ],
                   ),
                   SizedBox(
                     height: 5.0,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(left: 30.0, right: 30.0),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        hintText: description,
+                        border: InputBorder.none,
+                      ),
+                      controller: hikeName,
+                      maxLines: 6,
+                    ),
                   ),
                   Divider(
                     color: Colors.grey,
@@ -56,7 +71,8 @@ class NewPageToDoState extends State<NewPageToDo> {
                         hintText: description,
                         border: InputBorder.none,
                       ),
-                      maxLines: 13,
+                      controller: hikeType,
+                      maxLines: 6,
                     ),
                   ),
                   Divider(
@@ -70,6 +86,7 @@ class NewPageToDoState extends State<NewPageToDo> {
                         hintText: "Edit Length",
                         border: InputBorder.none,
                       ),
+                      controller: miles,
                       maxLines: 6,
                     ),
                   ),
@@ -90,8 +107,27 @@ class NewPageToDoState extends State<NewPageToDo> {
                         "Done",
                         style: TextStyle(color: Colors.white),
                         textAlign: TextAlign.center,
+                        
                       ),
+                      
                     ),
+                    onTap: (){
+                      if (hikeName.text != "" && hikeType.text != "") {
+                        print("Done Clicked");
+                        Database temp = new Database();
+                        temp.pushAddHike(hikeName.text, hikeType.text, miles.text);
+                      }
+                      else if(hikeName.text == "" && hikeType.text == ""){
+                        print("Fields Left Empty");
+                        Database temp = new Database();
+                        temp.pushAddHike("test6", "test6", "5");
+                      }
+                      else{
+                        print("idk what is happening");
+                      }
+                      Database temp = new Database();
+                          temp.deleteHikeFromToDoPage(doc['Title']);
+                    },
                   ),
                 ],
               ),
@@ -148,7 +184,7 @@ class NewPageToDoState extends State<NewPageToDo> {
                     color: Colors.transparent,
                     child: new ListTile(
                         title: doneHikeCardMaker(
-                            document['Title'], document['Type'], '1')),
+                            document['Title'], document['Type'], document['Miles'])),
                   ),
                   actions: <Widget>[
                     new IconSlideAction(
@@ -174,7 +210,7 @@ class NewPageToDoState extends State<NewPageToDo> {
                       caption: 'Edit',
                       color: Colors.black45,
                       icon: Icons.more_horiz,
-                      onTap: () {openAlertBox(document['Title'],document['Type'] );},
+                      onTap: () {openAlertBox(document['Title'],document['Type'], document);},
                     ),
                     new IconSlideAction(
                       caption: 'Delete',
