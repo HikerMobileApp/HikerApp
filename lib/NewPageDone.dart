@@ -3,7 +3,6 @@ import 'HikeCard.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'Database.dart';
-
 import 'Constants.dart';
 
 class NewPageDone extends StatefulWidget {

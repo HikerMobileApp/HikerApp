@@ -102,7 +102,11 @@ _loadUsername() async {
                     fontSize: 16.0,
                     color: Colors.white)),
             onTap: () {
-              Navigator.push(context, ProfilePage());
+              //Navigator.push(context, ProfilePage());
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ProfilePage()),
+              );
             },
           ),
           ListTile(
@@ -194,7 +198,7 @@ _loadUsername() async {
                 }),
           ]),
       body: new TabBarView(
-        physics: NeverScrollableScrollPhysics(),
+        //physics: NeverScrollableScrollPhysics(),
         children: <Widget>[new NewPageToDo(), new NewPageDone()],
         controller: tabController,
       ),

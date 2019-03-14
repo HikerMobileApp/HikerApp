@@ -41,13 +41,13 @@ class Database {
   }
 
   Future<String> numOfDoneHikes() async {
-    String ret = 
+    String ret = await
     Firestore.instance
     .collection(globalUserName)
     .snapshots()
     .length.toString();
 
-    return ret;
+    return ret.toString();
   }
 
   Future<String> getUserName() async { 

@@ -2,15 +2,34 @@ import 'package:flutter/material.dart';
 import 'Constants.dart';
 import 'Database.dart';
 
-//class ProfilePage extends StatefulWidget {
-//  @override
-//  _ProfilePage createState() => new _ProfilePage();
-//}
+class ProfilePage extends StatefulWidget {
+  @override
+  _ProfilePage createState() => new _ProfilePage();
+}
+
+String doneHikes;
 Database temp = new Database();
-class ProfilePage extends MaterialPageRoute<Null> {
-  ProfilePage()
+
+class _ProfilePage extends State<ProfilePage> {
+
+_numOfDoneHikes() async{
+  temp.numOfDoneHikes().then((result){
+    setState(() {
+    doneHikes = result;
+  });
+});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _numOfDoneHikes();
+  }
+
   
-      : super(builder: (BuildContext context) {
+
+@override
+  Widget build(BuildContext context) {
     return new Scaffold(
         body: new Stack(
       children: <Widget>[
@@ -54,24 +73,31 @@ class ProfilePage extends MaterialPageRoute<Null> {
                       fontFamily: 'Montserrat'),
                 ),
                 SizedBox(height: 25.0),
-                Card(
+                Container(
+                  width: MediaQuery.of(context).size.width/1.5,
+                  
+                child: new Card(
+                  
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
-                        const ListTile(
-                          //leading: Icon(Icons.album),
-                          title: Text('Hikes Done: '),
-                          //subtitle: Text('Music by Julie Gable. Lyrics by Sidney Stein.'),
+                        Text(" "),
+                         ListTile(
+                          title: Text("\n Hikes done: 20 \n\n" + 
+                                      "Hikes to-do: 15 \n\n" +
+                                      "Miles hiked: 125 \n"),
                         ),
                       ],
                     ),
                 ),
+                )
               ],
             ))
       ],
     ));
   }
-      );
 }
 
 class getClipper extends CustomClipper<Path> {
@@ -91,3 +117,4 @@ class getClipper extends CustomClipper<Path> {
     return true;
   }
 }
+  

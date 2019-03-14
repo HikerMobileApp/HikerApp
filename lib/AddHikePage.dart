@@ -31,7 +31,7 @@ class AddHikePage extends MaterialPageRoute<Null> {
                         temp.pushAddHike("test6", "test6", "5");
                       }
                       else{
-                        print("idk what is happening");
+                        print("idk what is happening but isaiah is a cool guy   ");
                       }
                       Navigator.pop(context);
                     })
