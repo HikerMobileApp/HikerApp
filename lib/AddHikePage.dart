@@ -23,15 +23,15 @@ class AddHikePage extends MaterialPageRoute<Null> {
                       if (hikeName.text != "" && hikeType.text != "") {
                         print("Checkmark clicked");
                         Database temp = new Database();
-                        temp.pushAddHike(hikeName.text, hikeType.text);
+                        temp.pushAddHike(hikeName.text, hikeType.text, miles.text);
                       }
                       else if(hikeName.text == "" && hikeType.text == ""){
                         print("Fields Left Empty");
                         Database temp = new Database();
-                        temp.pushAddHike("test6", "test6");
+                        temp.pushAddHike("test6", "test6", "5");
                       }
                       else{
-                        print("idk what is happening");
+                        print("idk what is happening but isaiah is a cool guy   ");
                       }
                       Navigator.pop(context);
                     })
