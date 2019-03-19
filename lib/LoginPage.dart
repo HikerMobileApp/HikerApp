@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'RegisterPage.dart';
-//import 'Home.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -95,9 +94,16 @@ void onLoginStatusChanged(bool LoggedIn, {profileData}) {
 
   void initiateFacebookLogin() async {
     var facebookLogin = FacebookLogin();
-    facebookLogin.loginBehavior = FacebookLoginBehavior.nativeOnly;
-    var facebookLoginResult =
-        await facebookLogin.logInWithReadPermissions(['email', 'public_profile']);
+    facebookLogin.loginBehavior = FacebookLoginBehavior.webOnly;
+    final facebookLoginResult = await facebookLogin.logInWithReadPermissions(['email', 'public_profile']);
+    FacebookAccessToken myToken = facebookLoginResult.accessToken;
+
+    ///assuming sucess in FacebookLoginStatus.loggedIn
+    /// we use FacebookAuthProvider class to get a credential from accessToken
+    /// this will return an AuthCredential object that we will use to auth in firebase
+    AuthCredential credential= FacebookAuthProvider.getCredential(accessToken: myToken.token);
+
+    // this line do auth in firebase with your facebook credential.
      switch (facebookLoginResult.status) {
       case FacebookLoginStatus.error:
         print("Error");
@@ -109,8 +115,8 @@ void onLoginStatusChanged(bool LoggedIn, {profileData}) {
         break;
       case FacebookLoginStatus.loggedIn:
         print("LoggedIn");
-        FirebaseAuth.instance.signInWithFacebook(accessToken: facebookLoginResult.accessToken.token);
-        final FirebaseUser user = await _auth.signInWithFacebook(accessToken: facebookLoginResult.accessToken.token);
+        FirebaseAuth.instance.signInWithCredential(credential);
+        FirebaseUser user = await FirebaseAuth.instance.signInWithCredential(credential);
         onLoginStatusChanged(true);
         final FirebaseUser currentUser = await _auth.currentUser();
         print("Login Page Username " + currentUser.displayName);
@@ -128,13 +134,16 @@ void onLoginStatusChanged(bool LoggedIn, {profileData}) {
                 .accessToken.token}');
 
         profile = json.decode(graphResponse.body);
+
         print(profile['picture']['data']['url']);
         _setProfPic(profile['picture']['data']['url']);
         _loadProfPic();
         print("Profile img --> " + img);
         print(profile.toString());
+        
 
           Navigator.pushReplacement(
+            
               context,
               MaterialPageRoute(builder: (context) => RootPage(auth: Auth())),
             );

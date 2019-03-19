@@ -8,5 +8,5 @@ Summit Log allows the users to keep track of outdoor activities they wish to do,
 To run this code as is, you must have flutter installed and working, follow the steps [Here](https://flutter.io/)
 
 ## Demos
-
+<img src="https://github.com/HikerMobileApp/HikerApp/blob/master/Demo.gif" width="300" height="500" />
 
