@@ -40,14 +40,16 @@ class Database {
     .catchError( (e) {  print(e);} );
   }
 
-  Future<String> numOfDoneHikes() async {
-    String ret = await
-    Firestore.instance
-    .collection(globalUserName)
-    .snapshots()
-    .length.toString();
+  Future<int> numOfDoneHikes() async{
+    final documents = await Firestore.instance.collection(globalUserName)
+    .document("Done Hikes").collection("Hike List").getDocuments();
+    return documents.documents.length;
+  }
 
-    return ret.toString();
+  Future<int> numOfTodoHikes() async{
+    final documents = await Firestore.instance.collection(globalUserName)
+    .document("Hikes To Do").collection("Hike List").getDocuments();
+    return documents.documents.length;
   }
 
   Future<String> getUserName() async { 

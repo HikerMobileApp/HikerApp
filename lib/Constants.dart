@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'SharedPreferences.dart';
 
 String img;
+int globalDoneHikes;
 BaseAuth auth;
 FirebaseUser globalUser;
 String globalUserName = "";
