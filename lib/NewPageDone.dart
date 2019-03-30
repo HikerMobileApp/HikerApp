@@ -19,6 +19,10 @@ class NewPageDoneState extends State<NewPageDone> {
   final hikeName = TextEditingController();
   final hikeType = TextEditingController();
   final miles = TextEditingController();
+  final longitude = TextEditingController();
+  final latitude = TextEditingController();
+  final tripDescription = TextEditingController();
+  final dateCompleted = TextEditingController();
   openAlertBox(String  title, String description, DocumentSnapshot doc, String mil) {
     return showDialog(
         context: context,
@@ -35,8 +39,10 @@ class NewPageDoneState extends State<NewPageDone> {
               padding: mediaQuery.padding,
               width: MediaQuery.of(context).size.width/1.1,
               height: MediaQuery.of(context).size.height/3.465,
+              //height: MediaQuery.of(context).size.height,
               //alignment: Alignment(0.0, MediaQuery.of(context).size.height),
               //height: 500.0,
+              child: SingleChildScrollView(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -98,6 +104,66 @@ class NewPageDoneState extends State<NewPageDone> {
                     color: Colors.grey,
                     height: mediaQuery.size.height/400,
                   ),
+                  Padding(
+                    padding: EdgeInsets.only(left: 30.0, right: 30.0),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        hintText: "Enter longitude",
+                        border: InputBorder.none,
+                      ),
+                      controller: longitude,
+                      maxLines: 1,
+                    ),
+                  ),
+                  Divider(
+                    color: Colors.grey,
+                    height: mediaQuery.size.height/400,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(left: 30.0, right: 30.0),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        hintText: "Enter latitude",
+                        border: InputBorder.none,
+                      ),
+                      controller: latitude,
+                      maxLines: 1,
+                    ),
+                  ),
+                  Divider(
+                    color: Colors.grey,
+                    height: mediaQuery.size.height/400,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(left: 30.0, right: 30.0),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        hintText: "Describe your hike",
+                        border: InputBorder.none,
+                      ),
+                      controller: tripDescription,
+                      maxLines: 2,
+                    ),
+                  ),
+                  Divider(
+                    color: Colors.grey,
+                    height: mediaQuery.size.height/400,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(left: 30.0, right: 30.0),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        hintText: "Date completed",
+                        border: InputBorder.none,
+                      ),
+                      controller: dateCompleted,
+                      maxLines: 1,
+                    ),
+                  ),
+                  Divider(
+                    color: Colors.grey,
+                    height: mediaQuery.size.height/400,
+                  ),
                   InkWell(
                     
                     child: Container(
@@ -134,7 +200,7 @@ class NewPageDoneState extends State<NewPageDone> {
                         if(miles.text == ""){
                           miles.text = mil;
                         }
-                        temp.pushAddDoneHike(hikeName.text, hikeType.text, miles.text);
+                        temp.pushAddDoneHike(hikeName.text, hikeType.text, miles.text,longitude.text, latitude.text, tripDescription.text, dateCompleted.text);
                         temp.deleteHikeFromDonePage(doc['Title']);
                         hikeName.text = "";
                         hikeType.text = "";
@@ -147,7 +213,7 @@ class NewPageDoneState extends State<NewPageDone> {
                         miles.text = mil;
                         print("Fields Left Empty");
                         Database temp = new Database();
-                        temp.pushAddDoneHike(hikeName.text, hikeType.text, miles.text);
+                        temp.pushAddDoneHike(hikeName.text, hikeType.text, miles.text,longitude.text, latitude.text, tripDescription.text, dateCompleted.text);
                         hikeName.text = "";
                         hikeType.text = "";
                         miles.text = "";
@@ -163,6 +229,7 @@ class NewPageDoneState extends State<NewPageDone> {
                   ),
                 ],
               ),
+            ),
             ),
           );
         });
@@ -193,7 +260,7 @@ class NewPageDoneState extends State<NewPageDone> {
                     color: Colors.transparent,
                     child: new ListTile(
                         title: doneHikeCardMaker(
-                            document['Title'], document['Type'], document['Miles'])),
+                            document['Title'], document['Type'], document['Miles'], document['Description'] ,document['Longitude'], document['Latitude'], document['Date'])),
                   ),
                   actions: <Widget>[
                     new IconSlideAction(
@@ -206,7 +273,8 @@ class NewPageDoneState extends State<NewPageDone> {
                       caption: 'Share',
                       color: Colors.indigo,
                       icon: Icons.share,
-                      onTap: () {},
+                      onTap: () { 
+                      },
                     ),
                   ],
                   secondaryActions: <Widget>[
