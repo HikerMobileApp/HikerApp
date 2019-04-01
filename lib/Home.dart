@@ -9,6 +9,8 @@ import 'Constants.dart';
 import 'Root.dart';
 import 'ProfilePage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'NearMe.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 const Color dark_green = Color(0xff141d26);
 const Color light_dark = Color(0xff243447);
@@ -45,6 +47,15 @@ _loadUsername() async {
       img = (prefs.getString('profPic') ?? "image");
     });
   }
+
+  _launchURL() async {
+  const url = 'https://isaiaher.github.io/';
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
+  }
+}
 
   TabController tabController;
   String img = "";
@@ -112,16 +123,23 @@ _loadUsername() async {
           ),
           ListTile(
             leading: Icon(
-              Icons.favorite,
+              Icons.public,
               color: Colors.white,
               size: 20,
             ),
-            title: Text('Friends',
+            title: Text('Near Me',
                 style: TextStyle(
                     fontWeight: FontWeight.normal,
                     fontSize: 16.0,
                     color: Colors.white)),
-            onTap: () {},
+            onTap: () {
+              String url = "https://isaiaher.github.io/";
+              launch(url);
+              //Navigator.push(
+              //  context,
+              //  MaterialPageRoute(builder: (context) => NearMe()),
+              //);
+            },
           ),
           ListTile(
             leading: Icon(
