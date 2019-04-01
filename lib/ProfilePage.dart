@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'Constants.dart';
 import 'Database.dart';
 import 'StatCard.dart';
+import 'main.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -10,6 +12,9 @@ class ProfilePage extends StatefulWidget {
 
 int doneHikes;
 int todoHikes;
+double milesHiked;
+double totMiles = 0.0;
+List<DocumentSnapshot> doneHikesReturn;
 Database temp = new Database();
 
 class _ProfilePage extends State<ProfilePage> {
@@ -19,6 +24,9 @@ class _ProfilePage extends State<ProfilePage> {
     super.initState();
     _numOfDoneHikes();
     _numOfTodoHikes();
+    _milesHiked();
+    totMiles = 0;
+    _doneHikes();
   }
 
   _numOfDoneHikes() async{
@@ -33,15 +41,35 @@ class _ProfilePage extends State<ProfilePage> {
     setState(() {
       todoHikes = asyncResult;
     });
+  }
 
+    _milesHiked() async{
+    var asyncResult = await temp.milesHiked();
+    setState(() {
+      milesHiked = asyncResult;
+    });
+  }
+
+     _doneHikes() async{
+    var asyncResult = await temp.doneHikes();
+    setState(() {
+      doneHikesReturn = asyncResult.documents;
+    });
+
+    doneHikesReturn.forEach((doc) => totMiles += double.parse(doc.data['Miles']));
   }
   
-
   
 
 @override
   Widget build(BuildContext context) {
     return new Scaffold(
+        appBar: new AppBar(
+              backgroundColor: light_dark,
+              title: new Text("Your Profile"),
+              actions: <Widget>[
+              ],
+        ),
         body: new Stack(
       children: <Widget>[
         ClipPath(
@@ -92,7 +120,7 @@ class _ProfilePage extends State<ProfilePage> {
                   children: <Widget>[
                       statCardMaker("Hikes Done", doneHikes.toString()),
                       statCardMaker("Hikes to-do", todoHikes.toString()),
-                      statCardMaker("Miles Hiked", doneHikes.toString()),
+                      statCardMaker("Miles Hiked", totMiles.toString()),
                       statCardMaker("Friends", doneHikes.toString()),
                   ]
                 )

@@ -52,6 +52,57 @@ class Database {
     return documents.documents.length;
   }
 
+  Future<double> milesHiked() async{
+      double miles = 0.0;
+
+      var docs = Firestore.instance
+        .collection(globalUserName)
+        .document("Done Hikes")
+        .collection("Hike List")
+        //.snapshots()
+        .getDocuments();
+
+        //docs.then(onValue)
+
+        //docs.forEach((doc) => miles += double.parse(doc.data()['Miles']));
+
+        return miles;
+
+/*
+    Firestore.instance
+        .collection(globalUserName)
+        .document("Done Hikes")
+        .collection("Hike List")
+        .snapshots()
+        .listen((snapshot) {
+           double tempTotal = snapshot.documents.fold(0, (miles, doc) => miles += double.parse(doc.data['Miles']));
+           miles = tempTotal;
+            print("Miles " + miles.toString());
+    });
+    */
+
+        
+
+        //docs.forEach((doc) => doc.);
+        
+        print("Miles " + miles.toString());
+      return miles;
+}
+
+Future<QuerySnapshot> doneHikes() async{
+      double miles = 0.0;
+
+      var docs = Firestore.instance
+        .collection(globalUserName)
+        .document("Done Hikes")
+        .collection("Hike List")
+        //.snapshots()
+        .getDocuments();
+
+      return docs;
+
+}
+
   Future<String> getUserName() async { 
     FirebaseUser mCurrentUser = await FirebaseAuth.instance.currentUser();
     return mCurrentUser.displayName;
