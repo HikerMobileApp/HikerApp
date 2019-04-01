@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'Constants.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'Database.dart';
+import 'package:share/share.dart';
 //import 'dart.async';
 
 const Color myColor = Color(0xff243447);
@@ -501,7 +502,7 @@ class NewPageToDoState extends State<NewPageToDo> {
                       caption: 'Share',
                       color: Colors.indigo,
                       icon: Icons.share,
-                      onTap: () {}    
+                      onTap: () { Share.share("This is a test");}    
                     ),
                   ],
                   secondaryActions: <Widget>[

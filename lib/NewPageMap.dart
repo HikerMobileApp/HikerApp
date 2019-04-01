@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:map_view/map_view.dart';
-import 'HikeCard.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
-import 'Database.dart';
-import 'Constants.dart';
+import 'Home.dart';
 
 var myKey = 'AIzaSyB_2tJ1sapz6JjEYRCA2fVYQc6TM_LbMAI';
 
@@ -29,14 +25,15 @@ class NewPageMapState extends State<NewPageMap> {
   displayMap() {
     mapView.show(new MapOptions(
       mapViewType: MapViewType.normal,
-      initialCameraPosition: new CameraPosition(new Location(47.6062, -122.3321), 10.0),
+      initialCameraPosition: new CameraPosition(new Location(47.6062, -122.3321), 8.0),
       showUserLocation: true,
-      title: 'Hike Locator'
+      //title: 'Hike Locator',
       
     ));
     //mapView.setMarkers(markers);
     //mapView.zoomToFit(padding: 100);
     mapView.onMapTapped.listen((tapped) {
+      //call the database class to let all the lgn and lat to put in the markers
       mapView.setMarkers(markers);
       mapView.zoomToFit(padding: 100);
     });
@@ -44,21 +41,22 @@ class NewPageMapState extends State<NewPageMap> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      /*appBar: new AppBar(
-        title: new Text('Maps'),
-      ),*/
-      body: displayMap() 
-      /*new Center(
-        child: Container(
-          child: RaisedButton(
-            child: Text('Tap me'),
-            color: Colors.blue,
-            textColor: Colors.white,
-            elevation: 7.0,
-            onPressed: displayMap,
+      appBar: new AppBar(
+              backgroundColor: light_dark,
+              title: new Text("Hike Locator"),
+              actions: <Widget>[],
+            ),
+      body: new Column(
+        children: <Widget>[
+          new Container(
+            height: 500.0,
+            width: 350.0,
+            child: new Stack(
+              children: displayMap(),
+            ),
           ),
-        ),
-      ),*/
+        ],
+      ),
     );
 
   }
