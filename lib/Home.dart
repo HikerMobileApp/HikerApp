@@ -3,6 +3,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'NewPageDone.dart';
 import 'NewPageToDo.dart';
 import 'AddHikePage.dart';
+import 'NewPageMap.dart';
 import 'auth.dart';
 import 'Constants.dart';
 import 'Root.dart';
@@ -65,7 +66,7 @@ _loadUsername() async {
     _loadProfPic();
     //Firestore.instance.collection('Hiking').document()
     //.setData({'Title': 'Jade Lake', 'Type': 'Backpacking'});
-    tabController = new TabController(length: 2, vsync: this);
+    tabController = new TabController(length: 3, vsync: this);
   }
 
   @override
@@ -217,7 +218,7 @@ _loadUsername() async {
           ]),
       body: new TabBarView(
         //physics: NeverScrollableScrollPhysics(),
-        children: <Widget>[new NewPageToDo(), new NewPageDone()],
+        children: <Widget>[new NewPageToDo(), new NewPageDone(), new NewPageMap()],
         controller: tabController,
       ),
       bottomNavigationBar: new Material(
@@ -235,7 +236,16 @@ _loadUsername() async {
             new Tab(
               //icon: new Icon(Icons.beenhere),
               icon: new Icon(Icons.done),
-            )
+            ),
+            new Tab(
+              //icon: new Icon(Icons.add_location),
+              //icon: new Icon(Icons.edit_location),
+              //icon: new Icon(Icons.filter_hdr),
+              //icon: new Icon(Icons.location_on),
+              //icon: new Icon(Icons.map),
+              //icon: new Icon(Icons.pin_drop),
+              icon: new Icon(Icons.rv_hookup),
+            ),
           ],
         ),
       ),
