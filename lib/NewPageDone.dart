@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'Database.dart';
 import 'Constants.dart';
+import 'package:share/share.dart';
 
 const Color myColor = Color(0xff243447);
 
@@ -15,33 +16,41 @@ class NewPageDone extends StatefulWidget {
 
 class NewPageDoneState extends State<NewPageDone> {
   //alert box
+  //alert box
   final hikeName = TextEditingController();
   final hikeType = TextEditingController();
   final miles = TextEditingController();
+  final longitude = TextEditingController();
+  final latitude = TextEditingController();
+  final tripDescription = TextEditingController();
+  final dateCompleted = TextEditingController();
   openAlertBox(String  title, String description, DocumentSnapshot doc, String mil) {
     return showDialog(
         context: context,
-        
+
         builder: (BuildContext context) {
           var mediaQuery =MediaQuery.of(context);
           return AlertDialog(
             shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(32.0))),
+            borderRadius: BorderRadius.all(Radius.circular(32.0))
+            ),
             contentPadding: mediaQuery.padding,
             content: AnimatedContainer(
               duration: const Duration(milliseconds: 300),
               padding: mediaQuery.padding,
               width: MediaQuery.of(context).size.width/1.1,
-              height: MediaQuery.of(context).size.height/2.0565,
-              //alignment: Alignment(0.0, MediaQuery.of(context).size.height/1.3),
+              height: MediaQuery.of(context).size.height/3.465,
+              //height: MediaQuery.of(context).size.height,
+              //alignment: Alignment(0.0, MediaQuery.of(context).size.height),
               //height: 500.0,
+              child: SingleChildScrollView(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
                       Text(
@@ -50,9 +59,7 @@ class NewPageDoneState extends State<NewPageDone> {
                       ),
                     ],
                   ),
-                  SizedBox(
-                    height: 5.0,
-                  ),
+                  
                   Padding(
                     padding: EdgeInsets.only(left: 30.0, right: 30.0),
                     child: TextField(
@@ -61,12 +68,12 @@ class NewPageDoneState extends State<NewPageDone> {
                         border: InputBorder.none,
                       ),
                       controller: hikeName,
-                      maxLines: 4,
+                      maxLines: 1,
                     ),
                   ),
                   Divider(
                     color: Colors.grey,
-                    height: 4.0,
+                    height: mediaQuery.size.height/400,
                   ),
                   Padding(
                     padding: EdgeInsets.only(left: 30.0, right: 30.0),
@@ -76,12 +83,12 @@ class NewPageDoneState extends State<NewPageDone> {
                         border: InputBorder.none,
                       ),
                       controller: hikeType,
-                      maxLines: 6,
+                      maxLines: 1,
                     ),
                   ),
                   Divider(
                     color: Colors.grey,
-                    height: 4.0,
+                    height: mediaQuery.size.height/400,
                   ),
                   Padding(
                     padding: EdgeInsets.only(left: 30.0, right: 30.0),
@@ -91,15 +98,77 @@ class NewPageDoneState extends State<NewPageDone> {
                         border: InputBorder.none,
                       ),
                       controller: miles,
-                      maxLines: 4,
+                      maxLines: 1,
                     ),
                   ),
                   Divider(
                     color: Colors.grey,
-                    height: 4.0,
+                    height: mediaQuery.size.height/400,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(left: 30.0, right: 30.0),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        hintText: "Enter longitude",
+                        border: InputBorder.none,
+                      ),
+                      controller: longitude,
+                      maxLines: 1,
+                    ),
+                  ),
+                  Divider(
+                    color: Colors.grey,
+                    height: mediaQuery.size.height/400,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(left: 30.0, right: 30.0),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        hintText: "Enter latitude",
+                        border: InputBorder.none,
+                      ),
+                      controller: latitude,
+                      maxLines: 1,
+                    ),
+                  ),
+                  Divider(
+                    color: Colors.grey,
+                    height: mediaQuery.size.height/400,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(left: 30.0, right: 30.0),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        hintText: "Describe your hike",
+                        border: InputBorder.none,
+                      ),
+                      controller: tripDescription,
+                      maxLines: 2,
+                    ),
+                  ),
+                  Divider(
+                    color: Colors.grey,
+                    height: mediaQuery.size.height/400,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(left: 30.0, right: 30.0),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        hintText: "Date completed",
+                        border: InputBorder.none,
+                      ),
+                      controller: dateCompleted,
+                      maxLines: 1,
+                    ),
+                  ),
+                  Divider(
+                    color: Colors.grey,
+                    height: mediaQuery.size.height/400,
                   ),
                   InkWell(
+                    
                     child: Container(
+                      alignment:Alignment(0.0, 0.0),
                       height: MediaQuery.of(context).size.height/15.1,
                       padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
                       decoration: BoxDecoration(
@@ -108,12 +177,14 @@ class NewPageDoneState extends State<NewPageDone> {
                             bottomLeft: Radius.circular(32.0),
                             bottomRight: Radius.circular(32.0)),
                       ),
+                      
                       child: Text(
                         "Done",
                         style: TextStyle(color: Colors.white),
                         textAlign: TextAlign.center,
                         
                       ),
+                      
                       
                     ),
                     onTap: (){
@@ -130,7 +201,8 @@ class NewPageDoneState extends State<NewPageDone> {
                         if(miles.text == ""){
                           miles.text = mil;
                         }
-                        temp.pushAddDoneHike(hikeName.text, hikeType.text, miles.text);
+                        temp.pushAddDoneHike(hikeName.text, hikeType.text, miles.text,longitude.text, latitude.text, tripDescription.text, dateCompleted.text);
+                        temp.deleteHikeFromDonePage(doc['Title']);
                         hikeName.text = "";
                         hikeType.text = "";
                         miles.text = "";
@@ -142,7 +214,7 @@ class NewPageDoneState extends State<NewPageDone> {
                         miles.text = mil;
                         print("Fields Left Empty");
                         Database temp = new Database();
-                        temp.pushAddDoneHike(hikeName.text, hikeType.text, miles.text);
+                        temp.pushAddDoneHike(hikeName.text, hikeType.text, miles.text,longitude.text, latitude.text, tripDescription.text, dateCompleted.text);
                         hikeName.text = "";
                         hikeType.text = "";
                         miles.text = "";
@@ -151,13 +223,14 @@ class NewPageDoneState extends State<NewPageDone> {
                       else{
                         print("idk what is happening");
                       }
-                      Database temp = new Database();
-                          temp.deleteHikeFromDonePage(doc['Title']);
+                      
+                          
                     },
                     
                   ),
                 ],
               ),
+            ),
             ),
           );
         });
@@ -188,7 +261,7 @@ class NewPageDoneState extends State<NewPageDone> {
                     color: Colors.transparent,
                     child: new ListTile(
                         title: doneHikeCardMaker(
-                            document['Title'], document['Type'], document['Miles'])),
+                            document['Title'], document['Type'], document['Miles'], document['Description'] ,document['Longitude'], document['Latitude'], document['Date'])),
                   ),
                   actions: <Widget>[
                     new IconSlideAction(
@@ -201,7 +274,7 @@ class NewPageDoneState extends State<NewPageDone> {
                       caption: 'Share',
                       color: Colors.indigo,
                       icon: Icons.share,
-                      onTap: () {},
+                      onTap: () { Share.share("This is a test");},
                     ),
                   ],
                   secondaryActions: <Widget>[

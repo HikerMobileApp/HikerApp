@@ -41,7 +41,7 @@ Card toDoHikeCardMaker(String hikeName, String hikeType, String miles){
       );
 }
 
-Card doneHikeCardMaker(String hikeName, String hikeType, String miles){
+Card doneHikeCardMaker(String hikeName, String hikeType, String miles, String des, String long, String lat, String date){
   return new Card(
         child: new Column(
           mainAxisSize: MainAxisSize.min,
@@ -49,7 +49,7 @@ Card doneHikeCardMaker(String hikeName, String hikeType, String miles){
              ListTile(
             leading:  Icon(Icons.directions_walk),
             title:  Text(hikeName),
-            subtitle:  Text(miles + ' mile ' + hikeType),
+            subtitle:  Text(miles + ' mile(s)\t Type: ' + hikeType +'\tTrip Description: ' + des + '\tLongitude: '+ long + ', Latitude: '+ lat + '\t Date: ' +  date),
             ),
             /*new ButtonTheme.bar(
               child: new ButtonBar(

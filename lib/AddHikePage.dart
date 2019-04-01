@@ -43,6 +43,7 @@ class AddHikePage extends MaterialPageRoute<Null> {
                   new ListTile(
                     leading: const Icon(MdiIcons.walk, color: Colors.white),
                     title: new TextFormField(
+                      textCapitalization: TextCapitalization.sentences,
                       style: TextStyle(fontSize: 15.0, color: Colors.white),
                       decoration: new InputDecoration(
                         labelText: 'Hike Name',
@@ -54,6 +55,7 @@ class AddHikePage extends MaterialPageRoute<Null> {
                   new ListTile(
                     leading: const Icon(MdiIcons.pen, color: Colors.white),
                     title: new TextFormField(
+                      textCapitalization: TextCapitalization.sentences,
                       style: TextStyle(fontSize: 15.0, color: Colors.white),
                       decoration: new InputDecoration(
                         labelText: 'Hike Type',

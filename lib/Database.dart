@@ -13,13 +13,13 @@ class Database {
         .setData({'Title': hikeName, 'Type': hikeType, 'Miles': miles});
   }
 
-  Future<void> pushAddDoneHike(String hikeName, String hikeType, String mileCount) async {
+  Future<void> pushAddDoneHike(String hikeName, String hikeType, String mileCount, String longitude, String latitude, String tripDescription, String dateCompleted) async {
     Firestore.instance
         .collection(globalUserName)
         .document('Done Hikes')
         .collection('Hike List')
         .document(hikeName)
-        .setData({'Title': hikeName, 'Type': hikeType, "Miles":mileCount});
+        .setData({'Title': hikeName, 'Type': hikeType, "Miles":mileCount, "Description": tripDescription, "Longitude":longitude, "Latitude": latitude, "Date": dateCompleted});
   }
   
   Future<void> deleteHikeFromDonePage(String hikeName) async {
