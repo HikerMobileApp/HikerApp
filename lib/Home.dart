@@ -213,7 +213,9 @@ _loadUsername() async {
             new IconButton(
                 icon: new Icon(Icons.add),
                 onPressed: () {
-                  Navigator.push(context, AddHikePage());
+                  Navigator.of(context).push(new MaterialPageRoute(builder: 
+                   (BuildContext context) => new AddHikePage()));
+                  //Navigator.push(context, AddHikePage());
                 }),
           ]),
       body: new TabBarView(
