@@ -3,11 +3,14 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'NewPageDone.dart';
 import 'NewPageToDo.dart';
 import 'AddHikePage.dart';
+import 'NewPageMap.dart';
 import 'auth.dart';
 import 'Constants.dart';
 import 'Root.dart';
 import 'ProfilePage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'NearMe.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 const Color dark_green = Color(0xff141d26);
 const Color light_dark = Color(0xff243447);
@@ -45,6 +48,15 @@ _loadUsername() async {
     });
   }
 
+  _launchURL() async {
+  const url = 'https://isaiaher.github.io/';
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
+  }
+}
+
   TabController tabController;
   String img = "";
   @override
@@ -54,7 +66,7 @@ _loadUsername() async {
     _loadProfPic();
     //Firestore.instance.collection('Hiking').document()
     //.setData({'Title': 'Jade Lake', 'Type': 'Backpacking'});
-    tabController = new TabController(length: 2, vsync: this);
+    tabController = new TabController(length: 3, vsync: this);
   }
 
   @override
@@ -111,16 +123,23 @@ _loadUsername() async {
           ),
           ListTile(
             leading: Icon(
-              Icons.favorite,
+              Icons.public,
               color: Colors.white,
               size: 20,
             ),
-            title: Text('Friends',
+            title: Text('Near Me',
                 style: TextStyle(
                     fontWeight: FontWeight.normal,
                     fontSize: 16.0,
                     color: Colors.white)),
-            onTap: () {},
+            onTap: () {
+              String url = "https://isaiaher.github.io/";
+              launch(url);
+              //Navigator.push(
+              //  context,
+              //  MaterialPageRoute(builder: (context) => NearMe()),
+              //);
+            },
           ),
           ListTile(
             leading: Icon(
@@ -199,7 +218,7 @@ _loadUsername() async {
           ]),
       body: new TabBarView(
         //physics: NeverScrollableScrollPhysics(),
-        children: <Widget>[new NewPageToDo(), new NewPageDone()],
+        children: <Widget>[new NewPageToDo(), new NewPageDone(), new NewPageMap()],
         controller: tabController,
       ),
       bottomNavigationBar: new Material(
@@ -217,7 +236,16 @@ _loadUsername() async {
             new Tab(
               //icon: new Icon(Icons.beenhere),
               icon: new Icon(Icons.done),
-            )
+            ),
+            new Tab(
+              //icon: new Icon(Icons.add_location),
+              //icon: new Icon(Icons.edit_location),
+              //icon: new Icon(Icons.filter_hdr),
+              //icon: new Icon(Icons.location_on),
+              //icon: new Icon(Icons.map),
+              //icon: new Icon(Icons.pin_drop),
+              icon: new Icon(Icons.rv_hookup),
+            ),
           ],
         ),
       ),

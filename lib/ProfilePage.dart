@@ -1,36 +1,75 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'Constants.dart';
 import 'Database.dart';
+import 'StatCard.dart';
+import 'main.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
   _ProfilePage createState() => new _ProfilePage();
 }
 
-String doneHikes;
+int doneHikes;
+int todoHikes;
+double milesHiked;
+double totMiles = 0.0;
+List<DocumentSnapshot> doneHikesReturn;
 Database temp = new Database();
 
 class _ProfilePage extends State<ProfilePage> {
-
-_numOfDoneHikes() async{
-  temp.numOfDoneHikes().then((result){
-    setState(() {
-    doneHikes = result;
-  });
-});
-  }
 
   @override
   void initState() {
     super.initState();
     _numOfDoneHikes();
+    _numOfTodoHikes();
+    _milesHiked();
+    totMiles = 0;
+    _doneHikes();
   }
 
+  _numOfDoneHikes() async{
+    var asyncResult = await temp.numOfDoneHikes();
+    setState(() {
+      doneHikes = asyncResult;
+    });
+  }
+
+  _numOfTodoHikes() async{
+    var asyncResult = await temp.numOfTodoHikes();
+    setState(() {
+      todoHikes = asyncResult;
+    });
+  }
+
+    _milesHiked() async{
+    var asyncResult = await temp.milesHiked();
+    setState(() {
+      milesHiked = asyncResult;
+    });
+  }
+
+     _doneHikes() async{
+    var asyncResult = await temp.doneHikes();
+    setState(() {
+      doneHikesReturn = asyncResult.documents;
+    });
+
+    doneHikesReturn.forEach((doc) => totMiles += double.parse(doc.data['Miles']));
+  }
+  
   
 
 @override
   Widget build(BuildContext context) {
     return new Scaffold(
+        appBar: new AppBar(
+              backgroundColor: light_dark,
+              title: new Text("Your Profile"),
+              actions: <Widget>[
+              ],
+        ),
         body: new Stack(
       children: <Widget>[
         ClipPath(
@@ -74,24 +113,17 @@ _numOfDoneHikes() async{
                 ),
                 SizedBox(height: 25.0),
                 Container(
-                  width: MediaQuery.of(context).size.width/1.5,
+                  width: MediaQuery.of(context).size.width/2,
                   
-                child: new Card(
-                  
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        Text(" "),
-                         ListTile(
-                          title: Text("\n Hikes done: 20 \n\n" + 
-                                      "Hikes to-do: 15 \n\n" +
-                                      "Miles hiked: 125 \n"),
-                        ),
-                      ],
-                    ),
-                ),
+                child: 
+                Column(
+                  children: <Widget>[
+                      statCardMaker("Hikes Done", doneHikes.toString()),
+                      statCardMaker("Hikes to-do", todoHikes.toString()),
+                      statCardMaker("Miles Hiked", totMiles.toString()),
+                      statCardMaker("Friends", doneHikes.toString()),
+                  ]
+                )
                 )
               ],
             ))
@@ -99,6 +131,8 @@ _numOfDoneHikes() async{
     ));
   }
 }
+
+
 
 class getClipper extends CustomClipper<Path> {
   @override
