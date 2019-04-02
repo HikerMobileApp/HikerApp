@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:map_view/map_view.dart';
 import 'Home.dart';
-import 'package:geolocator/geolocator.dart';
 
 
 var myKey = 'AIzaSyB_2tJ1sapz6JjEYRCA2fVYQc6TM_LbMAI';
- var currentLocation;
 
 class NewPageMap extends StatefulWidget {
   NewPageMapState createState() {
@@ -17,15 +15,7 @@ class NewPageMap extends StatefulWidget {
 class NewPageMapState extends State<NewPageMap> {
   MapView mapView = new MapView();
   
-  void initState() {
-    super.initState();
-    Geolocator().getCurrentPosition().then((currloc) {
-      setState(() {
-        currentLocation = currloc;
-      });
-    });
-  }
-
+  
   List<Marker> markers = <Marker>[
     new Marker("1", "Name of Hike", 20.2672, -97.7431, color: Colors.blue, draggable: true),
     new Marker("2", "Name of Hike", 30.2672, -97.7431, color: Colors.blue, draggable: true),
@@ -36,8 +26,8 @@ class NewPageMapState extends State<NewPageMap> {
   displayMap() {
     mapView.show(new MapOptions(
       mapViewType: MapViewType.normal,
-      //initialCameraPosition: new CameraPosition(new Location(47.6062, -122.3321), 8.0),
-      initialCameraPosition: new CameraPosition(currentLocation, 8.0),
+      initialCameraPosition: new CameraPosition(new Location(47.6062, -122.3321), 8.0),
+      
       showUserLocation: true,
       //title: 'Hike Locator',
       
