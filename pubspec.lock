@@ -157,6 +157,7 @@ packages:
       name: pedantic
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
     version: "1.4.0"
   permission_handler:
     dependency: transitive
@@ -165,6 +166,9 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.2.0"
+=======
+    version: "1.5.0"
+>>>>>>> e984f3711a2f47ec811c49ba20c304275361eb65
   quiver:
     dependency: transitive
     description:
@@ -197,7 +201,7 @@ packages:
       name: source_span
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.5.4"
+    version: "1.5.5"
   stack_trace:
     dependency: transitive
     description:
