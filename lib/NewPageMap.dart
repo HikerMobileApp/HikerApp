@@ -39,7 +39,7 @@ class NewPageMapState extends State<NewPageMap> {
       //initialCameraPosition: new CameraPosition(new Location(47.6062, -122.3321), 8.0),
       initialCameraPosition: new CameraPosition(currentLocation, 8.0),
       showUserLocation: true,
-      //title: 'Hike Locator',
+      title: 'Hike Locator',
       
     ));
     //mapView.setMarkers(markers);
