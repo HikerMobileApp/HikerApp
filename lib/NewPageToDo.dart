@@ -241,7 +241,7 @@ class NewPageToDoState extends State<NewPageToDo> {
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
                       Text(
-                        "Edit Hike",
+                        "Complete Trip Report",
                         style: TextStyle(fontSize: 24.0),
                       ),
                     ],
@@ -386,7 +386,7 @@ class NewPageToDoState extends State<NewPageToDo> {
                     ),
                     onTap: (){
 
-                      if (hikeName.text != "" || hikeType.text != ""||miles.text != "") {
+                      if (hikeName.text != "" || hikeType.text != ""||miles.text != "" || latitude.text != "" || longitude.text != "" ||  tripDescription.text != "" || dateCompleted.text != "") {
                         print("Done Clicked");
                         Database temp = new Database();
                         if(hikeName.text == ""){
@@ -398,6 +398,7 @@ class NewPageToDoState extends State<NewPageToDo> {
                         if(miles.text == ""){
                           miles.text = mil;
                         }
+    
                         //temp.pushAddHike(hikeName.text, hikeType.text, miles.text);
                         temp.pushAddDoneHike(hikeName.text, hikeType.text, miles.text,longitude.text, latitude.text, tripDescription.text, dateCompleted.text);
                         temp.deleteHikeFromToDoPage(doc['Title']);
@@ -407,22 +408,11 @@ class NewPageToDoState extends State<NewPageToDo> {
                         Navigator.pop(context);
                         Scaffold.of(context).showSnackBar(SnackBar( content: Text('Hike was moved to the done page')));
                       }
-                      else if(hikeName.text == "" && hikeType.text == "" && miles.text == ""){
-                        hikeName.text =title;
-                        hikeType.text =description;
-                        miles.text = mil;
-                        print("Fields Left Empty");
-                        Database temp = new Database();
-                        temp.pushAddHike(hikeName.text, hikeType.text, miles.text);
-                        hikeName.text = "";
-                        hikeType.text = "";
-                        miles.text = "";
+                      else
+                      {
                         Navigator.pop(context);
                       }
-                      else{
-                        print("idk what is happening");
-                      }
-            
+                     
                     },
                     
                   ),
@@ -510,7 +500,7 @@ class NewPageToDoState extends State<NewPageToDo> {
                       caption: 'Edit',
                       color: Colors.black45,
                       icon: Icons.more_horiz,
-                      onTap: () {openAlertBox(document['Title'],document['Type'], document, document['Miles']);},
+                      onTap: () {openAlertBox(document['Title'],document['Type'], document, document['Miles'],);},
                     ),
                     new IconSlideAction(
                       caption: 'Delete',

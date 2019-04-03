@@ -7,37 +7,24 @@ import 'package:flutter/material.dart';
 
 Card toDoHikeCardMaker(String hikeName, String hikeType, String miles){
   return new Card(
-        child: new Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-             ListTile(
-            leading:  Icon(Icons.directions_walk),
-            title:  Text(hikeName),
-            subtitle:  Text(miles + ' mile ' + hikeType),
-            ),
-            /*new ButtonTheme.bar(
-              child: new ButtonBar(
-                children: <Widget>[
-                  new FlatButton(
-                    child: const Text('DONE', style: TextStyle(color: Colors.blueGrey)),
-                    onPressed: () {
-                      Database temp = new Database();
-                      temp.pushAddDoneHike(hikeName, hikeType);
-                      temp.deleteHikeFromToDoPage(hikeName);
-                      }
-                  ),
-                  new FlatButton(
-                    child: const Text('DELETE', style: TextStyle(color: Colors.blueGrey)),
-                    onPressed: () {
-                      Database temp = new Database();
-                      temp.deleteHikeFromToDoPage(hikeName);
-                    }
-                  ),
-                ],
-              )
-            )*/
-          ]
-        )
+        child:InkWell(
+          child: new Column(
+           mainAxisSize: MainAxisSize.min,
+           children: <Widget>[
+               ListTile(
+              leading:  Icon(Icons.directions_walk),
+              title:  Text(hikeName),
+             subtitle:  Text(miles + ' mile ' + hikeType),
+              ),
+            
+            ]
+         ),
+         onTap: (){
+           
+         },
+        
+        ),
+        
       );
 }
 
