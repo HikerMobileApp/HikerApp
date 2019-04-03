@@ -9,6 +9,10 @@ import 'Database.dart';
 var myKey = 'AIzaSyB_2tJ1sapz6JjEYRCA2fVYQc6TM_LbMAI';
 List<DocumentSnapshot> doneHikesReturn;
 
+
+
+
+
 class NewPageMap extends StatefulWidget {
   NewPageMapState createState() {
     MapView.setApiKey(myKey);

@@ -1,17 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 
 //class HikeCard(String hikeName, string hikeType, int elevation, String location){
 //
 //}
 
+Icon leadingIcon;
+String icon;
+
 Card toDoHikeCardMaker(String hikeName, String hikeType, String miles){
+  if(hikeType == "Multi-Night"){
+      icon = "weatherNight";
+  }
+  else if(hikeType == "Day Hike"){
+      icon = "walk";
+  }
+  else if(hikeType == "Backpacking"){
+      icon = "tent";
+  }
+  else{
+      icon = "pineTree";
+  }
   return new Card(
         child: new Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
              ListTile(
-            leading:  Icon(Icons.directions_walk),
+            leading: Icon(MdiIcons.fromString(icon)),
             title:  Text(hikeName),
             subtitle:  Text(miles + ' mile ' + hikeType),
             ),
@@ -42,12 +58,24 @@ Card toDoHikeCardMaker(String hikeName, String hikeType, String miles){
 }
 
 Card doneHikeCardMaker(String hikeName, String hikeType, String miles, String des, String long, String lat, String date){
+    if(hikeType == "Multi-Night"){
+      icon = "weatherNight";
+  }
+  else if(hikeType == "Day Hike"){
+      icon = "walk";
+  }
+  else if(hikeType == "Backpacking"){
+      icon = "tent";
+  }
+  else{
+      icon = "pineTree";
+  }
   return new Card(
         child: new Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
              ListTile(
-            leading:  Icon(Icons.directions_walk),
+            leading:  Icon(MdiIcons.fromString(icon)),
             title:  Text(hikeName),
             subtitle:  Text(miles + ' mile(s)\t Type: ' + hikeType +'\tTrip Description: ' + des + '\tLongitude: '+ long + ', Latitude: '+ lat + '\t Date: ' +  date),
             ),
