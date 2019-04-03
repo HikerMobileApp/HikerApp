@@ -86,6 +86,9 @@ PODS:
   - flutter_facebook_login (0.0.1):
     - FBSDKLoginKit (= 4.39.1)
     - Flutter
+  - google_maps_flutter (0.0.1):
+    - Flutter
+    - GoogleMaps
   - GoogleAppMeasurement (5.6.0):
     - GoogleUtilities/AppDelegateSwizzler (~> 5.2)
     - GoogleUtilities/MethodSwizzler (~> 5.2)
@@ -155,6 +158,7 @@ DEPENDENCIES:
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
   - Flutter (from `.symlinks/flutter/ios`)
   - flutter_facebook_login (from `.symlinks/plugins/flutter_facebook_login/ios`)
+  - google_maps_flutter (from `.symlinks/plugins/google_maps_flutter/ios`)
   - map_view (from `.symlinks/plugins/map_view/ios`)
   - share (from `.symlinks/plugins/share/ios`)
   - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
@@ -195,6 +199,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/flutter/ios"
   flutter_facebook_login:
     :path: ".symlinks/plugins/flutter_facebook_login/ios"
+  google_maps_flutter:
+    :path: ".symlinks/plugins/google_maps_flutter/ios"
   map_view:
     :path: ".symlinks/plugins/map_view/ios"
   share:
@@ -222,6 +228,7 @@ SPEC CHECKSUMS:
   FirebaseInstanceID: 4522aad88f69297622062c0e9ffccdee3dd9b151
   Flutter: 58dd7d1b27887414a370fcccb9e645c08ffd7a6a
   flutter_facebook_login: f1f88c32d5888d6b5f3301fd87cc7de26f02877e
+  google_maps_flutter: 924970f41ec509a201b593548db005efb2a09ee9
   GoogleAppMeasurement: 008e04ecd8efedd97a693aea8634aefe220bd26e
   GoogleMaps: f79af95cb24d869457b1f961c93d3ce8b2f3b848
   GoogleUtilities: 111a012f4c3a29c9e7c954c082fafd6ee3c999c0

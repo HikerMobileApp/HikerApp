@@ -100,8 +100,7 @@ Future<QuerySnapshot> doneHikes() async{
       return docs;
 }
 
-Future<QuerySnapshot> doneMarkers() async{
-
+Future<QuerySnapshot> userMarkers() async{
       var docs = Firestore.instance
         .collection(globalUserName)
         .document("Done Hikes")

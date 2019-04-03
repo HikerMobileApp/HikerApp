@@ -11,6 +11,7 @@ import 'ProfilePage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'NearMe.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'NewMapPage.dart';
 
 const Color dark_green = Color(0xff141d26);
 const Color light_dark = Color(0xff243447);
@@ -220,8 +221,8 @@ _loadUsername() async {
                 }),
           ]),
       body: new TabBarView(
-        //physics: NeverScrollableScrollPhysics(),
-        children: <Widget>[new NewPageToDo(), new NewPageDone(), new NewPageMap()],
+        physics: NeverScrollableScrollPhysics(),
+        children: <Widget>[new NewPageToDo(), new NewPageDone(), new NewMapPage()],
         controller: tabController,
       ),
       bottomNavigationBar: new Material(
