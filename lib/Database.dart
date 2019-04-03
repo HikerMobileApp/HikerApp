@@ -90,17 +90,25 @@ class Database {
 }
 
 Future<QuerySnapshot> doneHikes() async{
-      double miles = 0.0;
 
       var docs = Firestore.instance
         .collection(globalUserName)
         .document("Done Hikes")
         .collection("Hike List")
-        //.snapshots()
         .getDocuments();
 
       return docs;
+}
 
+Future<QuerySnapshot> doneMarkers() async{
+
+      var docs = Firestore.instance
+        .collection(globalUserName)
+        .document("Done Hikes")
+        .collection("Hike List")
+        .getDocuments();
+
+      return docs;
 }
 
   Future<String> getUserName() async { 

@@ -121,7 +121,7 @@ class _ProfilePage extends State<ProfilePage> {
                       statCardMaker("Hikes Done", doneHikes.toString()),
                       statCardMaker("Hikes to-do", todoHikes.toString()),
                       statCardMaker("Miles Hiked", totMiles.toString()),
-                      statCardMaker("Friends", doneHikes.toString()),
+                      //statCardMaker("Friends", doneHikes.toString()),
                   ]
                 )
                 )
