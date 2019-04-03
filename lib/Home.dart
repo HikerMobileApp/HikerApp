@@ -166,7 +166,8 @@ _loadUsername() async {
                     fontSize: 16.0,
                     color: Colors.white)),
             onTap: () {
-              print("globalUserName: " + globalUserName);
+              String privacyURL = "https://termsfeed.com/privacy-policy/f0d509a98ee4996998b6d545dc1e3afb";
+              launch(privacyURL);
             },
           ),
           ListTile(
@@ -213,7 +214,9 @@ _loadUsername() async {
             new IconButton(
                 icon: new Icon(Icons.add),
                 onPressed: () {
-                  Navigator.push(context, AddHikePage());
+                  Navigator.of(context).push(new MaterialPageRoute(builder: 
+                   (BuildContext context) => new AddHikePage()));
+                  //Navigator.push(context, AddHikePage());
                 }),
           ]),
       body: new TabBarView(
