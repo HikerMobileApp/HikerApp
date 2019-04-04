@@ -23,26 +23,6 @@ Card toDoHikeCardMaker(String hikeName, String hikeType, String miles){
       icon = "pineTree";
   }
   return new Card(
-<<<<<<< HEAD
-        child:InkWell(
-          child: new Column(
-           mainAxisSize: MainAxisSize.min,
-           children: <Widget>[
-               ListTile(
-              leading:  Icon(Icons.directions_walk),
-              title:  Text(hikeName),
-             subtitle:  Text(miles + ' mile ' + hikeType),
-              ),
-            
-            ]
-         ),
-         onTap: (){
-           
-         },
-        
-        ),
-        
-=======
         child: new Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
@@ -74,7 +54,6 @@ Card toDoHikeCardMaker(String hikeName, String hikeType, String miles){
             )*/
           ]
         )
->>>>>>> 4ae23e796e7110b1a85fc954e6ef12eb9de5163e
       );
 }
 

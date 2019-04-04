@@ -217,23 +217,6 @@ SPEC CHECKSUMS:
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
   BoringSSL-GRPC: 2a230d9cd93e7ce39916044f645cebb31f37dde6
   cloud_firestore: cd6e849ecb8ab43e5a7a5f1f169304ca65436c03
-<<<<<<< HEAD
-  FBSDKCoreKit: ae214474b25033399c131dc81d258e412582a2ba
-  FBSDKLoginKit: c3079d9a4db27c492287b1eed7a4272b28cf8a59
-  Firebase: 59d557e064217fab6a03ff00baa73c06e73832e6
-  firebase_auth: 02ced56521bc9f220d40edda27b1ec5a2fcdf01e
-  firebase_core: ce5006bb48508ee4e71e0f429a3f519bb8ee2961
-  FirebaseAnalytics: 75e4bbc6417d190cc98ec1f17c41a4fad4c2c976
-  FirebaseAuth: 0f61e1329237da5682c49c9abd135e8f9d07a151
-  FirebaseAuthInterop: 0ffa57668be100582bb7643d4fcb7615496c41fc
-  FirebaseCore: c0c4befb82374d6aef64d800e569f47625352edc
-  FirebaseDatabase: 23acb0c53cd4d4070a427b60100b2e4aaa97c45d
-  FirebaseFirestore: e95af4fe30552092d6e72a8f97ea475d93891b75
-  FirebaseInstanceID: 4522aad88f69297622062c0e9ffccdee3dd9b151
-  Flutter: 58dd7d1b27887414a370fcccb9e645c08ffd7a6a
-  flutter_facebook_login: f1f88c32d5888d6b5f3301fd87cc7de26f02877e
-  GoogleAppMeasurement: 008e04ecd8efedd97a693aea8634aefe220bd26e
-=======
   FBSDKCoreKit: f442aa96179cc9b382bb4abeb7e340a47cca8f91
   FBSDKLoginKit: c3079d9a4db27c492287b1eed7a4272b28cf8a59
   Firebase: 2f5235e62f141cb86181c3af0dfe4509706351ac
@@ -250,7 +233,6 @@ SPEC CHECKSUMS:
   flutter_facebook_login: f1f88c32d5888d6b5f3301fd87cc7de26f02877e
   google_maps_flutter: 924970f41ec509a201b593548db005efb2a09ee9
   GoogleAppMeasurement: 1624046ab1bcc5e170061a56ef5679000b079c8e
->>>>>>> 4ae23e796e7110b1a85fc954e6ef12eb9de5163e
   GoogleMaps: f79af95cb24d869457b1f961c93d3ce8b2f3b848
   GoogleUtilities: 6481e6318c5fcabaaa8513ef8120f329055d7c10
   "gRPC-C++": e76441995900ac90e9bd98644ab4733f12521edf
@@ -259,11 +241,7 @@ SPEC CHECKSUMS:
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   map_view: 08a3006066435d5ca812f731be4824b010e31205
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
-<<<<<<< HEAD
-  Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
-=======
   Protobuf: 7a877b7f3e5964e3fce995e2eb323dbc6831bb5a
->>>>>>> 4ae23e796e7110b1a85fc954e6ef12eb9de5163e
   share: 7d22fe8baedfe93aefd864bf0b73f29711fbb0a3
   shared_preferences: 1feebfa37bb57264736e16865e7ffae7fc99b523
   url_launcher: 0067ddb8f10d36786672aa0722a21717dba3a298

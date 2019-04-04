@@ -386,11 +386,7 @@ class NewPageToDoState extends State<NewPageToDo> {
                     ),
                     onTap: (){
 
-<<<<<<< HEAD
-                      if (hikeName.text != "" || hikeType.text != ""||miles.text != "" || latitude.text != "" || longitude.text != "" ||  tripDescription.text != "" || dateCompleted.text != "") {
-=======
                       if (hikeName.text != "" || hikeType.text != "" || miles.text != "") {
->>>>>>> 4ae23e796e7110b1a85fc954e6ef12eb9de5163e
                         print("Done Clicked");
                         Database temp = new Database();
                         if(hikeName.text == ""){
@@ -412,10 +408,6 @@ class NewPageToDoState extends State<NewPageToDo> {
                         Navigator.pop(context);
                         Scaffold.of(context).showSnackBar(SnackBar( content: Text('Hike was moved to the done page')));
                       }
-<<<<<<< HEAD
-                      else
-                      {
-=======
                       
                       else if(hikeName.text == "" && hikeType.text == "" && miles.text == ""){
                         print("hikeName = " + hikeName.text + ", hikeType = " + hikeType.text + ", miles = " + miles.text);
@@ -428,7 +420,6 @@ class NewPageToDoState extends State<NewPageToDo> {
                         hikeName.text = "";
                         hikeType.text = "";
                         miles.text = "";
->>>>>>> 4ae23e796e7110b1a85fc954e6ef12eb9de5163e
                         Navigator.pop(context);
                       }
                      
