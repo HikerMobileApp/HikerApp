@@ -5,6 +5,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'Home.dart';
 import 'Database.dart';
 
+
 List<DocumentSnapshot> doneHikesReturn;
 
 class NewMapPage extends StatefulWidget {
@@ -14,12 +15,16 @@ class NewMapPage extends StatefulWidget {
 }
 
 class NewMapPageState extends State<NewMapPage> {
+
   void initState() {
     super.initState();
     _userMakers();
+    
   }
 
+
   Completer<GoogleMapController> _controller = Completer();
+
 
   static const LatLng _center = const LatLng(47.6062, -122.3321);
 
@@ -34,6 +39,7 @@ class NewMapPageState extends State<NewMapPage> {
           : MapType.terrain;
     });
   }
+  
 
   void _onAddMarkerButtonPressed(DocumentSnapshot doc) {
     setState(() {
@@ -120,3 +126,4 @@ class NewMapPageState extends State<NewMapPage> {
     );
   }
 }
+
