@@ -147,7 +147,7 @@ class NewPageToDoState extends State<NewPageToDo> {
                     
                     
                     onTap: (){
-
+                      print("Description = " + description);
                       if (hikeName.text != "" || hikeType.text != ""||miles.text != "") {
                         print("Done Clicked");
                         Database temp = new Database();
@@ -197,7 +197,7 @@ class NewPageToDoState extends State<NewPageToDo> {
   openAlertBoxForDone(String  title, String description, DocumentSnapshot doc, String mil) {
     DateTime _date = new DateTime.now();
     //TimeOfDay _time = new TimeOfDay.now();
-
+    print("Description = " + description);
     Future<Null> _selectData(BuildContext context) async {
       final DateTime picked = await showDatePicker(
         context: context,
@@ -386,7 +386,11 @@ class NewPageToDoState extends State<NewPageToDo> {
                     ),
                     onTap: (){
 
+<<<<<<< HEAD
                       if (hikeName.text != "" || hikeType.text != ""||miles.text != "" || latitude.text != "" || longitude.text != "" ||  tripDescription.text != "" || dateCompleted.text != "") {
+=======
+                      if (hikeName.text != "" || hikeType.text != "" || miles.text != "") {
+>>>>>>> 4ae23e796e7110b1a85fc954e6ef12eb9de5163e
                         print("Done Clicked");
                         Database temp = new Database();
                         if(hikeName.text == ""){
@@ -408,8 +412,23 @@ class NewPageToDoState extends State<NewPageToDo> {
                         Navigator.pop(context);
                         Scaffold.of(context).showSnackBar(SnackBar( content: Text('Hike was moved to the done page')));
                       }
+<<<<<<< HEAD
                       else
                       {
+=======
+                      
+                      else if(hikeName.text == "" && hikeType.text == "" && miles.text == ""){
+                        print("hikeName = " + hikeName.text + ", hikeType = " + hikeType.text + ", miles = " + miles.text);
+                        hikeName.text =title;
+                        hikeType.text =description;
+                        miles.text = mil;
+                        print("Fields Left Empty");
+                        Database temp = new Database();
+                        temp.pushAddHike(hikeName.text, hikeType.text, miles.text);
+                        hikeName.text = "";
+                        hikeType.text = "";
+                        miles.text = "";
+>>>>>>> 4ae23e796e7110b1a85fc954e6ef12eb9de5163e
                         Navigator.pop(context);
                       }
                      

@@ -81,6 +81,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  google_maps_flutter:
+    dependency: "direct main"
+    description:
+      name: google_maps_flutter
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.4.0"
   http:
     dependency: "direct main"
     description:
@@ -110,12 +117,12 @@ packages:
     source: hosted
     version: "0.12.3+1"
   material_design_icons_flutter:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: material_design_icons_flutter
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.7.94"
+    version: "3.2.3595"
   meta:
     dependency: transitive
     description:
@@ -241,5 +248,10 @@ packages:
     source: hosted
     version: "2.0.8"
 sdks:
+<<<<<<< HEAD
   dart: ">=2.1.0 <3.0.0"
   flutter: ">=0.5.6 <2.0.0"
+=======
+  dart: ">=2.1.1-dev.0.0 <3.0.0"
+  flutter: ">=0.11.9 <2.0.0"
+>>>>>>> 4ae23e796e7110b1a85fc954e6ef12eb9de5163e

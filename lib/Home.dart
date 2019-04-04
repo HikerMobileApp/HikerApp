@@ -11,6 +11,7 @@ import 'ProfilePage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'NearMe.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'NewMapPage.dart';
 
 const Color dark_green = Color(0xff141d26);
 const Color light_dark = Color(0xff243447);
@@ -166,7 +167,8 @@ _loadUsername() async {
                     fontSize: 16.0,
                     color: Colors.white)),
             onTap: () {
-              print("globalUserName: " + globalUserName);
+              String privacyURL = "https://termsfeed.com/privacy-policy/f0d509a98ee4996998b6d545dc1e3afb";
+              launch(privacyURL);
             },
           ),
           ListTile(
@@ -213,12 +215,14 @@ _loadUsername() async {
             new IconButton(
                 icon: new Icon(Icons.add),
                 onPressed: () {
-                  Navigator.push(context, AddHikePage());
+                  Navigator.of(context).push(new MaterialPageRoute(builder: 
+                   (BuildContext context) => new AddHikePage()));
+                  //Navigator.push(context, AddHikePage());
                 }),
           ]),
       body: new TabBarView(
-        //physics: NeverScrollableScrollPhysics(),
-        children: <Widget>[new NewPageToDo(), new NewPageDone(), new NewPageMap()],
+        physics: NeverScrollableScrollPhysics(),
+        children: <Widget>[new NewPageToDo(), new NewPageDone(), new NewMapPage()],
         controller: tabController,
       ),
       bottomNavigationBar: new Material(
