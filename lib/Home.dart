@@ -3,13 +3,11 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'NewPageDone.dart';
 import 'NewPageToDo.dart';
 import 'AddHikePage.dart';
-import 'NewPageMap.dart';
 import 'auth.dart';
 import 'Constants.dart';
 import 'Root.dart';
 import 'ProfilePage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'NearMe.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'NewMapPage.dart';
 
@@ -242,13 +240,8 @@ _loadUsername() async {
               icon: new Icon(Icons.done),
             ),
             new Tab(
-              //icon: new Icon(Icons.add_location),
-              //icon: new Icon(Icons.edit_location),
-              //icon: new Icon(Icons.filter_hdr),
-              //icon: new Icon(Icons.location_on),
-              //icon: new Icon(Icons.map),
+              icon: new Icon(Icons.public),
               //icon: new Icon(Icons.pin_drop),
-              icon: new Icon(Icons.rv_hookup),
             ),
           ],
         ),

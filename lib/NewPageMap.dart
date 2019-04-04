@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:map_view/map_view.dart';
 import 'Home.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'Constants.dart';
 import 'Database.dart';
 
 
@@ -42,15 +41,6 @@ class NewPageMapState extends State<NewPageMap> {
     setState(() {
       doneHikesReturn =something.documents;
     });
-
-    int num = 1;
-    /*doneHikesReturn.forEach((doc) => markers.add(new Marker("$num", 
-                                                            doc.data['Title'], 
-                                                            double.parse(doc.data['Latitude']),
-                                                            double.parse(doc.data['Longitude']),
-                                                            color: Colors.blue, draggable: false))
-    );*/ 
-    doneHikesReturn.forEach((doc) => print(doc.data['Title']));
   }  
 
 

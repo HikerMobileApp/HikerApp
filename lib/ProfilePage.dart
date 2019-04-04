@@ -74,7 +74,7 @@ class _ProfilePage extends State<ProfilePage> {
       children: <Widget>[
         ClipPath(
           child: Container(color: Colors.black.withOpacity(0.8)),
-          clipper: getClipper(),
+          clipper: GetClipper(),
         ),
         //Center(
         Positioned(
@@ -134,7 +134,7 @@ class _ProfilePage extends State<ProfilePage> {
 
 
 
-class getClipper extends CustomClipper<Path> {
+class GetClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
     var path = new Path();
@@ -147,7 +147,7 @@ class getClipper extends CustomClipper<Path> {
 
   @override
   bool shouldReclip(CustomClipper<Path> oldClipper) {
-    // TODO: implement shouldReclip
+    
     return true;
   }
 }

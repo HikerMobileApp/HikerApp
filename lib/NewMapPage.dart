@@ -6,7 +6,6 @@ import 'Home.dart';
 import 'Database.dart';
 
 List<DocumentSnapshot> doneHikesReturn;
-GoogleMapController mapController;
 
 class NewMapPage extends StatefulWidget {
   NewMapPageState createState() {
@@ -18,7 +17,6 @@ class NewMapPageState extends State<NewMapPage> {
   void initState() {
     super.initState();
     _userMakers();
-
   }
 
   Completer<GoogleMapController> _controller = Completer();
@@ -27,28 +25,26 @@ class NewMapPageState extends State<NewMapPage> {
 
   Set<Marker> _markers = {};
 
-  LatLng _lastMapPosition = _center;
-
-  MapType _currentMapType = MapType.normal;
+  MapType _currentMapType = MapType.terrain;
 
   void _onMapTypeButtonPressed() {
     setState(() {
-      _currentMapType = _currentMapType == MapType.normal
+      _currentMapType = _currentMapType == MapType.terrain
           ? MapType.satellite
-          : MapType.normal;
+          : MapType.terrain;
     });
   }
 
   void _onAddMarkerButtonPressed(DocumentSnapshot doc) {
-    print("in the add marker method");
     setState(() {
       _markers.add(Marker(
         // This marker id can be anything that uniquely identifies each marker.
         markerId: MarkerId(doc.data['Title']),
-        position: LatLng(double.parse(doc.data['Latitude']), double.parse(doc.data['Longitude'])),
+        position: LatLng(double.parse(doc.data['Latitude']),
+            double.parse(doc.data['Longitude'])),
         infoWindow: InfoWindow(
           title: doc.data['Title'],
-          //snippet: '5 Star Rating',
+          snippet: doc.data['Miles'] + " mile(s)\t" + doc.data['Date'],
         ),
         icon: BitmapDescriptor.defaultMarker,
       ));
@@ -63,20 +59,13 @@ class NewMapPageState extends State<NewMapPage> {
       doneHikesReturn = something.documents;
     });
 
-    /*doneHikesReturn.forEach((doc) => mapController.addMarker(MarkerOptions(
-                      position:LatLng(double.parse(doc.data['Latitude']), double.parse(doc.data['Longitude'])),          
-                      infoWindowText: InfoWindowText(doc.data['Title'], "Content"),
-                      //icon: BitmapDescriptor.defaultMarker,
-                    ))
-    );*/
-    doneHikesReturn.forEach((doc) =>  _onAddMarkerButtonPressed(doc));
-    doneHikesReturn.forEach((doc) => print(doc.data['Latitude']));
-
+    doneHikesReturn.forEach((doc) => _onAddMarkerButtonPressed(doc));
   }
 
+  /*LatLng _lastMapPosition = _center;
   void _onCameraMove(CameraPosition position) {
     _lastMapPosition = position.target;
-  }
+  }*/
 
   void _onMapCreated(GoogleMapController controller) {
     _controller.complete(controller);
@@ -86,13 +75,13 @@ class NewMapPageState extends State<NewMapPage> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      
       home: Scaffold(
         body: Stack(
           children: <Widget>[
             GoogleMap(
               myLocationEnabled: true,
               tiltGesturesEnabled: true,
+              compassEnabled: false,
               onMapCreated: _onMapCreated,
               initialCameraPosition: CameraPosition(
                 target: _center,
@@ -100,7 +89,7 @@ class NewMapPageState extends State<NewMapPage> {
               ),
               mapType: _currentMapType,
               markers: _markers,
-              onCameraMove: _onCameraMove,
+              //onCameraMove: _onCameraMove,
             ),
             Padding(
               padding: const EdgeInsets.all(16.0),

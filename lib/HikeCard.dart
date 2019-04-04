@@ -77,7 +77,7 @@ Card doneHikeCardMaker(String hikeName, String hikeType, String miles, String de
              ListTile(
             leading:  Icon(MdiIcons.fromString(icon)),
             title:  Text(hikeName),
-            subtitle:  Text(miles + ' mile(s)\t Type: ' + hikeType +'\tTrip Description: ' + des + '\tLongitude: '+ long + ', Latitude: '+ lat + '\t Date: ' +  date),
+            subtitle:  Text(miles + ' mile(s)\t Type: ' + hikeType +'\nTrip Description: ' + des + '\nLongitude: '+ long + ', Latitude: '+ lat + '\nDate: ' +  date),
             ),
             /*new ButtonTheme.bar(
               child: new ButtonBar(
