@@ -54,30 +54,6 @@ class NewPageMapState extends State<NewPageMap> {
   }  
 
 
- /* Widget loadMarker() {
-    print("IN THE LOAD MARKER METHOD");
-    return StreamBuilder(
-      stream: Firestore.instance.collection(globalUserName).document('Done Hikes').collection('Hike List').snapshots(),
-      builder: (context, snapshot) {
-        print("IN THE BUILDER METHOD");
-        if(snapshot.hasError) {
-          print(snapshot.error);
-        }
-        if(!snapshot.hasData) return Text('Loading markers');
-        for(int i=0; i < snapshot.data.document.length; i++) {
-          int num = i + 1;
-          print("$num");
-          print(snapshot.data.document['Title']);
-          print(snapshot.data.document['Latitude']);
-          print(snapshot.data.document['Longitude']);
-          markers.add(new Marker("$num",snapshot.data.document['Title'], 
-                                      snapshot.data.document['Latitude'], 
-                                      snapshot.data.document['Longitude']));
-        }
-      }, 
-    );
-  }*/
-
   displayMap() {
     mapView.show(new MapOptions(
       mapViewType: MapViewType.normal,
@@ -85,8 +61,6 @@ class NewPageMapState extends State<NewPageMap> {
       showUserLocation: true,
       title: 'Hike Locator',
     ));
-    //mapView.setMarkers(markers);
-    //mapView.zoomToFit(padding: 100);
     mapView.onMapTapped.listen((tapped) {
       //call the database class to let all the lgn and lat to put in the markers
       mapView.setMarkers(markers);
