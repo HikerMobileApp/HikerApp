@@ -281,7 +281,9 @@ class NewPageDoneState extends State<NewPageDone> {
                     color: Colors.transparent,
                     child: new ListTile(
                         title: doneHikeCardMaker(
-                            document['Title'], document['Type'], document['Miles'], document['Description'] ,document['Longitude'], document['Latitude'], document['Date'])),
+                            document['Title'], document['Type'], document['Miles'], document['Description'] ,document['Longitude'], document['Latitude'], document['Date']
+                            )
+                            ),
                   ),
                   actions: <Widget>[
                     new IconSlideAction(
