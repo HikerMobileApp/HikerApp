@@ -98,6 +98,7 @@ class NewPageDoneState extends State<NewPageDone> {
                         border: InputBorder.none,
                       ),
                       controller: miles,
+                      keyboardType: TextInputType.numberWithOptions(decimal: true),
                       maxLines: 1,
                     ),
                   ),

@@ -116,6 +116,7 @@ class NewPageToDoState extends State<NewPageToDo> {
                       ),
                       controller: miles,
                       maxLines: 1,
+                      keyboardType: TextInputType.numberWithOptions(decimal: true),
                     ),
                   ),
                   Divider(
@@ -286,6 +287,7 @@ class NewPageToDoState extends State<NewPageToDo> {
                         border: InputBorder.none,
                       ),
                       controller: miles,
+                      keyboardType: TextInputType.numberWithOptions(decimal: true),
                       maxLines: 1,
                     ),
                   ),

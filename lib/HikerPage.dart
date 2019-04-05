@@ -5,10 +5,15 @@ import 'Database.dart';
 import 'StatCard.dart';
 import 'main.dart';
 
-class ProfilePage extends StatefulWidget {
-  @override
-  _ProfilePage createState() => new _ProfilePage();
+class HikerPage extends StatefulWidget {
+  final String name;
+  final String profPic;
+  final String miles;
+   HikerPage({Key key, @required this.name, this.profPic, this.miles});
+  _HikerPage createState() => new _HikerPage(username: name, profilePic: profPic, milesHiked: miles);
 }
+
+
 
 int doneHikes;
 int todoHikes;
@@ -17,57 +22,24 @@ double totMiles = 0.0;
 List<DocumentSnapshot> doneHikesReturn;
 Database temp = new Database();
 
-class _ProfilePage extends State<ProfilePage> {
+class _HikerPage extends State<HikerPage> {
+final String username;
+final String profilePic;
+final String milesHiked;
+ _HikerPage({Key key, @required this.username, this.profilePic, this.milesHiked});
 
   @override
   void initState() {
     super.initState();
-    _numOfDoneHikes();
-    _numOfTodoHikes();
-    _milesHiked();
-    totMiles = 0;
-    _doneHikes();
   }
 
-  _numOfDoneHikes() async{
-    var asyncResult = await temp.numOfDoneHikes();
-    setState(() {
-      doneHikes = asyncResult;
-    });
-  }
-
-  _numOfTodoHikes() async{
-    var asyncResult = await temp.numOfTodoHikes();
-    setState(() {
-      todoHikes = asyncResult;
-    });
-  }
-
-    _milesHiked() async{
-    var asyncResult = await temp.milesHiked();
-    setState(() {
-      milesHiked = asyncResult;
-    });
-  }
-
-     _doneHikes() async{
-    var asyncResult = await temp.doneHikes();
-    setState(() {
-      doneHikesReturn = asyncResult.documents;
-    });
-
-    doneHikesReturn.forEach((doc) => totMiles += double.parse(doc.data['Miles']));
-    temp.addMilesHiked(globalUserName, totMiles);
-  }
-  
-  
 
 @override
   Widget build(BuildContext context) {
     return new Scaffold(
         appBar: new AppBar(
               backgroundColor: light_dark,
-              title: new Text("Your Profile"),
+              title: new Text(username),
               actions: <Widget>[
               ],
         ),
@@ -89,7 +61,7 @@ class _ProfilePage extends State<ProfilePage> {
                     decoration: BoxDecoration(
                         color: Colors.red,
                         image: DecorationImage(
-                            image: new NetworkImage(img),
+                            image: new NetworkImage(profilePic),
                             fit: BoxFit.cover),
                         borderRadius: BorderRadius.all(Radius.circular(75.0)),
                         boxShadow: [
@@ -97,7 +69,7 @@ class _ProfilePage extends State<ProfilePage> {
                         ])),
                 SizedBox(height: 1.0),
                 Text(
-                  globalUserName,
+                  username,
                   style: TextStyle(
                     color: Colors.white,
                       fontSize: 30.0,
@@ -119,10 +91,7 @@ class _ProfilePage extends State<ProfilePage> {
                 child: 
                 Column(
                   children: <Widget>[
-                      statCardMaker("Hikes Done", doneHikes.toString()),
-                      statCardMaker("Hikes to-do", todoHikes.toString()),
-                      statCardMaker("Miles Hiked", totMiles.toStringAsFixed(2)),
-                      //statCardMaker("Friends", doneHikes.toString()),
+                      statCardMaker("Miles Hiked", milesHiked.toString()),
                   ]
                 )
                 )
