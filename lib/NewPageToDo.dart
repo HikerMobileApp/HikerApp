@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'HikeCard.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -7,7 +5,6 @@ import 'Constants.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'Database.dart';
 import 'package:share/share.dart';
-//import 'dart.async';
 
 const Color myColor = Color(0xff243447);
 
@@ -16,22 +13,7 @@ class NewPageToDo extends StatefulWidget {
     return NewPageToDoState();
   }
 }
-class _SystemPadding extends StatelessWidget {
-  final Widget child;
 
-  _SystemPadding({Key key, this.child}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    var mediaQuery = MediaQuery.of(context);
-    return new AnimatedContainer(
-        padding: mediaQuery.padding,
-        duration: const Duration(milliseconds: 300),
-        child: child);
-  }
-  
-  
-}
 class NewPageToDoState extends State<NewPageToDo> {
 
   
@@ -197,7 +179,7 @@ class NewPageToDoState extends State<NewPageToDo> {
   }
 
   openAlertBoxForDone(String  title, String description, DocumentSnapshot doc, String mil) {
-    DateTime _date = new DateTime.now();
+    /*DateTime _date = new DateTime.now();
     //TimeOfDay _time = new TimeOfDay.now();
     print("Description = " + description);
     Future<Null> _selectData(BuildContext context) async {
@@ -213,7 +195,7 @@ class NewPageToDoState extends State<NewPageToDo> {
           _date =picked;
         });
       }
-    }
+    }*/
     return showDialog(
         context: context,
 
@@ -437,28 +419,6 @@ class NewPageToDoState extends State<NewPageToDo> {
         });
   }
 
- Future<void> _askedToLead() async {
-  await showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return SimpleDialog(
-        contentPadding: const EdgeInsets.all(16.0),
-        title: const Text('Edit Hike'),
-          children: <Widget>[
-          SimpleDialogOption(
-            onPressed: () {},
-            child: const Text('Hike Name: '),
-          ),
-          SimpleDialogOption(
-            onPressed: () {},
-            child: const Text('Hike Description'),
-          ),
-        ],
-      );
-  
-    }
-  );
-}
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
