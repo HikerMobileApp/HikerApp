@@ -14,7 +14,6 @@ import 'NewMapPage.dart';
 const Color dark_green = Color(0xff141d26);
 const Color light_dark = Color(0xff243447);
 
-//List<Widget> cards = new List.generate(5, (i)=>new HikeCard());
 String hikeName;
 String typeOfHike;
 final GlobalKey<ScaffoldState> globalKey = new GlobalKey<ScaffoldState>();
@@ -26,35 +25,26 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
-
-
-_setUsername(String username) async {
+  _setUsername(String username) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
       prefs.setString('username', username);
     });
   }
-_loadUsername() async {
+
+  _loadUsername() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
       globalUserName = (prefs.getString('username') ?? "username");
     });
   }
+
   _loadProfPic() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
       img = (prefs.getString('profPic') ?? "image");
     });
   }
-
-  _launchURL() async {
-  const url = 'https://isaiaher.github.io/';
-  if (await canLaunch(url)) {
-    await launch(url);
-  } else {
-    throw 'Could not launch $url';
-  }
-}
 
   TabController tabController;
   String img = "";
@@ -63,8 +53,6 @@ _loadUsername() async {
     super.initState();
     _loadUsername();
     _loadProfPic();
-    //Firestore.instance.collection('Hiking').document()
-    //.setData({'Title': 'Jade Lake', 'Type': 'Backpacking'});
     tabController = new TabController(length: 3, vsync: this);
   }
 
@@ -76,31 +64,23 @@ _loadUsername() async {
 
   @override
   Widget build(BuildContext context) {
-    //_loadUsername();
     Drawer drawer = new Drawer(
       child: new ListView(
         children: <Widget>[
           new UserAccountsDrawerHeader(
-            decoration: BoxDecoration(
-              color: light_dark
-              
-            ),
+            decoration: BoxDecoration(color: light_dark),
             accountName: new Text(
-              globalUserName, 
+              globalUserName,
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-              ),
-              currentAccountPicture: new Container(
+            ),
+            currentAccountPicture: new Container(
                 width: 250.0,
                 height: 250.0,
                 decoration: new BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: new DecorationImage(
-                  fit: BoxFit.fill,
-                  image: new NetworkImage(img)
-                 )
-                  )),
-      
-            ),
+                    shape: BoxShape.circle,
+                    image: new DecorationImage(
+                        fit: BoxFit.fill, image: new NetworkImage(img)))),
+          ),
           ListTile(
             leading: Icon(
               Icons.person,
@@ -113,7 +93,6 @@ _loadUsername() async {
                     fontSize: 16.0,
                     color: Colors.white)),
             onTap: () {
-              //Navigator.push(context, ProfilePage());
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => ProfilePage()),
@@ -134,10 +113,6 @@ _loadUsername() async {
             onTap: () {
               String url = "https://isaiaher.github.io/";
               launch(url);
-              //Navigator.push(
-              //  context,
-              //  MaterialPageRoute(builder: (context) => NearMe()),
-              //);
             },
           ),
           ListTile(
@@ -165,7 +140,8 @@ _loadUsername() async {
                     fontSize: 16.0,
                     color: Colors.white)),
             onTap: () {
-              String privacyURL = "https://termsfeed.com/privacy-policy/f0d509a98ee4996998b6d545dc1e3afb";
+              String privacyURL =
+                  "https://termsfeed.com/privacy-policy/f0d509a98ee4996998b6d545dc1e3afb";
               launch(privacyURL);
             },
           ),
@@ -175,7 +151,7 @@ _loadUsername() async {
               color: Colors.white,
               size: 20,
             ),
-              title: Text('Sign Out',
+            title: Text('Sign Out',
                 style: TextStyle(
                     fontWeight: FontWeight.normal,
                     fontSize: 16.0,
@@ -183,7 +159,8 @@ _loadUsername() async {
             onTap: () {
               _setUsername("Signed Out");
               auth.signOut();
-              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (BuildContext) => RootPage(auth: Auth())));
+              Navigator.of(context).pushReplacement(MaterialPageRoute(
+                  builder: (BuildContext context) => RootPage(auth: Auth())));
             },
           ),
         ],
@@ -198,11 +175,9 @@ _loadUsername() async {
           backgroundColor: light_dark,
           leading: new IconButton(
               icon: new CircleAvatar(
-               backgroundImage: NetworkImage(img),
+                backgroundImage: NetworkImage(img),
               ),
-              
               onPressed: () {
-                //img = returnProfilePic();
                 print(img);
                 if (img == ' ') {
                   img = 'http://logo.pizza/img/dog-profile/dog-profile.png';
@@ -213,35 +188,33 @@ _loadUsername() async {
             new IconButton(
                 icon: new Icon(Icons.add),
                 onPressed: () {
-                  Navigator.of(context).push(new MaterialPageRoute(builder: 
-                   (BuildContext context) => new AddHikePage()));
-                  //Navigator.push(context, AddHikePage());
+                  Navigator.of(context).push(new MaterialPageRoute(
+                      builder: (BuildContext context) => new AddHikePage()));
                 }),
           ]),
       body: new TabBarView(
         physics: NeverScrollableScrollPhysics(),
-        children: <Widget>[new NewPageToDo(), new NewPageDone(), new NewMapPage()],
+        children: <Widget>[
+          new NewPageToDo(),
+          new NewPageDone(),
+          new NewMapPage()
+        ],
         controller: tabController,
       ),
       bottomNavigationBar: new Material(
-        //color: jade_blue,
         color: light_dark,
         child: new TabBar(
           indicatorColor: Colors.white,
           controller: tabController,
           tabs: <Widget>[
             new Tab(
-              //icon: new Icon(Icons.bookmark),
-              //icon: new Icon(Icons.directions_walk),
               icon: new Icon(MdiIcons.walk),
             ),
             new Tab(
-              //icon: new Icon(Icons.beenhere),
               icon: new Icon(Icons.done),
             ),
             new Tab(
               icon: new Icon(Icons.public),
-              //icon: new Icon(Icons.pin_drop),
             ),
           ],
         ),
