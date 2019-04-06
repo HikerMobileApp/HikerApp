@@ -5,7 +5,6 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'Home.dart';
 import 'Database.dart';
 
-
 List<DocumentSnapshot> doneHikesReturn;
 
 class NewMapPage extends StatefulWidget {
@@ -15,16 +14,12 @@ class NewMapPage extends StatefulWidget {
 }
 
 class NewMapPageState extends State<NewMapPage> {
-
   void initState() {
     super.initState();
     _userMakers();
-    
   }
 
-
   Completer<GoogleMapController> _controller = Completer();
-
 
   static const LatLng _center = const LatLng(47.6062, -122.3321);
 
@@ -39,7 +34,6 @@ class NewMapPageState extends State<NewMapPage> {
           : MapType.terrain;
     });
   }
-  
 
   void _onAddMarkerButtonPressed(DocumentSnapshot doc) {
     setState(() {
@@ -59,6 +53,16 @@ class NewMapPageState extends State<NewMapPage> {
   }
 
   _userMakers() async {
+    Database temp = new Database();
+    var something = await temp.userMarkers();
+    setState(() {
+      doneHikesReturn = something.documents;
+    });
+
+    doneHikesReturn.forEach((doc) => _onAddMarkerButtonPressed(doc));
+  }
+
+  _otherUserMakers() async {
     Database temp = new Database();
     var something = await temp.userMarkers();
     setState(() {
@@ -110,12 +114,18 @@ class NewMapPageState extends State<NewMapPage> {
                       child: const Icon(Icons.map, size: 36.0),
                     ),
                     SizedBox(height: 16.0),
-                    /*FloatingActionButton(
-                      onPressed: _onAddMarkerButtonPressed,
-                      materialTapTargetSize: MaterialTapTargetSize.padded,
-                      backgroundColor: light_dark,
-                      child: const Icon(Icons.add_location, size: 36.0),
-                    ),*/
+                    FloatingActionButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SomeOtherClass()));
+                      },
+                      child: Icon(
+                        Icons.add,
+                      ),
+                      heroTag: "demoTag",
+                    ),
                   ],
                 ),
               ),
@@ -127,3 +137,62 @@ class NewMapPageState extends State<NewMapPage> {
   }
 }
 
+class SomeOtherClass extends StatefulWidget {
+  SomeOtherClassState createState() {
+    return SomeOtherClassState();
+  }
+}
+
+// The base class for the different types of items the List can contain
+abstract class ListItem {}
+
+// A ListItem that contains data to display a heading
+class HeadingItem implements ListItem {
+  final String heading;
+
+  HeadingItem(this.heading);
+}
+
+// A ListItem that contains data to display a message
+class MessageItem implements ListItem {
+  final String sender;
+  final String body;
+
+  MessageItem(this.sender, this.body);
+}
+
+final items = List<ListItem>.generate(
+  1200,
+  (i) => i % 6 == 0
+      ? HeadingItem("Heading $i")
+      : MessageItem("Sender $i", "Message body $i"),
+);
+
+class SomeOtherClassState extends State<SomeOtherClass> {
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      // Let the ListView know how many items it needs to build
+      itemCount: items.length,
+      // Provide a builder function. This is where the magic happens! We'll
+      // convert each item into a Widget based on the type of item it is.
+      itemBuilder: (context, index) {
+        final item = items[index];
+
+        if (item is HeadingItem) {
+          return ListTile(
+            title: Text(
+              item.heading,
+              style: Theme.of(context).textTheme.headline,
+            ),
+          );
+        } else if (item is MessageItem) {
+          return ListTile(
+            title: Text(item.sender),
+            subtitle: Text(item.body),
+          );
+        }
+      },
+    );
+  }
+}

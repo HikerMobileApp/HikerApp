@@ -112,6 +112,16 @@ class Database {
     return docs;
   }
 
+  Future<QuerySnapshot> otherUserMarkers(String otherUserName) async {
+    var docs = Firestore.instance
+        .collection(otherUserName)
+        .document("Done Hikes")
+        .collection("Hike List")
+        .getDocuments();
+
+    return docs;
+  }
+
   Future<String> getUserName() async {
     FirebaseUser mCurrentUser = await FirebaseAuth.instance.currentUser();
     return mCurrentUser.displayName;
