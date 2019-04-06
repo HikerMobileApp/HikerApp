@@ -6,6 +6,7 @@ import 'Home.dart';
 import 'Database.dart';
 
 List<DocumentSnapshot> doneHikesReturn;
+List<DocumentSnapshot> otherUser;
 
 class NewMapPage extends StatefulWidget {
   NewMapPageState createState() {
@@ -62,11 +63,11 @@ class NewMapPageState extends State<NewMapPage> {
     doneHikesReturn.forEach((doc) => _onAddMarkerButtonPressed(doc));
   }
 
-  _otherUserMakers() async {
+  _otherUserMakers(String userName) async {
     Database temp = new Database();
-    var something = await temp.userMarkers();
+    var something = await temp.otherUserMarkers(userName);
     setState(() {
-      doneHikesReturn = something.documents;
+      otherUser = something.documents;
     });
 
     doneHikesReturn.forEach((doc) => _onAddMarkerButtonPressed(doc));
@@ -171,28 +172,46 @@ final items = List<ListItem>.generate(
 class SomeOtherClassState extends State<SomeOtherClass> {
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      // Let the ListView know how many items it needs to build
-      itemCount: items.length,
-      // Provide a builder function. This is where the magic happens! We'll
-      // convert each item into a Widget based on the type of item it is.
-      itemBuilder: (context, index) {
-        final item = items[index];
+    var mediaQuery = MediaQuery.of(context);
+    return Scaffold(
+      appBar: new AppBar(
+        backgroundColor: light_dark,
+        title: new Text("View other hikers completed hikes"),
+      ),
+      body: SizedBox(
+        width: MediaQuery.of(context).size.width,
+        child: Hero(
+          tag: "demoTag",
+          transitionOnUserGestures: true,
+          child: Material(
+            color: Colors.white,
+            child: ListView.builder(
+              // Let the ListView know how many items it needs to build
+              //itemCount: items.length,
+              itemCount: doneHikesReturn.length,
+              // Provide a builder function. This is where the magic happens! We'll
+              // convert each item into a Widget based on the type of item it is.
+              itemBuilder: (context, index) {
+                final item = items[index];
 
-        if (item is HeadingItem) {
-          return ListTile(
-            title: Text(
-              item.heading,
-              style: Theme.of(context).textTheme.headline,
+                if (item is HeadingItem) {
+                  return ListTile(
+                    title: Text(
+                      item.heading,
+                      style: Theme.of(context).textTheme.headline,
+                    ),
+                  );
+                } else if (item is MessageItem) {
+                  return ListTile(
+                    title: Text(item.sender),
+                    subtitle: Text(item.body),
+                  );
+                }
+              },
             ),
-          );
-        } else if (item is MessageItem) {
-          return ListTile(
-            title: Text(item.sender),
-            subtitle: Text(item.body),
-          );
-        }
-      },
+          ),
+        ),
+      ),
     );
   }
 }
