@@ -144,38 +144,25 @@ class SomeOtherClass extends StatefulWidget {
   }
 }
 
-// The base class for the different types of items the List can contain
-abstract class ListItem {}
-
-// A ListItem that contains data to display a heading
-class HeadingItem implements ListItem {
-  final String heading;
-
-  HeadingItem(this.heading);
-}
-
-// A ListItem that contains data to display a message
-class MessageItem implements ListItem {
-  final String sender;
-  final String body;
-
-  MessageItem(this.sender, this.body);
-}
-
-final items = List<ListItem>.generate(
-  1200,
-  (i) => i % 6 == 0
-      ? HeadingItem("Heading $i")
-      : MessageItem("Sender $i", "Message body $i"),
-);
-
 class SomeOtherClassState extends State<SomeOtherClass> {
   Widget userNameButtons = new Container(
-    child: new Row(
+    child: new Column(
+      //mainAxisAlignment: MainAxisAlignment.end,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        new Text("Name 1", style: new TextStyle(fontSize: 16.0)),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: new Text("Name 1", style: new TextStyle(fontSize: 16.0)),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: new Text("Name 2", style: new TextStyle(fontSize: 16.0)),
+        ),
         new Text("Name 3", style: new TextStyle(fontSize: 16.0)),
         new Text("Name 4", style: new TextStyle(fontSize: 16.0)),
+        new Text("Name 5", style: new TextStyle(fontSize: 16.0)),
+        new Text("Name 5", style: new TextStyle(fontSize: 16.0)),
+        new Text("Name 5", style: new TextStyle(fontSize: 16.0)),
         new Text("Name 5", style: new TextStyle(fontSize: 16.0)),
       ],
     ),
@@ -194,10 +181,12 @@ class SomeOtherClassState extends State<SomeOtherClass> {
           transitionOnUserGestures: true,
           child: Material(
             color: Colors.white,
-            child: ListView(
-              children: <Widget>[
-                userNameButtons,
-              ],
+            child: ListView.builder(
+              itemCount: 20,
+              itemBuilder: (context, index) => Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: userNameButtons,
+                  ),
             ),
           ),
         ),
