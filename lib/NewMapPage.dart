@@ -125,7 +125,7 @@ class NewMapPageState extends State<NewMapPage> {
                       child: Icon(
                         Icons.add,
                       ),
-                      heroTag: "demoTag",
+                      heroTag: "HikerNamesTag",
                     ),
                   ],
                 ),
@@ -170,9 +170,18 @@ final items = List<ListItem>.generate(
 );
 
 class SomeOtherClassState extends State<SomeOtherClass> {
+  Widget userNameButtons = new Container(
+    child: new Row(
+      children: <Widget>[
+        new Text("Name 1", style: new TextStyle(fontSize: 16.0)),
+        new Text("Name 3", style: new TextStyle(fontSize: 16.0)),
+        new Text("Name 4", style: new TextStyle(fontSize: 16.0)),
+        new Text("Name 5", style: new TextStyle(fontSize: 16.0)),
+      ],
+    ),
+  );
   @override
   Widget build(BuildContext context) {
-    var mediaQuery = MediaQuery.of(context);
     return Scaffold(
       appBar: new AppBar(
         backgroundColor: light_dark,
@@ -181,33 +190,14 @@ class SomeOtherClassState extends State<SomeOtherClass> {
       body: SizedBox(
         width: MediaQuery.of(context).size.width,
         child: Hero(
-          tag: "demoTag",
+          tag: "HikerNamesTag",
           transitionOnUserGestures: true,
           child: Material(
             color: Colors.white,
-            child: ListView.builder(
-              // Let the ListView know how many items it needs to build
-              //itemCount: items.length,
-              itemCount: doneHikesReturn.length,
-              // Provide a builder function. This is where the magic happens! We'll
-              // convert each item into a Widget based on the type of item it is.
-              itemBuilder: (context, index) {
-                final item = items[index];
-
-                if (item is HeadingItem) {
-                  return ListTile(
-                    title: Text(
-                      item.heading,
-                      style: Theme.of(context).textTheme.headline,
-                    ),
-                  );
-                } else if (item is MessageItem) {
-                  return ListTile(
-                    title: Text(item.sender),
-                    subtitle: Text(item.body),
-                  );
-                }
-              },
+            child: ListView(
+              children: <Widget>[
+                userNameButtons,
+              ],
             ),
           ),
         ),
