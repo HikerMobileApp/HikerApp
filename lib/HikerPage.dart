@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'Constants.dart';
 import 'Database.dart';
 import 'StatCard.dart';
-import 'main.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+
 
 class HikerPage extends StatefulWidget {
   final String name;
@@ -12,15 +12,47 @@ class HikerPage extends StatefulWidget {
    HikerPage({Key key, @required this.name, this.profPic, this.miles});
   _HikerPage createState() => new _HikerPage(username: name, profilePic: profPic, milesHiked: miles);
 }
-
-
-
 int doneHikes;
 int todoHikes;
 double milesHiked;
 double totMiles = 0.0;
+Color lightDark = Color(0xff243447);
 List<DocumentSnapshot> doneHikesReturn;
 Database temp = new Database();
+String icon;
+
+Container hikecardToDo(String hikeName, String hikeType, String miles, var context){
+  if(hikeType == "Multi-Night"){
+      icon = "weatherNight";
+  }
+  else if(hikeType == "Day Hike"){
+      icon = "walk";
+  }
+  else if(hikeType == "Backpacking"){
+      icon = "tent";
+  }
+  else{
+      icon = "pineTree";
+  }
+  return 
+      Container(
+        //color: Colors.white,
+        width: context.size.width/2,
+        decoration: BoxDecoration(border: Border.all(
+            color: lightDark,
+            width: 8.0,
+          ),
+          color: Colors.white
+          ),
+        //height: 20,
+        //width: 20,
+        child: new ListTile(
+            leading: Icon(MdiIcons.fromString(icon)),
+            title:  Text(hikeName),
+            subtitle:  Text(miles + ' mile ' + hikeType),
+            ),
+      );
+}
 
 class _HikerPage extends State<HikerPage> {
 final String username;
@@ -36,9 +68,10 @@ final String milesHiked;
 
 @override
   Widget build(BuildContext context) {
+  var mediaQuery = MediaQuery.of(context);
     return new Scaffold(
         appBar: new AppBar(
-              backgroundColor: light_dark,
+              backgroundColor: lightDark,
               title: new Text(username),
               actions: <Widget>[
               ],
@@ -85,20 +118,68 @@ final String milesHiked;
                       fontFamily: 'Montserrat'),
                 ),
                 SizedBox(height: 25.0),
-                Container(
-                  width: MediaQuery.of(context).size.width/2,
+                
                   
-                child: 
-                Column(
+              Column(
                   children: <Widget>[
+                    Container(
+                  width: MediaQuery.of(context).size.width/2,
+                  child:
                       statCardMaker("Miles Hiked", milesHiked.toString()),
-                  ]
+                    ),
+                     Container(
+                        
+                        child: StreamBuilder<QuerySnapshot>(
+                        stream: Firestore.instance
+                          .collection(username)
+                          .document("Hikes To Do")
+                          .collection("Hike List")
+                          .snapshots(),
+
+                        builder: (context, snapshot){
+                      if (!snapshot.hasData){
+                        return Container(
+                          child: Center(
+                            child: Text("No Hikes")
+                          )
+                        );
+                      }
+                        return Container(
+                          height: MediaQuery.of(context).size.width/5,
+                          width: MediaQuery.of(context).size.width,
+                          child: ListView.builder(
+                      padding: EdgeInsets.all(1.0),
+                      reverse: false,
+                      scrollDirection: Axis.horizontal,
+                      itemCount: snapshot.data.documents.length,
+                      itemBuilder: (_, int index) {
+                        String hikeName = snapshot.data.documents[index]["Title"];
+                        String hikeType = snapshot.data.documents[index]["Type"];
+                        String miles = snapshot.data.documents[index]["Miles"];
+                        return 
+                          new GestureDetector(
+                            onTap: () {
+                            },
+                            child:
+                              hikecardToDo(hikeName, hikeType, miles, mediaQuery),
+                              );
+                          
+                      }
+                    ) 
+                        );    
+                  }
+
+            
+                
                 )
-                )
+                      ) 
               ],
-            ))
+            )
       ],
-    ));
+    ))
+      ]
+        )
+    );
   }
 }
 

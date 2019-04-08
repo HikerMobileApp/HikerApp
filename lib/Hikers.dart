@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'main.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'Database.dart';
 import 'HikerPage.dart';
 
@@ -11,7 +10,7 @@ class Hikers extends StatefulWidget {
 }
 
   Database temp = new Database();
-Card profileCard(String name, double miles, String profPic){
+Card profileCard(String name, var miles, String profPic){
   if(miles == null){
      miles = 0;
   }
@@ -34,9 +33,6 @@ Card profileCard(String name, double miles, String profPic){
       );
 }
 
-
-
-
 class _Hikers extends State<Hikers>{
 
             @override
@@ -45,9 +41,10 @@ class _Hikers extends State<Hikers>{
             }
 
 Widget build(BuildContext context) {
+  Color lightDark = Color(0xff243447);
           return new Scaffold(
             appBar: new AppBar(
-              backgroundColor: light_dark,
+              backgroundColor: lightDark,
               title: new Text("Hikers"),
               actions: <Widget>[
               ],
@@ -83,7 +80,7 @@ Widget build(BuildContext context) {
                               );
                             },
                             child:
-                           profileCard(user, miles,profPic),
+                           profileCard(user, miles, profPic),
                           );
                       }
                     );        
