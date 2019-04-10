@@ -87,6 +87,7 @@ class _AddHikePage extends State<AddHikePage> {
             new ListTile(
               leading: const Icon(MdiIcons.gnome, color: Colors.white),
               title: new TextFormField(
+                keyboardType: TextInputType.numberWithOptions(decimal: true),
                 style: TextStyle(fontSize: 15.0, color: Colors.white),
                 decoration: new InputDecoration(
                   labelText: 'Miles',

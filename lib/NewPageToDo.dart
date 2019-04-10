@@ -94,6 +94,7 @@ class NewPageToDoState extends State<NewPageToDo> {
                   Padding(
                     padding: EdgeInsets.only(left: 30.0, right: 30.0),
                     child: TextField(
+                      keyboardType: TextInputType.numberWithOptions(decimal: true),
                       decoration: InputDecoration(
                         hintText: mil,
                         border: InputBorder.none,
@@ -107,7 +108,6 @@ class NewPageToDoState extends State<NewPageToDo> {
                     height: mediaQuery.size.height/400,
                   ),
                   InkWell(
-                    
                     child: Container(
                       alignment:Alignment(0.0, 0.0),
                       height: MediaQuery.of(context).size.height/15.1,
@@ -265,6 +265,7 @@ class NewPageToDoState extends State<NewPageToDo> {
                   Padding(
                     padding: EdgeInsets.only(left: 30.0, right: 30.0),
                     child: TextField(
+                      keyboardType: TextInputType.numberWithOptions(decimal: true),
                       decoration: InputDecoration(
                         hintText: mil,
                         border: InputBorder.none,
@@ -281,6 +282,7 @@ class NewPageToDoState extends State<NewPageToDo> {
                   Padding(
                     padding: EdgeInsets.only(left: 30.0, right: 30.0),
                     child: TextField(
+                      keyboardType: TextInputType.numberWithOptions(decimal: true),
                       decoration: InputDecoration(
                         hintText: "Enter longitude",
                         border: InputBorder.none,
@@ -296,6 +298,7 @@ class NewPageToDoState extends State<NewPageToDo> {
                   Padding(
                     padding: EdgeInsets.only(left: 30.0, right: 30.0),
                     child: TextField(
+                      keyboardType: TextInputType.numberWithOptions(decimal: true),
                       decoration: InputDecoration(
                         hintText: "Enter latitude",
                         border: InputBorder.none,
@@ -336,6 +339,7 @@ class NewPageToDoState extends State<NewPageToDo> {
                       ],
                     ),*/
                     child: TextField(
+                      keyboardType: TextInputType.datetime,
                       decoration: InputDecoration(
                         hintText: "Date completed",
                         border: InputBorder.none,

@@ -63,6 +63,7 @@ class NewPageDoneState extends State<NewPageDone> {
                   Padding(
                     padding: EdgeInsets.only(left: 30.0, right: 30.0),
                     child: TextField(
+                      textCapitalization: TextCapitalization.sentences,
                       decoration: InputDecoration(
                         hintText: title,
                         border: InputBorder.none,
@@ -78,6 +79,7 @@ class NewPageDoneState extends State<NewPageDone> {
                   Padding(
                     padding: EdgeInsets.only(left: 30.0, right: 30.0),
                     child: TextField(
+                      textCapitalization: TextCapitalization.sentences,
                       decoration: InputDecoration(
                         hintText: description,
                         border: InputBorder.none,
@@ -93,6 +95,7 @@ class NewPageDoneState extends State<NewPageDone> {
                   Padding(
                     padding: EdgeInsets.only(left: 30.0, right: 30.0),
                     child: TextField(
+                      keyboardType: TextInputType.numberWithOptions(decimal: true),
                       decoration: InputDecoration(
                         hintText: mil,
                         border: InputBorder.none,
@@ -108,6 +111,7 @@ class NewPageDoneState extends State<NewPageDone> {
                   Padding(
                     padding: EdgeInsets.only(left: 30.0, right: 30.0),
                     child: TextField(
+                      keyboardType: TextInputType.numberWithOptions(signed: true, decimal: true),
                       decoration: InputDecoration(
                         hintText: lng,
                         border: InputBorder.none,
@@ -123,6 +127,7 @@ class NewPageDoneState extends State<NewPageDone> {
                   Padding(
                     padding: EdgeInsets.only(left: 30.0, right: 30.0),
                     child: TextField(
+                      keyboardType: TextInputType.numberWithOptions(decimal: true, signed: true),
                       decoration: InputDecoration(
                         hintText: lat,
                         border: InputBorder.none,
@@ -138,6 +143,7 @@ class NewPageDoneState extends State<NewPageDone> {
                   Padding(
                     padding: EdgeInsets.only(left: 30.0, right: 30.0),
                     child: TextField(
+                      textCapitalization: TextCapitalization.sentences,
                       decoration: InputDecoration(
                         hintText: tripDes,
                         border: InputBorder.none,
@@ -153,6 +159,7 @@ class NewPageDoneState extends State<NewPageDone> {
                   Padding(
                     padding: EdgeInsets.only(left: 30.0, right: 30.0),
                     child: TextField(
+                      keyboardType: TextInputType.datetime,
                       decoration: InputDecoration(
                         hintText: date,
                         border: InputBorder.none,

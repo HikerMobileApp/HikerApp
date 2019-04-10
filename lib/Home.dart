@@ -79,7 +79,8 @@ class _HomePageState extends State<HomePage>
                 decoration: new BoxDecoration(
                     shape: BoxShape.circle,
                     image: new DecorationImage(
-                        fit: BoxFit.fill, image: new NetworkImage(img)))),
+                        fit: BoxFit.fill, image: new NetworkImage(img)))), 
+                        accountEmail: null,
           ),
           ListTile(
             leading: Icon(
