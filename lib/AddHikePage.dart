@@ -20,11 +20,11 @@ class _AddHikePage extends State<AddHikePage> {
 
   List<DropdownMenuItem<String>> _dropDownMenuItems;
 
-  @override
-  void initState() {
-    _dropDownMenuItems = getDropDownMenuItems();
-    super.initState();
-  }
+            @override
+            void initState() {
+              _dropDownMenuItems = getDropDownMenuItems();
+              super.initState();
+            }
 
   List<DropdownMenuItem<String>> getDropDownMenuItems() {
     List<DropdownMenuItem<String>> items = new List();

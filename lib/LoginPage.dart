@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:mobile_hiking_app/Database.dart';
 import 'RegisterPage.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:http/http.dart' as http;
@@ -12,6 +13,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 const Color light_dark = Color(0xff243447);
 const Color dark_green = Color(0xff141d26);
 final FirebaseAuth _auth = FirebaseAuth.instance;
+Database temp = new Database();
 
 class LoginPage extends StatefulWidget {
   @override
@@ -124,6 +126,7 @@ void onLoginStatusChanged(bool loggedIn, {profileData}) {
         _setUsername(currentUser.displayName);
         _loadUsername();
         print("Global Username After " + globalUserName);
+        temp.addUsername(currentUser.displayName);
         assert(user.uid == currentUser.uid);
 
         break;
@@ -139,6 +142,7 @@ void onLoginStatusChanged(bool loggedIn, {profileData}) {
         _setProfPic(profile['picture']['data']['url']);
         _loadProfPic();
         print("Profile img --> " + img);
+        temp.addImage(globalUserName,img);
         print(profile.toString());
         
 
