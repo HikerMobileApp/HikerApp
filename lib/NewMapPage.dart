@@ -17,7 +17,6 @@ class NewMapPage extends StatefulWidget {
 
 class NewMapPageState extends State<NewMapPage> {
   void initState() {
-    print("in the initstate");
     _markers.clear();
     super.initState();
     _userMakers();
@@ -228,7 +227,8 @@ class SomeOtherClassState extends State<SomeOtherClass> {
                                 _otherUserMakers(user, profPic);
                                 Scaffold.of(context)
                             .showSnackBar(SnackBar(content: Text(user + "s hikes added to the map")));
-                                //Navigator.pop(context);
+                            //Navigator.pop(context);
+                            
                               },
                               child: profileCard(user, miles, profPic),
                             );
