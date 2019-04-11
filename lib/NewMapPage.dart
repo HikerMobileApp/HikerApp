@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'Constants.dart';
 import 'Home.dart';
 import 'Database.dart';
 
@@ -24,7 +25,7 @@ class NewMapPageState extends State<NewMapPage> {
 
   Completer<GoogleMapController> _controller = Completer();
 
-  static const LatLng _center = const LatLng(47.6062, -122.3321);
+  static  LatLng _center =  LatLng(47.6062, -122.3321);
 
   MapType _currentMapType = MapType.terrain;
 
@@ -139,8 +140,16 @@ class SomeOtherClass extends StatefulWidget {
 }
 
 class SomeOtherClassState extends State<SomeOtherClass> {
+
   void _onAddMarkerButtonPressed(
       DocumentSnapshot doc, String userName, String picId) {
+        double color = 0.0;
+        if (userName == "Isaiah Scheel") {
+          color = BitmapDescriptor.hueBlue;
+        }
+        else {
+          color = BitmapDescriptor.hueCyan;
+        }
     setState(() {
       _markers.add(Marker(
         // This marker id can be anything that uniquely identifies each marker.
@@ -158,7 +167,7 @@ class SomeOtherClassState extends State<SomeOtherClass> {
         //try to make it his facebook picture
         // add the url to the database
         //makes it easier to get the picture
-        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
+        icon: BitmapDescriptor.defaultMarkerWithHue(color),
       ));
     });
   }
@@ -175,6 +184,7 @@ class SomeOtherClassState extends State<SomeOtherClass> {
 
   Database temp = new Database();
   Card profileCard(String name, var miles, String profPic) {
+    if(name != globalUserName){
     if (miles == null) {
       miles = 0;
     }
@@ -190,7 +200,11 @@ class SomeOtherClassState extends State<SomeOtherClass> {
         subtitle: new Text("Miles Hiked: " + miles.toString()),
         //subtitle:  Text(miles + ' mile ' + hikeType),
       ),
-    ]));
+    ])); 
+    }
+    else {
+      return null;
+    }
   }
 
   @override
