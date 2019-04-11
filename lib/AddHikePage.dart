@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'main.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-//import 'package:cloud_firestore/cloud_firestore.dart';
-//import 'package:firebase_auth/firebase_auth.dart';
 import 'Database.dart';
 
 class AddHikePage extends StatefulWidget {
@@ -26,7 +24,6 @@ class _AddHikePage extends State<AddHikePage>{
             @override
             void initState() {
               _dropDownMenuItems = getDropDownMenuItems();
-              //_currentCity = _dropDownMenuItems[0].value;
               super.initState();
             }
 
@@ -79,7 +76,7 @@ Widget build(BuildContext context) {
                   new ListTile(
                     leading: const Icon(MdiIcons.walk, color: Colors.white),
                     title: new TextFormField(
-                      textCapitalization: TextCapitalization.sentences,
+                      textCapitalization: TextCapitalization.words,
                       style: TextStyle(fontSize: 15.0, color: Colors.white),
                       decoration: new InputDecoration(
                         labelText: 'Hike Name',
@@ -89,7 +86,6 @@ Widget build(BuildContext context) {
                     ),
                   ),
                   new ListTile(
-                    //leading: const Icon(MdiIcons.note, color: Colors.white,),
                     leading: const Icon(MdiIcons.gnome, color: Colors.white),
                     title: new TextFormField(
                       style: TextStyle(fontSize: 15.0, color: Colors.white),
@@ -98,6 +94,7 @@ Widget build(BuildContext context) {
                         hintText: "How Many Miles?",
                       ),
                       controller: miles,
+                      keyboardType: TextInputType.numberWithOptions(decimal: true),
                     ),
                   ),
                   new ListTile(

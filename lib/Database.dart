@@ -114,8 +114,36 @@ Future<QuerySnapshot> userMarkers() async{
     FirebaseUser mCurrentUser = await FirebaseAuth.instance.currentUser();
     return mCurrentUser.displayName;
   }
+
   getProfileImage() async {
     FirebaseUser mCurrentUser = await FirebaseAuth.instance.currentUser();
     mCurrentUser.photoUrl;
   }
+
+  Future<void> addUsername(String username) async {
+    print("-------------------------ADD USER------------------------");
+    Firestore.instance
+        .collection("USERS")
+        .document(username)
+        .setData({'Name': username});
+  }
+
+    Future<void> addMilesHiked(String username, double miles) async {
+    print("-------------------------ADD Miles Hiked------------------------");
+    Firestore.instance
+        .collection("USERS")
+        .document(username).updateData({'MilesHiked': miles.toStringAsFixed(2)});
+        //.setData({'Name': username,'MilesHiked': miles});
+  }
+
+    Future<void> addImage(String username, String image) async {
+    print("-------------------------ADD Image------------------------");
+    Firestore.instance
+        .collection("USERS")
+        .document(username).updateData({'profilePic': image});
+        //.setData({'Name': username,'MilesHiked': miles});
+  }
+
+
+
 }
