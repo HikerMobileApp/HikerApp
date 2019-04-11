@@ -69,32 +69,6 @@ class _AddHikePage extends State<AddHikePage> {
               })
         ],
       ),
-      body: new Form(
-        child: new Column(
-          children: <Widget>[
-            new ListTile(
-              leading: const Icon(MdiIcons.walk, color: Colors.white),
-              title: new TextFormField(
-                textCapitalization: TextCapitalization.sentences,
-                style: TextStyle(fontSize: 15.0, color: Colors.white),
-                decoration: new InputDecoration(
-                  labelText: 'Hike Name',
-                  hintText: "Name your hike",
-                ),
-                controller: hikeName,
-              ),
-            ),
-            new ListTile(
-              leading: const Icon(MdiIcons.gnome, color: Colors.white),
-              title: new TextFormField(
-                style: TextStyle(fontSize: 15.0, color: Colors.white),
-                decoration: new InputDecoration(
-                  labelText: 'Miles',
-                  hintText: "How Many Miles?",
-                ),
-                controller: miles,
-              ),
-            ),
             body: new Form(
               child: new Column(
                 children: <Widget>[
@@ -135,9 +109,6 @@ class _AddHikePage extends State<AddHikePage> {
                 ],
               ),
             ),
-          ],
-        ),
-      ),
     );
-  }
+    }
 }
