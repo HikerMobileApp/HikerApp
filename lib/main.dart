@@ -6,25 +6,22 @@ import 'NewPageDone.dart';
 import 'NewPageToDo.dart';
 import 'HikeCard.dart';
 import 'AddHikePage.dart';
+import 'Root.dart';
+import 'auth.dart';
 
-//import 'package:splashscreen/splashscreen.dart';
-
-const Color dark_green = Color(0xff027206);
-const Color jade_blue = Color(0xff339192);
-List<Widget> cards = new List.generate(20, (i)=>new HikeCard());
-String hikeName;
-String typeOfHike;
-final GlobalKey<ScaffoldState> globalKey = new GlobalKey<ScaffoldState>();
+const Color dark_green = Color(0xff141d26);
+const Color light_dark = Color(0xff243447);
 
 void main() => runApp( new MaterialApp(
+  debugShowCheckedModeBanner: false,
   theme: new ThemeData(
-    accentColor: Colors.teal,
-    hintColor: Colors.teal,
+    accentColor: Colors.greenAccent,
+    hintColor: Colors.greenAccent,
+    canvasColor: light_dark,
   ),
-  home: new HomePage(),
+  home:  RootPage(auth: Auth()),
   
 ));
-
 class HomePage extends StatefulWidget{
   @override
   _HomePageState createState() => new _HomePageState();
