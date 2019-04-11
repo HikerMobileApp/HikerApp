@@ -87,9 +87,9 @@ _loadUsername() async {
       return false;
     }
   }
-void onLoginStatusChanged(bool LoggedIn, {profileData}) {
+void onLoginStatusChanged(bool loggedIn, {profileData}) {
     setState(() {
-      isLoggedIn = LoggedIn;
+      isLoggedIn = loggedIn;
       profile = profileData;
     });
   }

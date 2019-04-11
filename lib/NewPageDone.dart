@@ -24,7 +24,7 @@ class NewPageDoneState extends State<NewPageDone> {
   final latitude = TextEditingController();
   final tripDescription = TextEditingController();
   final dateCompleted = TextEditingController();
-  openAlertBox(String  title, String description, DocumentSnapshot doc, String mil) {
+  openAlertBox(String  title, String description, DocumentSnapshot doc, String mil, String lat, String lng, String date, String tripDes) {
     return showDialog(
         context: context,
 
@@ -110,7 +110,7 @@ class NewPageDoneState extends State<NewPageDone> {
                     padding: EdgeInsets.only(left: 30.0, right: 30.0),
                     child: TextField(
                       decoration: InputDecoration(
-                        hintText: "Enter longitude",
+                        hintText: lng,
                         border: InputBorder.none,
                       ),
                       controller: longitude,
@@ -125,7 +125,7 @@ class NewPageDoneState extends State<NewPageDone> {
                     padding: EdgeInsets.only(left: 30.0, right: 30.0),
                     child: TextField(
                       decoration: InputDecoration(
-                        hintText: "Enter latitude",
+                        hintText: lat,
                         border: InputBorder.none,
                       ),
                       controller: latitude,
@@ -140,7 +140,7 @@ class NewPageDoneState extends State<NewPageDone> {
                     padding: EdgeInsets.only(left: 30.0, right: 30.0),
                     child: TextField(
                       decoration: InputDecoration(
-                        hintText: "Describe your hike",
+                        hintText: tripDes,
                         border: InputBorder.none,
                       ),
                       controller: tripDescription,
@@ -155,7 +155,7 @@ class NewPageDoneState extends State<NewPageDone> {
                     padding: EdgeInsets.only(left: 30.0, right: 30.0),
                     child: TextField(
                       decoration: InputDecoration(
-                        hintText: "Date completed",
+                        hintText: date,
                         border: InputBorder.none,
                       ),
                       controller: dateCompleted,
@@ -190,7 +190,7 @@ class NewPageDoneState extends State<NewPageDone> {
                     ),
                     onTap: (){
 
-                      if (hikeName.text != "" || hikeType.text != ""||miles.text != "") {
+                      if (hikeName.text != "" || hikeType.text != ""|| miles.text != "" || latitude.text != "" || longitude.text != "" ||  tripDescription.text != "" || dateCompleted.text != "") {
                         print("Done Clicked");
                         Database temp = new Database();
                         if(hikeName.text == ""){
@@ -202,30 +202,50 @@ class NewPageDoneState extends State<NewPageDone> {
                         if(miles.text == ""){
                           miles.text = mil;
                         }
+                        if(latitude.text == ""){
+                          latitude.text = lat;
+                        }
+                        if(longitude.text == ""){
+                          longitude.text = lng;
+                        }
+                        if(tripDescription.text == ""){
+                          tripDescription.text = tripDes;
+                        }
+                        if(dateCompleted.text == ""){
+                          dateCompleted.text = date;
+                        }
                         temp.pushAddDoneHike(hikeName.text, hikeType.text, miles.text,longitude.text, latitude.text, tripDescription.text, dateCompleted.text);
                         temp.deleteHikeFromDonePage(doc['Title']);
                         hikeName.text = "";
                         hikeType.text = "";
                         miles.text = "";
+                        latitude.text = "";
+                        longitude.text = ""; 
+                        tripDescription.text = "";
+                        dateCompleted.text = "";
                         Navigator.pop(context);
                       }
-                      else if(hikeName.text == "" && hikeType.text == "" && miles.text == ""){
+                      else {
                         hikeName.text =title;
                         hikeType.text =description;
                         miles.text = mil;
+                        longitude.text = lng;
+                        latitude.text = lat;
+                        tripDescription.text = tripDes;
+                        dateCompleted.text = date;
+
                         print("Fields Left Empty");
                         Database temp = new Database();
                         temp.pushAddDoneHike(hikeName.text, hikeType.text, miles.text,longitude.text, latitude.text, tripDescription.text, dateCompleted.text);
                         hikeName.text = "";
                         hikeType.text = "";
                         miles.text = "";
+                        latitude.text = "";
+                        longitude.text = ""; 
+                        tripDescription.text = "";
+                        dateCompleted.text = "";
                         Navigator.pop(context);
-                      }
-                      else{
-                        print("idk what is happening");
-                      }
-                      
-                          
+                      }                   
                     },
                     
                   ),
@@ -262,7 +282,9 @@ class NewPageDoneState extends State<NewPageDone> {
                     color: Colors.transparent,
                     child: new ListTile(
                         title: doneHikeCardMaker(
-                            document['Title'], document['Type'], document['Miles'], document['Description'] ,document['Longitude'], document['Latitude'], document['Date'])),
+                            document['Title'], document['Type'], document['Miles'], document['Description'] ,document['Longitude'], document['Latitude'], document['Date']
+                            )
+                            ),
                   ),
                   actions: <Widget>[
                     new IconSlideAction(
@@ -283,7 +305,7 @@ class NewPageDoneState extends State<NewPageDone> {
                       caption: 'Edit',
                       color: Colors.black45,
                       icon: Icons.more_horiz,
-                      onTap: () {openAlertBox(document['Title'],document['Type'], document, document['Miles']);},
+                      onTap: () {openAlertBox(document['Title'], document['Type'], document, document['Miles'],document['Latitude'], document['Longitude'], document['Date'], document['Description']);},
                     ),
                     new IconSlideAction(
                       caption: 'Delete',
