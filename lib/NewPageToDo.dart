@@ -282,7 +282,7 @@ class NewPageToDoState extends State<NewPageToDo> {
                   Padding(
                     padding: EdgeInsets.only(left: 30.0, right: 30.0),
                     child: TextField(
-                      keyboardType: TextInputType.numberWithOptions(decimal: true),
+                      textCapitalization: TextCapitalization.sentences,
                       decoration: InputDecoration(
                         hintText: "Enter longitude",
                         border: InputBorder.none,
@@ -298,7 +298,7 @@ class NewPageToDoState extends State<NewPageToDo> {
                   Padding(
                     padding: EdgeInsets.only(left: 30.0, right: 30.0),
                     child: TextField(
-                      keyboardType: TextInputType.numberWithOptions(decimal: true),
+                      textCapitalization: TextCapitalization.sentences,
                       decoration: InputDecoration(
                         hintText: "Enter latitude",
                         border: InputBorder.none,

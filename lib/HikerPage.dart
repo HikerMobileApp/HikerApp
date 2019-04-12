@@ -75,7 +75,7 @@ class _HikerPage extends State<HikerPage> {
         body: new Stack(children: <Widget>[
           ClipPath(
             child: Container(color: Colors.black.withOpacity(0.8)),
-            clipper: getClipper(),
+            clipper: GetClipper(),
           ),
           Positioned(
               width: MediaQuery.of(context).size.width,
@@ -216,7 +216,7 @@ class _HikerPage extends State<HikerPage> {
   }
 }
 
-class getClipper extends CustomClipper<Path> {
+class GetClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
     var path = new Path();
