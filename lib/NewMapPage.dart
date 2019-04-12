@@ -230,7 +230,7 @@ class SomeOtherClassState extends State<SomeOtherClass> {
                       return ListView.builder(
                           padding: EdgeInsets.all(8.0),
                           reverse: false,
-                          itemCount: snapshot.data.documents.length,
+                          itemCount: snapshot.data.documents.length-1,
                           itemBuilder: (_, int index) {
                             String user =
                                 snapshot.data.documents[index]["Name"];
