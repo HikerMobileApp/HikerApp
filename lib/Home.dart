@@ -10,6 +10,7 @@ import 'ProfilePage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'NewMapPage.dart';
+import 'Hikers.dart';
 
 const Color dark_green = Color(0xff141d26);
 const Color light_dark = Color(0xff243447);
@@ -118,16 +119,21 @@ class _HomePageState extends State<HomePage>
           ),
           ListTile(
             leading: Icon(
-              Icons.list,
+              Icons.directions_walk,
               color: Colors.white,
               size: 20,
             ),
-            title: Text('Lists',
+            title: Text('Hikers',
                 style: TextStyle(
                     fontWeight: FontWeight.normal,
                     fontSize: 16.0,
                     color: Colors.white)),
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Hikers()),
+              );
+            },
           ),
           ListTile(
             leading: Icon(
@@ -144,6 +150,21 @@ class _HomePageState extends State<HomePage>
               String privacyURL =
                   "https://termsfeed.com/privacy-policy/f0d509a98ee4996998b6d545dc1e3afb";
               launch(privacyURL);
+            },
+          ),
+                    ListTile(
+            leading: Icon(
+              Icons.print,
+              color: Colors.white,
+              size: 20,
+            ),
+            title: Text('Print GlobalUsername',
+                style: TextStyle(
+                    fontWeight: FontWeight.normal,
+                    fontSize: 16.0,
+                    color: Colors.white)),
+            onTap: () {
+              print(globalUserName);
             },
           ),
           ListTile(

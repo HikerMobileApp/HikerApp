@@ -57,6 +57,7 @@ class _ProfilePage extends State<ProfilePage> {
     });
 
     doneHikesReturn.forEach((doc) => totMiles += double.parse(doc.data['Miles']));
+    temp.addMilesHiked(globalUserName, totMiles);
   }
   
   
@@ -120,7 +121,7 @@ class _ProfilePage extends State<ProfilePage> {
                   children: <Widget>[
                       statCardMaker("Hikes Done", doneHikes.toString()),
                       statCardMaker("Hikes to-do", todoHikes.toString()),
-                      statCardMaker("Miles Hiked", totMiles.toString()),
+                      statCardMaker("Miles Hiked", totMiles.toStringAsFixed(2)),
                       //statCardMaker("Friends", doneHikes.toString()),
                   ]
                 )

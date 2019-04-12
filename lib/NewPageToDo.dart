@@ -43,7 +43,7 @@ class NewPageToDoState extends State<NewPageToDo> {
               height: MediaQuery.of(context).size.height/3.465,
               //alignment: Alignment(0.0, MediaQuery.of(context).size.height),
               //height: 500.0,
-              child: Column(
+              child: Column( //dcjcdc
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 mainAxisSize: MainAxisSize.min,
