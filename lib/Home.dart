@@ -69,9 +69,7 @@ class _HomePageState extends State<HomePage>
       child: new ListView(
         children: <Widget>[
           new UserAccountsDrawerHeader(
-            decoration: BoxDecoration(
-              color: light_dark
-            ),
+            decoration: BoxDecoration(color: light_dark),
             accountName: new Text(
               globalUserName,
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
@@ -82,7 +80,8 @@ class _HomePageState extends State<HomePage>
                 decoration: new BoxDecoration(
                     shape: BoxShape.circle,
                     image: new DecorationImage(
-                        fit: BoxFit.fill, image: new NetworkImage(img)))),
+                        fit: BoxFit.fill, image: new NetworkImage(img)))), 
+                        accountEmail: null,
           ),
           ListTile(
             leading: Icon(
