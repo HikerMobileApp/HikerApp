@@ -228,6 +228,7 @@ class _HomePageState extends State<HomePage>
         child: new TabBar(
           indicatorColor: Colors.white,
           controller: tabController,
+          indicatorWeight: 6.0,
           tabs: <Widget>[
             new Tab(
               icon: new Icon(MdiIcons.walk),
