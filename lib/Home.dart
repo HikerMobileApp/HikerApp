@@ -80,8 +80,8 @@ class _HomePageState extends State<HomePage>
                 decoration: new BoxDecoration(
                     shape: BoxShape.circle,
                     image: new DecorationImage(
-                        fit: BoxFit.fill, image: new NetworkImage(img)))), 
-                        accountEmail: null,
+                        fit: BoxFit.fill, image: new NetworkImage(img)))),
+            accountEmail: null,
           ),
           ListTile(
             leading: Icon(
@@ -152,7 +152,7 @@ class _HomePageState extends State<HomePage>
               launch(privacyURL);
             },
           ),
-                    ListTile(
+          ListTile(
             leading: Icon(
               Icons.print,
               color: Colors.white,
@@ -223,23 +223,31 @@ class _HomePageState extends State<HomePage>
         ],
         controller: tabController,
       ),
-      bottomNavigationBar: new Material(
-        color: light_dark,
-        child: new TabBar(
-          indicatorColor: Colors.white,
-          controller: tabController,
-          indicatorWeight: 6.0,
-          tabs: <Widget>[
-            new Tab(
-              icon: new Icon(MdiIcons.walk),
-            ),
-            new Tab(
-              icon: new Icon(Icons.done),
-            ),
-            new Tab(
-              icon: new Icon(Icons.public),
-            ),
-          ],
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          color: Colors.yellow,
+          //border: Border.all(color: Colors.white, width: 1),
+          border: Border(top: BorderSide(color: Colors.black, width: 2) ),
+        ),
+        child: new Material(
+          elevation: 20.0,
+          color: light_dark,
+          child: new TabBar(
+            indicatorColor: Colors.white,
+            controller: tabController,
+            //indicatorWeight: 6.0,
+            tabs: <Widget>[
+              new Tab(
+                icon: new Icon(MdiIcons.walk),
+              ),
+              new Tab(
+                icon: new Icon(Icons.done),
+              ),
+              new Tab(
+                icon: new Icon(Icons.public),
+              ),
+            ],
+          ),
         ),
       ),
     );
