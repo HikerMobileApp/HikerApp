@@ -5,7 +5,6 @@ import 'Constants.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'Database.dart';
 import 'package:share/share.dart';
-//import 'dart.async';
 
 const Color myColor = Color(0xff243447);
 
@@ -14,22 +13,7 @@ class NewPageToDo extends StatefulWidget {
     return NewPageToDoState();
   }
 }
-class _SystemPadding extends StatelessWidget {
-  final Widget child;
 
-  _SystemPadding({Key key, this.child}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    var mediaQuery = MediaQuery.of(context);
-    return new AnimatedContainer(
-        padding: mediaQuery.padding,
-        duration: const Duration(milliseconds: 300),
-        child: child);
-  }
-  
-  
-}
 class NewPageToDoState extends State<NewPageToDo> {
 
   
@@ -59,7 +43,7 @@ class NewPageToDoState extends State<NewPageToDo> {
               height: MediaQuery.of(context).size.height/3.465,
               //alignment: Alignment(0.0, MediaQuery.of(context).size.height),
               //height: 500.0,
-              child: Column(
+              child: Column( //dcjcdc
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 mainAxisSize: MainAxisSize.min,
@@ -110,6 +94,7 @@ class NewPageToDoState extends State<NewPageToDo> {
                   Padding(
                     padding: EdgeInsets.only(left: 30.0, right: 30.0),
                     child: TextField(
+                      keyboardType: TextInputType.numberWithOptions(decimal: true),
                       decoration: InputDecoration(
                         hintText: mil,
                         border: InputBorder.none,
@@ -123,7 +108,6 @@ class NewPageToDoState extends State<NewPageToDo> {
                     height: mediaQuery.size.height/400,
                   ),
                   InkWell(
-                    
                     child: Container(
                       alignment:Alignment(0.0, 0.0),
                       height: MediaQuery.of(context).size.height/15.1,
@@ -195,7 +179,7 @@ class NewPageToDoState extends State<NewPageToDo> {
   }
 
   openAlertBoxForDone(String  title, String description, DocumentSnapshot doc, String mil) {
-    DateTime _date = new DateTime.now();
+    /*DateTime _date = new DateTime.now();
     //TimeOfDay _time = new TimeOfDay.now();
     print("Description = " + description);
     Future<Null> _selectData(BuildContext context) async {
@@ -211,7 +195,7 @@ class NewPageToDoState extends State<NewPageToDo> {
           _date =picked;
         });
       }
-    }
+    }*/
     return showDialog(
         context: context,
 
@@ -241,7 +225,7 @@ class NewPageToDoState extends State<NewPageToDo> {
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
                       Text(
-                        "Edit Hike",
+                        "Complete Trip Report",
                         style: TextStyle(fontSize: 24.0),
                       ),
                     ],
@@ -281,6 +265,7 @@ class NewPageToDoState extends State<NewPageToDo> {
                   Padding(
                     padding: EdgeInsets.only(left: 30.0, right: 30.0),
                     child: TextField(
+                      keyboardType: TextInputType.numberWithOptions(decimal: true),
                       decoration: InputDecoration(
                         hintText: mil,
                         border: InputBorder.none,
@@ -297,6 +282,7 @@ class NewPageToDoState extends State<NewPageToDo> {
                   Padding(
                     padding: EdgeInsets.only(left: 30.0, right: 30.0),
                     child: TextField(
+                      textCapitalization: TextCapitalization.sentences,
                       decoration: InputDecoration(
                         hintText: "Enter longitude",
                         border: InputBorder.none,
@@ -312,6 +298,7 @@ class NewPageToDoState extends State<NewPageToDo> {
                   Padding(
                     padding: EdgeInsets.only(left: 30.0, right: 30.0),
                     child: TextField(
+                      textCapitalization: TextCapitalization.sentences,
                       decoration: InputDecoration(
                         hintText: "Enter latitude",
                         border: InputBorder.none,
@@ -352,6 +339,7 @@ class NewPageToDoState extends State<NewPageToDo> {
                       ],
                     ),*/
                     child: TextField(
+                      keyboardType: TextInputType.datetime,
                       decoration: InputDecoration(
                         hintText: "Date completed",
                         border: InputBorder.none,
@@ -398,6 +386,7 @@ class NewPageToDoState extends State<NewPageToDo> {
                         if(miles.text == ""){
                           miles.text = mil;
                         }
+    
                         //temp.pushAddHike(hikeName.text, hikeType.text, miles.text);
                         temp.pushAddDoneHike(hikeName.text, hikeType.text, miles.text,longitude.text, latitude.text, tripDescription.text, dateCompleted.text);
                         temp.deleteHikeFromToDoPage(doc['Title']);
@@ -421,10 +410,7 @@ class NewPageToDoState extends State<NewPageToDo> {
                         miles.text = "";
                         Navigator.pop(context);
                       }
-                      else{
-                        print("idk what is happening");
-                      }
-            
+                     
                     },
                     
                   ),
@@ -437,28 +423,6 @@ class NewPageToDoState extends State<NewPageToDo> {
         });
   }
 
- Future<void> _askedToLead() async {
-  await showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return SimpleDialog(
-        contentPadding: const EdgeInsets.all(16.0),
-        title: const Text('Edit Hike'),
-          children: <Widget>[
-          SimpleDialogOption(
-            onPressed: () {},
-            child: const Text('Hike Name: '),
-          ),
-          SimpleDialogOption(
-            onPressed: () {},
-            child: const Text('Hike Description'),
-          ),
-        ],
-      );
-  
-    }
-  );
-}
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
@@ -512,7 +476,7 @@ class NewPageToDoState extends State<NewPageToDo> {
                       caption: 'Edit',
                       color: Colors.black45,
                       icon: Icons.more_horiz,
-                      onTap: () {openAlertBox(document['Title'],document['Type'], document, document['Miles']);},
+                      onTap: () {openAlertBox(document['Title'],document['Type'], document, document['Miles'],);},
                     ),
                     new IconSlideAction(
                       caption: 'Delete',

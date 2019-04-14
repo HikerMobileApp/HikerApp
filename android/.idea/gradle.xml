@@ -3,20 +3,20 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
-        <compositeConfiguration>
-          <compositeBuild compositeDefinitionSource="SCRIPT" />
-        </compositeConfiguration>
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="modules">
           <set>
-            <option value="$USER_HOME$/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/cloud_firestore-0.9.0+2/android" />
-            <option value="$USER_HOME$/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/firebase_auth-0.8.1+1/android" />
-            <option value="$USER_HOME$/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/firebase_core-0.3.0+2/android" />
-            <option value="$USER_HOME$/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/flutter_facebook_login-1.2.0/android" />
-            <option value="$USER_HOME$/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/shared_preferences-0.5.1+1/android" />
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/../../flutter/.pub-cache/hosted/pub.dartlang.org/cloud_firestore-0.9.5+2/android" />
+            <option value="$PROJECT_DIR$/../../flutter/.pub-cache/hosted/pub.dartlang.org/firebase_auth-0.8.1+4/android" />
+            <option value="$PROJECT_DIR$/../../flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core-0.3.1+1/android" />
+            <option value="$PROJECT_DIR$/../../flutter/.pub-cache/hosted/pub.dartlang.org/flutter_facebook_login-1.2.0/android" />
+            <option value="$PROJECT_DIR$/../../flutter/.pub-cache/hosted/pub.dartlang.org/google_maps_flutter-0.4.0/android" />
+            <option value="$PROJECT_DIR$/../../flutter/.pub-cache/hosted/pub.dartlang.org/share-0.6.0+1/android" />
+            <option value="$PROJECT_DIR$/../../flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences-0.5.1+2/android" />
+            <option value="$PROJECT_DIR$/../../flutter/.pub-cache/hosted/pub.dartlang.org/url_launcher-5.0.2/android" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

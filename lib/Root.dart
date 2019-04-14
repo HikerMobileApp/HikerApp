@@ -35,12 +35,6 @@ class _RootPageState extends State<RootPage> {
     });
   }
 
-  void _updateAuthStatus(AuthStatus status) {
-    setState(() {
-      authStatus = status;
-    });
-  }
-
       _loadUsername() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {

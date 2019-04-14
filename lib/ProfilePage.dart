@@ -57,6 +57,7 @@ class _ProfilePage extends State<ProfilePage> {
     });
 
     doneHikesReturn.forEach((doc) => totMiles += double.parse(doc.data['Miles']));
+    temp.addMilesHiked(globalUserName, totMiles);
   }
   
   
@@ -74,7 +75,7 @@ class _ProfilePage extends State<ProfilePage> {
       children: <Widget>[
         ClipPath(
           child: Container(color: Colors.black.withOpacity(0.8)),
-          clipper: getClipper(),
+          clipper: GetClipper(),
         ),
         //Center(
         Positioned(
@@ -120,7 +121,7 @@ class _ProfilePage extends State<ProfilePage> {
                   children: <Widget>[
                       statCardMaker("Hikes Done", doneHikes.toString()),
                       statCardMaker("Hikes to-do", todoHikes.toString()),
-                      statCardMaker("Miles Hiked", totMiles.toString()),
+                      statCardMaker("Miles Hiked", totMiles.toStringAsFixed(2)),
                       //statCardMaker("Friends", doneHikes.toString()),
                   ]
                 )
@@ -134,7 +135,7 @@ class _ProfilePage extends State<ProfilePage> {
 
 
 
-class getClipper extends CustomClipper<Path> {
+class GetClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
     var path = new Path();
@@ -147,7 +148,7 @@ class getClipper extends CustomClipper<Path> {
 
   @override
   bool shouldReclip(CustomClipper<Path> oldClipper) {
-    // TODO: implement shouldReclip
+    
     return true;
   }
 }
