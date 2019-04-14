@@ -142,7 +142,7 @@ void onLoginStatusChanged(bool loggedIn, {profileData}) {
         _setProfPic(profile['picture']['data']['url']);
         _loadProfPic();
         print("Profile img --> " + img);
-        temp.addImage(globalUserName,img);
+        temp.addImage(globalUserName,profile['picture']['data']['url']);
         print(profile.toString());
         
 
