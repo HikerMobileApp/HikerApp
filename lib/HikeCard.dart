@@ -6,10 +6,12 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:expandable/expandable.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path/path.dart';
 
 Icon leadingIcon;
 String icon;
 File _image;
+String filename;
 
 Card toDoHikeCardMaker(String hikeName, String hikeType, String miles) {
   if (hikeType == "Multi-Night") {
@@ -31,7 +33,9 @@ Card toDoHikeCardMaker(String hikeName, String hikeType, String miles) {
   ]));
 }
 
-Card doneHikeCardMaker(String hikeName, String hikeType, String miles,
+
+
+/*Card doneHikeCardMaker(String hikeName, String hikeType, String miles,
     String des, String long, String lat, String date) {
   if (hikeType == "Multi-Night") {
     icon = "weatherNight";
@@ -43,9 +47,14 @@ Card doneHikeCardMaker(String hikeName, String hikeType, String miles,
     icon = "pineTree";
   }
 
-  Future getImage() async {
-    var image = await ImagePicker.pickImage(source: ImageSource.gallery);
-    _image = image;
+  Future _getImage() async {
+    var selectedImage = await ImagePicker.pickImage(source: ImageSource.gallery);
+    
+    setState((){
+        _image = selectedImage;
+        filename = basename(_image.path);
+    });
+    
   }
   return new Card(
     child: ExpandableNotifier(
@@ -99,7 +108,7 @@ Card doneHikeCardMaker(String hikeName, String hikeType, String miles,
                   ),
                   ),
                 trailing:FloatingActionButton(
-                  onPressed: getImage,
+                  onPressed: _getImage,
                   tooltip: 'Pick Image',
                   child: Icon(Icons.add_a_photo),
                 ),
@@ -137,29 +146,6 @@ Card doneHikeCardMaker(String hikeName, String hikeType, String miles,
 
   ])));
 }
+*/
 
-class HikeCard extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return new Card(
-        child: new Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
-      const ListTile(
-        leading: const Icon(Icons.directions_walk),
-        title: const Text('Jade Lake'),
-        subtitle: const Text('20 mile Backpacking'),
-      ),
-      new ButtonTheme.bar(
-          child: new ButtonBar(
-        children: <Widget>[
-          new FlatButton(
-              child: const Text(
-                'DONE',
-                style: TextStyle(color: Colors.blueGrey),
-              ),
-              onPressed: () {}),
-          new FlatButton(child: const Text('DELETE'), onPressed: () {}),
-        ],
-      ))
-    ]));
-  }
-}
+

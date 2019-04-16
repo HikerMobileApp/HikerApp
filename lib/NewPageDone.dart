@@ -1,10 +1,19 @@
+import 'dart:io';
+
+import 'package:carousel_pro/carousel_pro.dart';
+import 'package:expandable/expandable.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:path/path.dart' as Path;
 import 'HikeCard.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'Database.dart';
 import 'Constants.dart';
 import 'package:share/share.dart';
+
 
 const Color myColor = Color(0xff243447);
 
@@ -13,6 +22,10 @@ class NewPageDone extends StatefulWidget {
     return NewPageDoneState();
   }
 }
+Icon leadingIcon;
+String icon;
+File _image;
+String filename;
 
 class NewPageDoneState extends State<NewPageDone> {
   //alert box
@@ -24,6 +37,7 @@ class NewPageDoneState extends State<NewPageDone> {
   final latitude = TextEditingController();
   final tripDescription = TextEditingController();
   final dateCompleted = TextEditingController();
+
   openAlertBox(String  title, String description, DocumentSnapshot doc, String mil, String lat, String lng, String date, String tripDes) {
     return showDialog(
         context: context,
@@ -332,4 +346,122 @@ class NewPageDoneState extends State<NewPageDone> {
       },
     );
   }
+  Card doneHikeCardMaker(String hikeName, String hikeType, String miles,
+    String des, String long, String lat, String date) {
+  if (hikeType == "Multi-Night") {
+    icon = "weatherNight";
+  } else if (hikeType == "Day Hike") {
+    icon = "walk";
+  } else if (hikeType == "Backpacking") {
+    icon = "tent";
+  } else {
+    icon = "pineTree";
+  }
+  Future<String> uploadImage() async{
+    StorageReference ref = FirebaseStorage.instance.ref().child(filename);
+    ref.putFile(_image);
+  }
+
+  Future _getImage() async {
+    var selectedImage = await ImagePicker.pickImage(source: ImageSource.gallery);
+    
+    setState((){
+        _image = selectedImage;
+        filename = Path.basename(_image.path);
+    });
+    uploadImage();
+  }
+  
+  return new Card(
+    child: ExpandableNotifier(
+      controller: ExpandableController(false),
+      child: new Column(
+        mainAxisSize: MainAxisSize.min, 
+        children: <Widget>[
+          Expandable(
+            collapsed: 
+            ListTile(
+              leading: Icon(MdiIcons.fromString(icon)),
+              title: Text(hikeName),
+              subtitle: Text(miles +
+                  ' mile(s)\t Type: ' +
+                  hikeType +
+                  '\nTrip Description: ' +
+                  des +
+                  '\nLongitude: ' +
+                  long +
+                  ', Latitude: ' +
+                  lat +
+                  '\nDate: ' +
+                  date),
+            ),
+            expanded: 
+            ListTile(
+                leading: Icon(MdiIcons.fromString(icon)),
+                title: 
+                new SizedBox(
+                  height: 400.0,
+                  width: 300.0,
+                  child: _image == null
+                  ? new Carousel(
+                    images: [
+                      new NetworkImage('https://golutes.com/images/2018/12/11/TF_Scheel_web.jpg?width=300'),
+                      new NetworkImage('https://a2-images.myspacecdn.com/images03/33/b98cedc7bf1d42339c9d37ec03ab1fbc/300x300.jpg'),
+                      
+                    
+                      
+                    ],
+                  )
+                  : new Carousel(
+                    images: [
+                      new NetworkImage('https://golutes.com/images/2018/12/11/TF_Scheel_web.jpg?width=300'),
+                      new NetworkImage('https://a2-images.myspacecdn.com/images03/33/b98cedc7bf1d42339c9d37ec03ab1fbc/300x300.jpg'),
+                      new FileImage(_image),
+                      
+                    
+                      
+                    ],
+                  ),
+                  ),
+                trailing:FloatingActionButton(
+                  onPressed: _getImage,
+                  tooltip: 'Pick Image',
+                  child: Icon(Icons.add_a_photo),
+                ),
+                 
+              
+                
+
+              
+            ), 
+          ),
+    
+    Divider(
+      height: 0.0,
+    ),
+    Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: <Widget>[
+        Builder(
+          builder: (context){
+            var exp = ExpandableController.of(context);
+            return MaterialButton(
+              child: Text(exp.expanded ?"Info": "Photos",
+              style: Theme.of(context).textTheme.button.copyWith(
+                color:Colors.lightGreen
+              ),
+              ),
+              onPressed: (){
+                exp.toggle();
+              },
+            );
+          }
+        )
+      ],)
+
+
+  ])));
 }
+
+}
+
