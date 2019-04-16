@@ -224,18 +224,20 @@ class _HomePageState extends State<HomePage>
         controller: tabController,
       ),
       bottomNavigationBar: Container(
+        height: 65.0,
         decoration: BoxDecoration(
-          color: Colors.yellow,
+          color: Colors.black,
           //border: Border.all(color: Colors.white, width: 1),
-          border: Border(top: BorderSide(color: Colors.black, width: 2) ),
+          border: Border(top: BorderSide(color: Colors.black, width: 1) ),
         ),
         child: new Material(
           elevation: 20.0,
           color: light_dark,
           child: new TabBar(
+            indicatorSize: TabBarIndicatorSize.tab,
+            indicatorWeight: 5.0,
             indicatorColor: Colors.white,
             controller: tabController,
-            //indicatorWeight: 6.0,
             tabs: <Widget>[
               new Tab(
                 icon: new Icon(MdiIcons.walk),
