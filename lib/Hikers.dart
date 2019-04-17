@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:mobile_hiking_app/Constants.dart';
 import 'Database.dart';
 import 'HikerPage.dart';
 
@@ -10,6 +11,7 @@ class Hikers extends StatefulWidget {
 
 Database temp = new Database();
 Card profileCard(String name, var miles, String profPic) {
+  if (name != globalUserName) {
   if (miles == null) {
     miles = 0;
   }
@@ -25,6 +27,8 @@ Card profileCard(String name, var miles, String profPic) {
       subtitle: new Text("Miles Hiked: " + miles.toString()),
     ),
   ]));
+}
+else {return null;}
 }
 
 class _Hikers extends State<Hikers> {
@@ -53,7 +57,7 @@ class _Hikers extends State<Hikers> {
                     return ListView.builder(
                         padding: EdgeInsets.all(8.0),
                         reverse: false,
-                        itemCount: snapshot.data.documents.length,
+                        itemCount: snapshot.data.documents.length-1,
                         itemBuilder: (_, int index) {
                           String user = snapshot.data.documents[index]["Name"];
                           var miles =
