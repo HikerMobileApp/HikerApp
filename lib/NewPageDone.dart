@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:carousel_pro/carousel_pro.dart';
@@ -301,8 +302,8 @@ class NewPageDoneState extends State<NewPageDone> {
                   child: new Container(
                     color: Colors.transparent,
                     child: new ListTile(
-                        title: doneHikeCardMaker(
-                            document['Title'], document['Type'], document['Miles'], document['Description'] ,document['Longitude'], document['Latitude'], document['Date']
+                        title: doneHikeCardMaker(document,
+                             document['Title'], document['Type'], document['Miles'], document['Description'] ,document['Longitude'], document['Latitude'], document['Date']
                             )
                             ),
                   ),
@@ -346,7 +347,7 @@ class NewPageDoneState extends State<NewPageDone> {
       },
     );
   }
-  Card doneHikeCardMaker(String hikeName, String hikeType, String miles,
+  Card doneHikeCardMaker(DocumentSnapshot doc,String hikeName, String hikeType, String miles,
     String des, String long, String lat, String date) {
   if (hikeType == "Multi-Night") {
     icon = "weatherNight";
@@ -359,7 +360,12 @@ class NewPageDoneState extends State<NewPageDone> {
   }
   Future<String> uploadImage() async{
     StorageReference ref = FirebaseStorage.instance.ref().child(filename);
-    ref.putFile(_image);
+    StorageUploadTask uploadTask = ref.putFile(_image);
+
+    var downUrl = await( await uploadTask.onComplete).ref.getDownloadURL();
+    var url = downUrl.toString();
+    
+    return url;
   }
 
   Future _getImage() async {
@@ -369,9 +375,21 @@ class NewPageDoneState extends State<NewPageDone> {
         _image = selectedImage;
         filename = Path.basename(_image.path);
     });
-    uploadImage();
+    String downloadURL = await uploadImage();
+     Database temp = new Database();
+     if(doc['url1'] == null)
+     temp.pushImageOne(downloadURL,hikeName);
+     else if(doc['url2'] == null)
+     temp.pushImageTwo(downloadURL,hikeName);
+     else if(doc['url3'] == null)
+     temp.pushImageThree(downloadURL,hikeName);
+     else{
+       print("__________________________________NO MAS IMAGES___________________________");
+     }
+     print("______________________________NEW URL _____________________________________"+ doc['url1']);
   }
-  
+
+
   return new Card(
     child: ExpandableNotifier(
       controller: ExpandableController(false),
@@ -396,32 +414,25 @@ class NewPageDoneState extends State<NewPageDone> {
                   date),
             ),
             expanded: 
+            
             ListTile(
                 leading: Icon(MdiIcons.fromString(icon)),
                 title: 
                 new SizedBox(
-                  height: 400.0,
+                  height: 200,
                   width: 300.0,
-                  child: _image == null
-                  ? new Carousel(
+                  
+                  child:
+                  new Carousel(
                     images: [
-                      new NetworkImage('https://golutes.com/images/2018/12/11/TF_Scheel_web.jpg?width=300'),
-                      new NetworkImage('https://a2-images.myspacecdn.com/images03/33/b98cedc7bf1d42339c9d37ec03ab1fbc/300x300.jpg'),
-                      
+                      doc['url1'] != null? new NetworkImage(doc['url1']): new NetworkImage('https://golutes.com/images/2018/12/11/TF_Scheel_web.jpg?width=300'),
+                      doc['url2'] != null? new NetworkImage(doc['url2']): new NetworkImage('https://golutes.com/images/2018/12/11/TF_Scheel_web.jpg?width=300'),
+                      doc['url3'] != null? new NetworkImage(doc['url3']): new NetworkImage('https://golutes.com/images/2018/12/11/TF_Scheel_web.jpg?width=300'),
                     
                       
                     ],
                   )
-                  : new Carousel(
-                    images: [
-                      new NetworkImage('https://golutes.com/images/2018/12/11/TF_Scheel_web.jpg?width=300'),
-                      new NetworkImage('https://a2-images.myspacecdn.com/images03/33/b98cedc7bf1d42339c9d37ec03ab1fbc/300x300.jpg'),
-                      new FileImage(_image),
-                      
-                    
-                      
-                    ],
-                  ),
+                  
                   ),
                 trailing:FloatingActionButton(
                   onPressed: _getImage,

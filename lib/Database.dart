@@ -38,6 +38,38 @@ class Database {
     });
   }
 
+   Future<void> pushImageOne(String url, String hikeName) async {
+    Firestore.instance
+        .collection(globalUserName)
+        .document('Done Hikes')
+        .collection('Hike List')
+        .document(hikeName)
+        .updateData({
+        "url1": url
+    });
+  }
+    Future<void> pushImageTwo(String url, String hikeName) async {
+    Firestore.instance
+        .collection(globalUserName)
+        .document('Done Hikes')
+        .collection('Hike List')
+        .document(hikeName)
+        .updateData({
+        "url2": url
+    });
+  }
+      Future<void> pushImageThree(String url, String hikeName) async {
+    Firestore.instance
+        .collection(globalUserName)
+        .document('Done Hikes')
+        .collection('Hike List')
+        .document(hikeName)
+        .updateData({
+        "url3": url
+    });
+  }
+  
+
   Future<void> deleteHikeFromDonePage(String hikeName) async {
     Firestore.instance
         .collection(globalUserName)
