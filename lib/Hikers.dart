@@ -14,6 +14,7 @@ TextEditingController editingController = TextEditingController();
 Database temp = new Database();
 
 Container profileCard(String name, var miles, String profPic, String search) {
+
   if (miles == null) {
     miles = 0;
   }
