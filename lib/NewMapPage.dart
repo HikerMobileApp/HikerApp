@@ -184,7 +184,6 @@ class SomeOtherClassState extends State<SomeOtherClass> {
 
   Database temp = new Database();
   Card profileCard(String name, var miles, String profPic) {
-    if (name != globalUserName) {
       if (miles == null) {
         miles = 0;
       }
@@ -201,9 +200,6 @@ class SomeOtherClassState extends State<SomeOtherClass> {
           //subtitle:  Text(miles + ' mile ' + hikeType),
         ),
       ]));
-    } else {
-      return null;
-    }
   }
 
   @override

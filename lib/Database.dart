@@ -156,6 +156,23 @@ class Database {
         //.setData({'Name': username,'MilesHiked': miles});
   }
 
+    Future<void> addFollower(String username) async {
+    print("-------------------------ADD Follower------------------------");
+    Firestore.instance
+        .collection(globalUserName)
+        .document("Following")
+        .updateData({'Following': FieldValue.arrayUnion([username])});
+  }
+
+
+  Future<void> unFollow(String username) async {
+    print("-------------------------Delete Follower------------------------");
+    Firestore.instance
+        .collection(globalUserName)
+        .document("Following")
+        .updateData({'Following': FieldValue.arrayRemove([username])});
+  }
+
 
 
 }
