@@ -6,6 +6,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'Constants.dart';
 import 'Home.dart';
 import 'Database.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 List<DocumentSnapshot> doneHikesReturn;
 List<DocumentSnapshot> otherUser;
@@ -37,6 +38,21 @@ class NewMapPageState extends State<NewMapPage> {
           : MapType.terrain;
     });
   }
+  _launchMaps(String lat, String long) async {
+  String googleUrl =
+    'comgooglemaps://?center=$lat,$long';
+  String appleUrl =
+    'https://maps.apple.com/?sll=$lat,$long';
+  if (await canLaunch("comgooglemaps://")) {
+    print('launching com googleUrl');
+    await launch(googleUrl);
+  } else if (await canLaunch(appleUrl)) {
+    print('launching apple url');
+    await launch(appleUrl);
+  } else {
+    throw 'Could not launch url';
+  }
+}
 
   void _onAddMarkerButtonPressed(DocumentSnapshot doc) {
     setState(() {
@@ -48,6 +64,7 @@ class NewMapPageState extends State<NewMapPage> {
         infoWindow: InfoWindow(
           title: doc.data['Title'],
           snippet: doc.data['Miles'] + " mile(s)\t" + doc.data['Date'],
+          //onTap: _launchMaps(doc.data['Latitude'], doc.data['Longitude']),
         ),
         alpha: 1.0,
         icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
@@ -162,6 +179,7 @@ class SomeOtherClassState extends State<SomeOtherClass> {
               doc.data['Miles'] +
               " mile(s)\t" +
               doc.data['Date'],
+              //onTap: _launchMaps(doc.data['Latitude'], doc.data['Longitude']),
         ),
         alpha: .7,
         //try to make it his facebook picture
@@ -171,6 +189,22 @@ class SomeOtherClassState extends State<SomeOtherClass> {
       ));
     });
   }
+
+  _launchMaps(String lat, String long) async {
+  String googleUrl =
+    'comgooglemaps://?center=$lat,$long';
+  String appleUrl =
+    'https://maps.apple.com/?sll=$lat,$long';
+  if (await canLaunch("comgooglemaps://")) {
+    print('launching com googleUrl');
+    await launch(googleUrl);
+  } else if (await canLaunch(appleUrl)) {
+    print('launching apple url');
+    await launch(appleUrl);
+  } else {
+    throw 'Could not launch url';
+  }
+}
 
   _otherUserMakers(String userName, String picId) async {
     Database temp = new Database();
