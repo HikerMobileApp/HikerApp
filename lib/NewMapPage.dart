@@ -6,11 +6,11 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'Constants.dart';
 import 'Home.dart';
 import 'Database.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 List<DocumentSnapshot> doneHikesReturn;
 List<DocumentSnapshot> otherUser;
 Set<Marker> _markers = {};
+int counter = 0;
 
 class NewMapPage extends StatefulWidget {
   NewMapPageState createState() {
@@ -38,38 +38,84 @@ class NewMapPageState extends State<NewMapPage> {
           : MapType.terrain;
     });
   }
-  _launchMaps(String lat, String long) async {
-  String googleUrl =
-    'comgooglemaps://?center=$lat,$long';
-  String appleUrl =
-    'https://maps.apple.com/?sll=$lat,$long';
-  if (await canLaunch("comgooglemaps://")) {
-    print('launching com googleUrl');
-    await launch(googleUrl);
-  } else if (await canLaunch(appleUrl)) {
-    print('launching apple url');
-    await launch(appleUrl);
-  } else {
-    throw 'Could not launch url';
+
+  helper(String lat, String long) {
+    Database temp = new Database();
+    temp.launchMaps(lat, long);
   }
-}
+
+  _openAlertBox(String lat, String long, String name) {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          var mediaQuery = MediaQuery.of(context);
+          return AlertDialog(
+            backgroundColor: light_dark,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(32.0))),
+            contentPadding: mediaQuery.padding,
+            content: AnimatedContainer(
+              duration: const Duration(milliseconds: 300),
+              padding: mediaQuery.padding,
+              width: MediaQuery.of(context).size.width / 1.1,
+              height: MediaQuery.of(context).size.height /6,
+              //height: MediaQuery.of(context).size.height,
+              //alignment: Alignment(0.0, MediaQuery.of(context).size.height),
+              //height: 500.0,
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: <Widget>[
+                      Text(
+                        "Get directions to\n$name",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 24.0, color: Colors.white),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: RaisedButton(
+                          shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(32.0))),
+                          color: Colors.blue,
+                          child: new Text('Open Maps'),
+                          elevation: 20.0,
+                          textColor: Colors.white,
+                          onPressed: () {
+                            helper(lat, long);
+                            Navigator.pop(context);
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          );
+        });
+  }
 
   void _onAddMarkerButtonPressed(DocumentSnapshot doc) {
-    setState(() {
-      _markers.add(Marker(
-        // This marker id can be anything that uniquely identifies each marker.
-        markerId: MarkerId(doc.data['Title']),
-        position: LatLng(double.parse(doc.data['Latitude']),
-            double.parse(doc.data['Longitude'])),
-        infoWindow: InfoWindow(
-          title: doc.data['Title'],
-          snippet: doc.data['Miles'] + " mile(s)\t" + doc.data['Date'],
-          //onTap: _launchMaps(doc.data['Latitude'], doc.data['Longitude']),
-        ),
-        alpha: 1.0,
-        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
-      ));
-    });
+    // setState(() {
+    _markers.add(Marker(
+      // This marker id can be anything that uniquely identifies each marker.
+      markerId: MarkerId(doc.data['Title']),
+      position: LatLng(double.parse(doc.data['Latitude']),
+          double.parse(doc.data['Longitude'])),
+      infoWindow: InfoWindow(
+        title: doc.data['Title'],
+        snippet: doc.data['Miles'] + " mile(s)\t" + doc.data['Date'],
+        onTap: () {
+          _openAlertBox(
+              doc.data['Latitude'], doc.data['Longitude'], doc.data['Title']);
+        },
+      ),
+      alpha: 1.0,
+      icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
+    ));
+    //});
     //print(_markers);
   }
 
@@ -152,18 +198,74 @@ class NewMapPageState extends State<NewMapPage> {
   }
 }
 
-Map<String, double> colorMap =  Map();
+Map<String, double> colorMap = Map();
 
 class SomeOtherClass extends StatefulWidget {
   SomeOtherClassState createState() {
     return SomeOtherClassState();
   }
 }
+_helper(String lat, String long) {
+    Database temp = new Database();
+    temp.launchMaps(lat, long);
+  }
 
 class SomeOtherClassState extends State<SomeOtherClass> {
+  
+  openAlertBox(String lat, String long, String name) {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          var mediaQuery = MediaQuery.of(context);
+          return AlertDialog(
+            backgroundColor: light_dark,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(32.0))),
+            contentPadding: mediaQuery.padding,
+            content: AnimatedContainer(
+              duration: const Duration(milliseconds: 300),
+              padding: mediaQuery.padding,
+              width: MediaQuery.of(context).size.width / 1.1,
+              height: MediaQuery.of(context).size.height / 6,
+              //height: MediaQuery.of(context).size.height,
+              //alignment: Alignment(0.0, MediaQuery.of(context).size.height),
+              //height: 500.0,
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: <Widget>[
+                      Text(
+                        "Get directions to\n$name",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 24.0, color: Colors.white),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: RaisedButton(
+                          shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(32.0))),
+                          color: Colors.blue,
+                          child: new Text('Open Maps'),
+                          elevation: 20.0,
+                          textColor: Colors.white,
+                          onPressed: () {
+                            _helper(lat, long);
+                            Navigator.pop(context);
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          );
+        });
+  }
   void _onAddMarkerButtonPressed(
       DocumentSnapshot doc, String userName, String picId) {
-
     double color = colorMap[userName];
 
     setState(() {
@@ -179,7 +281,16 @@ class SomeOtherClassState extends State<SomeOtherClass> {
               doc.data['Miles'] +
               " mile(s)\t" +
               doc.data['Date'],
-              //onTap: _launchMaps(doc.data['Latitude'], doc.data['Longitude']),
+          onTap: () {
+            print("sometime");
+            print("sometime");
+            print("sometime");
+            print("sometime");
+            print("sometime");
+            print("sometime");
+            openAlertBox(
+                doc.data['Latitude'], doc.data['Longitude'], doc.data['Title']);
+          },
         ),
         alpha: .7,
         //try to make it his facebook picture
@@ -189,22 +300,6 @@ class SomeOtherClassState extends State<SomeOtherClass> {
       ));
     });
   }
-
-  _launchMaps(String lat, String long) async {
-  String googleUrl =
-    'comgooglemaps://?center=$lat,$long';
-  String appleUrl =
-    'https://maps.apple.com/?sll=$lat,$long';
-  if (await canLaunch("comgooglemaps://")) {
-    print('launching com googleUrl');
-    await launch(googleUrl);
-  } else if (await canLaunch(appleUrl)) {
-    print('launching apple url');
-    await launch(appleUrl);
-  } else {
-    throw 'Could not launch url';
-  }
-}
 
   _otherUserMakers(String userName, String picId) async {
     Database temp = new Database();
@@ -273,13 +368,13 @@ class SomeOtherClassState extends State<SomeOtherClass> {
                                 snapshot.data.documents[index]["profilePic"];
                             return new GestureDetector(
                               onTap: () {
-                                var randomizer =  new Random(); 
+                                var randomizer = new Random();
                                 double num = randomizer.nextInt(240).toDouble();
-                                if(num >= 0.0 && num <= 100.0){
+                                if (num >= 0.0 && num <= 100.0) {
                                   num = num + 60;
                                 }
                                 colorMap[user] = num;
-                      
+
                                 _otherUserMakers(user, profPic);
                                 Scaffold.of(context).showSnackBar(SnackBar(
                                     content: Text(

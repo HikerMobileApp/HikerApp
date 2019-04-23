@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'Constants.dart';
 import 'dart:async';
+import 'package:url_launcher/url_launcher.dart';
 
 class Database {
   Future<void> pushAddHike(
@@ -156,6 +157,23 @@ class Database {
         //.setData({'Name': username,'MilesHiked': miles});
   }
 
+  launchMaps(String lat, String long) async {
+  String googleUrl =
+    //'comgooglemaps://?center=$lat,$long&zoom=15&basemap=terrain';
+    'comgooglemaps://?daddr=$lat,$long&zoom=15&basemap=terrain';
+  String appleUrl =
+    'https://maps.apple.com/?daddr=$lat,$long&z=20';
+    //daddr=<lat>,<long>&amp;ll=");
+  if (await canLaunch("comgooglemaps://")) {
+    print('launching com googleUrl');
+    await launch(googleUrl);
+  } else if (await canLaunch(appleUrl)) {
+    print('launching apple url');
+    await launch(appleUrl);
+  } else {
+    throw 'Could not launch url';
+  }
+}
 
 
 }
