@@ -29,6 +29,7 @@ dependencies:
   share: ^0.6.0+1
   google_maps_flutter: ^0.5.7
   material_design_icons_flutter: ^3.2.3595
+  auto_size_text: ^1.1.2
 
 dev_dependencies:
   flutter_test:

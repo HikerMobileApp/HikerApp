@@ -10,6 +10,7 @@ import 'Database.dart';
 List<DocumentSnapshot> doneHikesReturn;
 List<DocumentSnapshot> otherUser;
 Set<Marker> _markers = {};
+List<String> following;
 
 class NewMapPage extends StatefulWidget {
   NewMapPageState createState() {
@@ -22,6 +23,7 @@ class NewMapPageState extends State<NewMapPage> {
     _markers.clear();
     super.initState();
     _userMakers();
+    _followingList();
   }
 
   Completer<GoogleMapController> _controller = Completer();
@@ -64,6 +66,17 @@ class NewMapPageState extends State<NewMapPage> {
     });
 
     doneHikesReturn.forEach((doc) => _onAddMarkerButtonPressed(doc));
+  }
+
+  _followingList() async{
+    var userQuery = Firestore.instance.collection(globalUserName);
+    userQuery.getDocuments().then((data) {
+      if (data.documents.length > 0) {
+        setState(() {
+          following = List.from(data.documents[0].data['Following']);
+        });
+      }
+    });
   }
 
   /*LatLng _lastMapPosition = _center;
@@ -184,7 +197,9 @@ class SomeOtherClassState extends State<SomeOtherClass> {
 
   Database temp = new Database();
   Card profileCard(String name, var miles, String profPic) {
-    if (name != globalUserName) {
+      if(!following.contains(name)){
+        return new Card();
+      }
       if (miles == null) {
         miles = 0;
       }
@@ -201,9 +216,6 @@ class SomeOtherClassState extends State<SomeOtherClass> {
           //subtitle:  Text(miles + ' mile ' + hikeType),
         ),
       ]));
-    } else {
-      return null;
-    }
   }
 
   @override
@@ -229,7 +241,7 @@ class SomeOtherClassState extends State<SomeOtherClass> {
                       return ListView.builder(
                           padding: EdgeInsets.all(8.0),
                           reverse: false,
-                          itemCount: snapshot.data.documents.length - 1,
+                          itemCount: snapshot.data.documents.length,
                           itemBuilder: (_, int index) {
                             String user =
                                 snapshot.data.documents[index]["Name"];
