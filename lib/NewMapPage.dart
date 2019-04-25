@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -9,6 +10,7 @@ import 'Database.dart';
 List<DocumentSnapshot> doneHikesReturn;
 List<DocumentSnapshot> otherUser;
 Set<Marker> _markers = {};
+List<String> following;
 
 class NewMapPage extends StatefulWidget {
   NewMapPageState createState() {
@@ -21,11 +23,12 @@ class NewMapPageState extends State<NewMapPage> {
     _markers.clear();
     super.initState();
     _userMakers();
+    _followingList();
   }
 
   Completer<GoogleMapController> _controller = Completer();
 
-  static  LatLng _center =  LatLng(47.6062, -122.3321);
+  static LatLng _center = LatLng(47.6062, -122.3321);
 
   MapType _currentMapType = MapType.terrain;
 
@@ -48,7 +51,8 @@ class NewMapPageState extends State<NewMapPage> {
           title: doc.data['Title'],
           snippet: doc.data['Miles'] + " mile(s)\t" + doc.data['Date'],
         ),
-        icon: BitmapDescriptor.defaultMarker,
+        alpha: 1.0,
+        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
       ));
     });
     //print(_markers);
@@ -62,6 +66,17 @@ class NewMapPageState extends State<NewMapPage> {
     });
 
     doneHikesReturn.forEach((doc) => _onAddMarkerButtonPressed(doc));
+  }
+
+  _followingList() async{
+    var userQuery = Firestore.instance.collection(globalUserName);
+    userQuery.getDocuments().then((data) {
+      if (data.documents.length > 0) {
+        setState(() {
+          following = List.from(data.documents[0].data['Following']);
+        });
+      }
+    });
   }
 
   /*LatLng _lastMapPosition = _center;
@@ -133,6 +148,8 @@ class NewMapPageState extends State<NewMapPage> {
   }
 }
 
+Map<String, double> colorMap =  Map();
+
 class SomeOtherClass extends StatefulWidget {
   SomeOtherClassState createState() {
     return SomeOtherClassState();
@@ -140,16 +157,11 @@ class SomeOtherClass extends StatefulWidget {
 }
 
 class SomeOtherClassState extends State<SomeOtherClass> {
-
   void _onAddMarkerButtonPressed(
       DocumentSnapshot doc, String userName, String picId) {
-        double color = 0.0;
-        if (userName == "Isaiah Scheel") {
-          color = BitmapDescriptor.hueBlue;
-        }
-        else {
-          color = BitmapDescriptor.hueCyan;
-        }
+
+    double color = colorMap[userName];
+
     setState(() {
       _markers.add(Marker(
         // This marker id can be anything that uniquely identifies each marker.
@@ -164,6 +176,7 @@ class SomeOtherClassState extends State<SomeOtherClass> {
               " mile(s)\t" +
               doc.data['Date'],
         ),
+        alpha: .7,
         //try to make it his facebook picture
         // add the url to the database
         //makes it easier to get the picture
@@ -184,27 +197,25 @@ class SomeOtherClassState extends State<SomeOtherClass> {
 
   Database temp = new Database();
   Card profileCard(String name, var miles, String profPic) {
-    if(name != globalUserName){
-    if (miles == null) {
-      miles = 0;
-    }
-    if (profPic == "") {
-      profPic =
-          "https://amp.businessinsider.com/images/5899ffcf6e09a897008b5c04-750-750.jpg";
-    }
-    return new Card(
-        child: new Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
-      ListTile(
-        leading: CircleAvatar(backgroundImage: NetworkImage(profPic)),
-        title: Text(name),
-        subtitle: new Text("Miles Hiked: " + miles.toString()),
-        //subtitle:  Text(miles + ' mile ' + hikeType),
-      ),
-    ])); 
-    }
-    else {
-      return null;
-    }
+      if(!following.contains(name)){
+        return new Card();
+      }
+      if (miles == null) {
+        miles = 0;
+      }
+      if (profPic == "") {
+        profPic =
+            "https://amp.businessinsider.com/images/5899ffcf6e09a897008b5c04-750-750.jpg";
+      }
+      return new Card(
+          child: new Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
+        ListTile(
+          leading: CircleAvatar(backgroundImage: NetworkImage(profPic)),
+          title: Text(name),
+          subtitle: new Text("Miles Hiked: " + miles.toString()),
+          //subtitle:  Text(miles + ' mile ' + hikeType),
+        ),
+      ]));
   }
 
   @override
@@ -230,7 +241,7 @@ class SomeOtherClassState extends State<SomeOtherClass> {
                       return ListView.builder(
                           padding: EdgeInsets.all(8.0),
                           reverse: false,
-                          itemCount: snapshot.data.documents.length-1,
+                          itemCount: snapshot.data.documents.length,
                           itemBuilder: (_, int index) {
                             String user =
                                 snapshot.data.documents[index]["Name"];
@@ -240,6 +251,13 @@ class SomeOtherClassState extends State<SomeOtherClass> {
                                 snapshot.data.documents[index]["profilePic"];
                             return new GestureDetector(
                               onTap: () {
+                                var randomizer =  new Random(); 
+                                double num = randomizer.nextInt(240).toDouble();
+                                if(num >= 0.0 && num <= 100.0){
+                                  num = num + 60;
+                                }
+                                colorMap[user] = num;
+                      
                                 _otherUserMakers(user, profPic);
                                 Scaffold.of(context).showSnackBar(SnackBar(
                                     content: Text(
