@@ -10,7 +10,7 @@ import 'Database.dart';
 List<DocumentSnapshot> doneHikesReturn;
 List<DocumentSnapshot> otherUser;
 Set<Marker> _markers = {};
-int counter = 0;
+Set<Marker> _newMarkers = {};
 
 class NewMapPage extends StatefulWidget {
   NewMapPageState createState() {
@@ -58,10 +58,7 @@ class NewMapPageState extends State<NewMapPage> {
               duration: const Duration(milliseconds: 300),
               padding: mediaQuery.padding,
               width: MediaQuery.of(context).size.width / 1.1,
-              height: MediaQuery.of(context).size.height /6,
-              //height: MediaQuery.of(context).size.height,
-              //alignment: Alignment(0.0, MediaQuery.of(context).size.height),
-              //height: 500.0,
+              height: MediaQuery.of(context).size.height / 6,
               child: SingleChildScrollView(
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -98,25 +95,47 @@ class NewMapPageState extends State<NewMapPage> {
   }
 
   void _onAddMarkerButtonPressed(DocumentSnapshot doc) {
-    // setState(() {
-    _markers.add(Marker(
-      // This marker id can be anything that uniquely identifies each marker.
-      markerId: MarkerId(doc.data['Title']),
-      position: LatLng(double.parse(doc.data['Latitude']),
-          double.parse(doc.data['Longitude'])),
-      infoWindow: InfoWindow(
-        title: doc.data['Title'],
-        snippet: doc.data['Miles'] + " mile(s)\t" + doc.data['Date'],
-        onTap: () {
-          _openAlertBox(
-              doc.data['Latitude'], doc.data['Longitude'], doc.data['Title']);
-        },
-      ),
-      alpha: 1.0,
-      icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
-    ));
-    //});
+    setState(() {
+      _markers.add(Marker(
+        // This marker id can be anything that uniquely identifies each marker.
+        markerId: MarkerId(doc.data['Title']),
+        position: LatLng(double.parse(doc.data['Latitude']),
+            double.parse(doc.data['Longitude'])),
+        infoWindow: InfoWindow(
+          title: doc.data['Title'],
+          snippet: doc.data['Miles'] + " mile(s)\t" + doc.data['Date'],
+          onTap: () {
+            _openAlertBox(
+                doc.data['Latitude'], doc.data['Longitude'], doc.data['Title']);
+          },
+        ),
+        alpha: 1.0,
+        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
+      ));
+    });
     //print(_markers);
+  }
+
+  _redoMarkers() {
+     setState(() {
+    for (Marker pin in _markers) {
+      _newMarkers.add(Marker(
+        markerId: MarkerId(pin.infoWindow.title),
+        position: LatLng(pin.position.latitude, pin.position.longitude),
+        infoWindow: InfoWindow(
+            title: pin.infoWindow.title,
+            snippet: pin.infoWindow.snippet,
+            onTap: () {
+              _openAlertBox(pin.position.latitude.toString(),
+                  pin.position.longitude.toString(), pin.infoWindow.title);
+            }),
+      ));
+      //print(pin.toString());
+    }
+    
+    _markers = null;
+    _markers = _newMarkers;
+     });
   }
 
   _userMakers() async {
@@ -155,7 +174,7 @@ class NewMapPageState extends State<NewMapPage> {
                 zoom: 11.0,
               ),
               mapType: _currentMapType,
-              markers: _markers,
+              markers: _newMarkers,
               //onCameraMove: _onCameraMove,
             ),
             Padding(
@@ -169,7 +188,6 @@ class NewMapPageState extends State<NewMapPage> {
                       onPressed: _onMapTypeButtonPressed,
                       materialTapTargetSize: MaterialTapTargetSize.padded,
                       backgroundColor: light_dark,
-                      //child: const Icon(Icons.map, size: 36.0),
                       child: const Icon(Icons.map),
                     ),
                     SizedBox(height: 16.0),
@@ -180,6 +198,7 @@ class NewMapPageState extends State<NewMapPage> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => SomeOtherClass()));
+                        _redoMarkers();
                       },
                       backgroundColor: light_dark,
                       child: Icon(
@@ -205,17 +224,21 @@ class SomeOtherClass extends StatefulWidget {
     return SomeOtherClassState();
   }
 }
-_helper(String lat, String long) {
+
+class SomeOtherClassState extends State<SomeOtherClass> {
+  NewMapPage mapClass = new NewMapPage();
+
+  _helper(String lat, String long) {
     Database temp = new Database();
     temp.launchMaps(lat, long);
   }
 
-class SomeOtherClassState extends State<SomeOtherClass> {
-  
-  openAlertBox(String lat, String long, String name) {
+  _openAlertBox(String lat, String long, String name) {
+    //print("in the box");
     return showDialog(
         context: context,
         builder: (BuildContext context) {
+          print("in the dialog");
           var mediaQuery = MediaQuery.of(context);
           return AlertDialog(
             backgroundColor: light_dark,
@@ -227,9 +250,6 @@ class SomeOtherClassState extends State<SomeOtherClass> {
               padding: mediaQuery.padding,
               width: MediaQuery.of(context).size.width / 1.1,
               height: MediaQuery.of(context).size.height / 6,
-              //height: MediaQuery.of(context).size.height,
-              //alignment: Alignment(0.0, MediaQuery.of(context).size.height),
-              //height: 500.0,
               child: SingleChildScrollView(
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -252,7 +272,7 @@ class SomeOtherClassState extends State<SomeOtherClass> {
                           textColor: Colors.white,
                           onPressed: () {
                             _helper(lat, long);
-                            Navigator.pop(context);
+                            //Navigator.pop(context);
                           },
                         ),
                       ),
@@ -264,6 +284,7 @@ class SomeOtherClassState extends State<SomeOtherClass> {
           );
         });
   }
+
   void _onAddMarkerButtonPressed(
       DocumentSnapshot doc, String userName, String picId) {
     double color = colorMap[userName];
@@ -282,13 +303,8 @@ class SomeOtherClassState extends State<SomeOtherClass> {
               " mile(s)\t" +
               doc.data['Date'],
           onTap: () {
-            print("sometime");
-            print("sometime");
-            print("sometime");
-            print("sometime");
-            print("sometime");
-            print("sometime");
-            openAlertBox(
+            print("Trying to open alert box");
+            _openAlertBox(
                 doc.data['Latitude'], doc.data['Longitude'], doc.data['Title']);
           },
         ),
@@ -308,10 +324,8 @@ class SomeOtherClassState extends State<SomeOtherClass> {
       otherUser = something.documents;
     });
     otherUser.forEach((doc) => _onAddMarkerButtonPressed(doc, userName, picId));
-    //print(otherUser);
   }
 
-  Database temp = new Database();
   Card profileCard(String name, var miles, String profPic) {
     if (name != globalUserName) {
       if (miles == null) {
@@ -327,7 +341,6 @@ class SomeOtherClassState extends State<SomeOtherClass> {
           leading: CircleAvatar(backgroundImage: NetworkImage(profPic)),
           title: Text(name),
           subtitle: new Text("Miles Hiked: " + miles.toString()),
-          //subtitle:  Text(miles + ' mile ' + hikeType),
         ),
       ]));
     } else {
