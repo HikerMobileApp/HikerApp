@@ -156,7 +156,6 @@ class Database {
         .document(username).updateData({'profilePic': image});
         //.setData({'Name': username,'MilesHiked': miles});
   }
-
   launchMaps(String lat, String long) async {
   String googleUrl =
     //'comgooglemaps://?center=$lat,$long&zoom=15&basemap=terrain';
@@ -174,6 +173,24 @@ class Database {
     throw 'Could not launch url';
   }
 }
+
+    Future<void> addFollower(String username) async {
+    print("-------------------------ADD Follower------------------------");
+    Firestore.instance
+        .collection(globalUserName)
+        .document("Following")
+        .updateData({'Following': FieldValue.arrayUnion([username])});
+  }
+
+
+  Future<void> unFollow(String username) async {
+    print("-------------------------Delete Follower------------------------");
+    Firestore.instance
+        .collection(globalUserName)
+        .document("Following")
+        .updateData({'Following': FieldValue.arrayRemove([username])});
+  }
+
 
 
 }
