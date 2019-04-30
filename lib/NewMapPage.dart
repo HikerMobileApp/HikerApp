@@ -10,7 +10,6 @@ import 'Database.dart';
 List<DocumentSnapshot> doneHikesReturn;
 List<DocumentSnapshot> otherUser;
 Set<Marker> _markers = {};
-Set<Marker> _newMarkers = {};
 List<String> following;
 
 
@@ -24,7 +23,7 @@ class NewMapPageState extends State<NewMapPage> {
   void initState() {
     _markers.clear();
     super.initState();
-   //_userMakers();
+    _userMakers();
     _followingList();
   }
 
@@ -116,32 +115,9 @@ class NewMapPageState extends State<NewMapPage> {
         icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
       ));
     });
-    //print(_markers);
+    print(_markers.toString());
   }
 
-  _redoMarkers() {
-     setState(() {
-    for (Marker pin in _markers) {
-      _newMarkers.add(Marker(
-        markerId: MarkerId(pin.infoWindow.title),
-        position: LatLng(pin.position.latitude, pin.position.longitude),
-        infoWindow: InfoWindow(
-            title: pin.infoWindow.title,
-            snippet: pin.infoWindow.snippet,
-            onTap: () {
-              _openAlertBox(pin.position.latitude.toString(),
-                  pin.position.longitude.toString(), pin.infoWindow.title);
-            }),
-      ));
-      //print(pin.toString());
-    }
-    
-    _markers = null;
-    _markers = _newMarkers;
-     });
-  }
-
-/*
   _userMakers() async {
     Database temp = new Database();
     var something = await temp.userMarkers();
@@ -151,7 +127,7 @@ class NewMapPageState extends State<NewMapPage> {
 
     doneHikesReturn.forEach((doc) => _onAddMarkerButtonPressed(doc));
   }
-  */
+  
 
   _followingList() async{
     var userQuery = Firestore.instance.collection(globalUserName);
@@ -190,7 +166,7 @@ class NewMapPageState extends State<NewMapPage> {
                 zoom: 11.0,
               ),
               mapType: _currentMapType,
-              markers: _newMarkers,
+              markers: _markers,
               //onCameraMove: _onCameraMove,
             ),
             Padding(
@@ -214,7 +190,6 @@ class NewMapPageState extends State<NewMapPage> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => SomeOtherClass()));
-                        _redoMarkers();
                       },
                       backgroundColor: light_dark,
                       child: Icon(
