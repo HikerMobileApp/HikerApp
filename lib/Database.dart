@@ -191,6 +191,10 @@ class Database {
         .updateData({'Following': FieldValue.arrayRemove([username])});
   }
 
-
+  Future<void> makeFollowing() async{
+    Firestore.instance
+        .collection(globalUserName)
+        .document("Following").setData({'Following': []});
+}
 
 }

@@ -24,7 +24,7 @@ class NewMapPageState extends State<NewMapPage> {
   void initState() {
     _markers.clear();
     super.initState();
-    _userMakers();
+   //_userMakers();
     _followingList();
   }
 
@@ -141,6 +141,7 @@ class NewMapPageState extends State<NewMapPage> {
      });
   }
 
+/*
   _userMakers() async {
     Database temp = new Database();
     var something = await temp.userMarkers();
@@ -150,6 +151,7 @@ class NewMapPageState extends State<NewMapPage> {
 
     doneHikesReturn.forEach((doc) => _onAddMarkerButtonPressed(doc));
   }
+  */
 
   _followingList() async{
     var userQuery = Firestore.instance.collection(globalUserName);
@@ -341,6 +343,7 @@ class SomeOtherClassState extends State<SomeOtherClass> {
   }
 
   Card profileCard(String name, var miles, String profPic) {
+      print(following.toString());
       if(!following.contains(name)){
         return new Card();
       }
