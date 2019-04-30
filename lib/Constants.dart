@@ -10,3 +10,4 @@ FirebaseUser globalUser;
 String globalUserName = "";
 VoidCallback onSignOut;
 SharedPreferencesObj sp = new SharedPreferencesObj();
+bool following = false;

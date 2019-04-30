@@ -42,8 +42,21 @@ class _LoginPageState extends State<LoginPage> {
     super.initState();
     _loadUsername();
     _loadProfPic();
+    _loadFollowing();
   }
 
+  _loadFollowing() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      following = prefs.getBool("Following");
+    });
+  }
+  _setFollowing() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      prefs.setBool("Following", true);
+    });
+  }
 _setUsername(String username) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
@@ -143,6 +156,12 @@ void onLoginStatusChanged(bool loggedIn, {profileData}) {
         _loadProfPic();
         print("Profile img --> " + img);
         temp.addImage(globalUserName,profile['picture']['data']['url']);
+        print(following);
+        if(following == null || !following){
+          print(following);
+          temp.makeFollowing();
+          _setFollowing();
+        }
         print(profile.toString());
         
 
