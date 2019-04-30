@@ -29,7 +29,7 @@ class NewMapPageState extends State<NewMapPage> {
 
   Completer<GoogleMapController> _controller = Completer();
 
-  static LatLng _center = LatLng(47.6062, -122.3321);
+  static LatLng _center = LatLng(47.1456776, -122.4468906);
 
   MapType _currentMapType = MapType.terrain;
 

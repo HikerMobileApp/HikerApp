@@ -154,21 +154,6 @@ class _HomePageState extends State<HomePage>
           ),
           ListTile(
             leading: Icon(
-              Icons.print,
-              color: Colors.white,
-              size: 20,
-            ),
-            title: Text('Print GlobalUsername',
-                style: TextStyle(
-                    fontWeight: FontWeight.normal,
-                    fontSize: 16.0,
-                    color: Colors.white)),
-            onTap: () {
-              print(globalUserName);
-            },
-          ),
-          ListTile(
-            leading: Icon(
               Icons.exit_to_app,
               color: Colors.white,
               size: 20,

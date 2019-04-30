@@ -212,14 +212,6 @@ class _HikerPage extends State<HikerPage> {
                   //SizedBox(height: 5.0),
                   _button(following, username),
                   SizedBox(height: 15.0),
-                  Text(
-                    'Stats: ',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 17.0,
-                        fontFamily: 'Montserrat'),
-                  ),
-                  SizedBox(height: 25.0),
                   Column(
                     children: <Widget>[
                       Container(

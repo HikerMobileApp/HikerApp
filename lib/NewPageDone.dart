@@ -424,10 +424,12 @@ class NewPageDoneState extends State<NewPageDone> {
                   
                   child:
                   new Carousel(
+                    showIndicator: false,
+                    autoplayDuration: const Duration(seconds: 8),
                     images: [
-                      doc['url1'] != null? new NetworkImage(doc['url1']): new NetworkImage('https://golutes.com/images/2018/12/11/TF_Scheel_web.jpg?width=300'),
-                      doc['url2'] != null? new NetworkImage(doc['url2']): new NetworkImage('https://golutes.com/images/2018/12/11/TF_Scheel_web.jpg?width=300'),
-                      doc['url3'] != null? new NetworkImage(doc['url3']): new NetworkImage('https://golutes.com/images/2018/12/11/TF_Scheel_web.jpg?width=300'),
+                      doc['url1'] != null? new NetworkImage(doc['url1']): new NetworkImage('https://i.imgur.com/fHpLsZc.png'),
+                      doc['url2'] != null? new NetworkImage(doc['url2']): new NetworkImage('https://i.imgur.com/fHpLsZc.png'),
+                      doc['url3'] != null? new NetworkImage(doc['url3']): new NetworkImage('https://i.imgur.com/fHpLsZc.png'),
                     
                       
                     ],
