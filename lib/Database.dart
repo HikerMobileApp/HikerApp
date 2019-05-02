@@ -259,7 +259,21 @@ class Database {
           .setData({"Number": ds["Number"] - 1});
     });
   }
-  
+  Future<int> gettingFollowers() async {
+    int num = 0;
+    var _ = await Firestore.instance
+        .collection(globalUserName)
+        .document("Following")
+        .collection("Followers")
+        .document("Followers")
+        .get()
+        .then((DocumentSnapshot ds) {
+          num = ds["Number"];
+          print(ds["Number"]);
+          //return ds["Number"];
+    });
+    return num;
+  }
 
   Future<void> makeFollowing() async {
     Firestore.instance

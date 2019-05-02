@@ -27,9 +27,16 @@ class _ProfilePage extends State<ProfilePage> {
     _numOfTodoHikes();
     _milesHiked();
     totMiles = 0;
+    followers = 0;
     _doneHikes();
+    _gettingFollow();
   }
-
+  _gettingFollow() async {
+    var asyncResult = await temp.gettingFollowers();
+    setState(() {
+        followers = asyncResult;
+    });
+  }
   _numOfDoneHikes() async{
     var asyncResult = await temp.numOfDoneHikes();
     setState(() {
@@ -60,8 +67,6 @@ class _ProfilePage extends State<ProfilePage> {
     doneHikesReturn.forEach((doc) => totMiles += double.parse(doc.data['Miles']));
     temp.addMilesHiked(globalUserName, totMiles);
   }
-  
-  
 
 @override
   Widget build(BuildContext context) {
@@ -123,6 +128,7 @@ class _ProfilePage extends State<ProfilePage> {
                       statCardMaker("Hikes Done", doneHikes.toString()),
                       statCardMaker("Hikes to-do", todoHikes.toString()),
                       statCardMaker("Miles Hiked", totMiles.toStringAsFixed(2)),
+                      statCardMaker("Followers", followers.toString()),
                       //statCardMaker("Friends", doneHikes.toString()),
                   ]
                 )
