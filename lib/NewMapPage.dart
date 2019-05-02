@@ -115,7 +115,6 @@ class NewMapPageState extends State<NewMapPage> {
         icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
       ));
     });
-    print(_markers.toString());
   }
 
   _userMakers() async {

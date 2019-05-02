@@ -16,6 +16,7 @@ double milesHiked;
 double totMiles = 0.0;
 List<DocumentSnapshot> doneHikesReturn;
 Database temp = new Database();
+int followers = 0;
 
 class _ProfilePage extends State<ProfilePage> {
 
