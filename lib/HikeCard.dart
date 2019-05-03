@@ -1,16 +1,8 @@
-import 'dart:async';
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:expandable/expandable.dart';
-import 'package:carousel_pro/carousel_pro.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:path/path.dart';
 
 Icon leadingIcon;
 String icon;
-File _image;
 String filename;
 
 Card toDoHikeCardMaker(String hikeName, String hikeType, String miles) {

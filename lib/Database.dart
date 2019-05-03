@@ -39,37 +39,32 @@ class Database {
     });
   }
 
-   Future<void> pushImageOne(String url, String hikeName) async {
+  Future<void> pushImageOne(String url, String hikeName) async {
     Firestore.instance
         .collection(globalUserName)
         .document('Done Hikes')
         .collection('Hike List')
         .document(hikeName)
-        .updateData({
-        "url1": url
-    });
+        .updateData({"url1": url});
   }
-    Future<void> pushImageTwo(String url, String hikeName) async {
+
+  Future<void> pushImageTwo(String url, String hikeName) async {
     Firestore.instance
         .collection(globalUserName)
         .document('Done Hikes')
         .collection('Hike List')
         .document(hikeName)
-        .updateData({
-        "url2": url
-    });
+        .updateData({"url2": url});
   }
-      Future<void> pushImageThree(String url, String hikeName) async {
+
+  Future<void> pushImageThree(String url, String hikeName) async {
     Firestore.instance
         .collection(globalUserName)
         .document('Done Hikes')
         .collection('Hike List')
         .document(hikeName)
-        .updateData({
-        "url3": url
-    });
+        .updateData({"url3": url});
   }
-  
 
   Future<void> deleteHikeFromDonePage(String hikeName) async {
     Firestore.instance
@@ -173,60 +168,117 @@ class Database {
         .setData({'Name': username});
   }
 
-    Future<void> addMilesHiked(String username, double miles) async {
+  Future<void> addMilesHiked(String username, double miles) async {
     print("-------------------------ADD Miles Hiked------------------------");
     Firestore.instance
         .collection("USERS")
-        .document(username).updateData({'MilesHiked': miles.toStringAsFixed(2)});
-        //.setData({'Name': username,'MilesHiked': miles});
+        .document(username)
+        .updateData({'MilesHiked': miles.toStringAsFixed(2)});
+    //.setData({'Name': username,'MilesHiked': miles});
   }
 
-    Future<void> addImage(String username, String image) async {
+  Future<void> addImage(String username, String image) async {
     print("-------------------------ADD Image------------------------");
     Firestore.instance
         .collection("USERS")
-        .document(username).updateData({'profilePic': image});
-        //.setData({'Name': username,'MilesHiked': miles});
+        .document(username)
+        .updateData({'profilePic': image});
+    //.setData({'Name': username,'MilesHiked': miles});
   }
-  launchMaps(String lat, String long) async {
-  String googleUrl =
-    //'comgooglemaps://?center=$lat,$long&zoom=15&basemap=terrain';
-    'comgooglemaps://?daddr=$lat,$long&zoom=15&basemap=terrain';
-  String appleUrl =
-    'https://maps.apple.com/?daddr=$lat,$long&z=20';
-    //daddr=<lat>,<long>&amp;ll=");
-  if (await canLaunch("comgooglemaps://")) {
-    print('launching com googleUrl');
-    await launch(googleUrl);
-  } else if (await canLaunch(appleUrl)) {
-    print('launching apple url');
-    await launch(appleUrl);
-  } else {
-    throw 'Could not launch url';
-  }
-}
 
-    Future<void> addFollower(String username) async {
+  launchMaps(String lat, String long) async {
+    String googleUrl =
+        //'comgooglemaps://?center=$lat,$long&zoom=15&basemap=terrain';
+        'comgooglemaps://?daddr=$lat,$long&zoom=15&basemap=terrain';
+    String appleUrl = 'https://maps.apple.com/?daddr=$lat,$long&z=20';
+    //daddr=<lat>,<long>&amp;ll=");
+    if (await canLaunch("comgooglemaps://")) {
+      print('launching com googleUrl');
+      await launch(googleUrl);
+    } else if (await canLaunch(appleUrl)) {
+      print('launching apple url');
+      await launch(appleUrl);
+    } else {
+      throw 'Could not launch url';
+    }
+  }
+
+  Future<void> addFollower(String username) async {
     print("-------------------------ADD Follower------------------------");
     Firestore.instance
         .collection(globalUserName)
         .document("Following")
-        .updateData({'Following': FieldValue.arrayUnion([username])});
+        .updateData({
+      'Following': FieldValue.arrayUnion([username])
+    });
+
+    updateCount(username);
   }
 
+  Future<void> updateCount(String username) async {
+    var _ = await Firestore.instance
+        .collection(username)
+        .document("Following")
+        .collection("Followers")
+        .document("Followers")
+        .get()
+        .then((DocumentSnapshot ds) {
+      Firestore.instance
+          .collection(username)
+          .document("Following")
+          .collection("Followers")
+          .document("Followers")
+          .setData({"Number": ds["Number"] + 1});
+    });
+  }
 
   Future<void> unFollow(String username) async {
     print("-------------------------Delete Follower------------------------");
     Firestore.instance
         .collection(globalUserName)
         .document("Following")
-        .updateData({'Following': FieldValue.arrayRemove([username])});
+        .updateData({
+      'Following': FieldValue.arrayRemove([username])
+    });
+    dropCount(username);
   }
 
-  Future<void> makeFollowing() async{
+  Future<void> dropCount(String username) async {
+    var _ = await Firestore.instance
+        .collection(username)
+        .document("Following")
+        .collection("Followers")
+        .document("Followers")
+        .get()
+        .then((DocumentSnapshot ds) {
+      Firestore.instance
+          .collection(username)
+          .document("Following")
+          .collection("Followers")
+          .document("Followers")
+          .setData({"Number": ds["Number"] - 1});
+    });
+  }
+  Future<int> gettingFollowers() async {
+    int num = 0;
+    var _ = await Firestore.instance
+        .collection(globalUserName)
+        .document("Following")
+        .collection("Followers")
+        .document("Followers")
+        .get()
+        .then((DocumentSnapshot ds) {
+          num = ds["Number"];
+          print(ds["Number"]);
+          //return ds["Number"];
+    });
+    return num;
+  }
+
+  Future<void> makeFollowing() async {
     Firestore.instance
         .collection(globalUserName)
-        .document("Following").setData({'Following': []});
-}
-
+        .document("Following")
+        .setData({'Following': []});
+  }
 }
